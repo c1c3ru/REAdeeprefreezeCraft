@@ -2,8 +2,8 @@
   "schema": "rea-progress-v1",
   "as_of": "2026-10-28",
   "project": "c1c3ru/REAdeeprefreezeCraft",
-  "objective": "Especificar e validar comportamentos observáveis dos componentes analisados do Deep Freeze, com contratos rastreáveis e validação independente em Windows 7 SP1 x86 e x64, sem redistribuir código proprietário.",
-  "scope_note": "Conclusões estáticas não comprovam semântica, operação de drivers, proteção de disco ou compatibilidade do produto. A contagem de tarefas concluídas não mede percentual de engenharia reversa completa.",
+  "objective": "Reconstruir e validar 100% dos componentes e comportamentos identificáveis do Deep Freeze Standard 9.00.020.5760, com denominadores auditáveis para código, funções, CFG, interfaces, semântica e equivalência em Windows 7 SP1 x86/x64.",
+  "scope_note": "Entregas concluídas são marcos do projeto, não percentuais de cobertura. O denominador global ainda não está fechado: ver docs/coverage/STATUS.md; somente uma dimensão integralmente comprovada poderá chegar a 100%.",
   "tasks": [
     {
       "id": "REA-001",
@@ -253,6 +253,85 @@
       ],
       "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/13",
       "next_action": "Não iniciar antes de validação experimental e contratos do escopo"
+    },
+    {
+      "id": "REA-014",
+      "phase": "Cobertura integral",
+      "title": "Definir escopo completo e medidor auditável",
+      "priority": "P0",
+      "status": "done",
+      "depends_on": [
+        "REA-006"
+      ],
+      "evidence": [
+        "tools/rea_coverage.py",
+        "tests/test_rea_coverage.py",
+        "docs/coverage/scope.json",
+        "docs/coverage/STATUS.md"
+      ],
+      "acceptance": [
+        "Classificar executáveis conhecidos e referências não recuperadas sem inventar binários",
+        "Implementar métricas parciais com denominador explícito e bloqueio de falso 100%",
+        "Adicionar verificação do manifesto e documento ao CI"
+      ],
+      "next_action": "Atualizar o inventário sempre que for comprovado um novo módulo"
+    },
+    {
+      "id": "REA-015",
+      "phase": "Cobertura integral",
+      "title": "Fechar inventário recursivo e identificar todo componente executável",
+      "priority": "P0",
+      "status": "todo",
+      "depends_on": [
+        "REA-014"
+      ],
+      "evidence": [],
+      "acceptance": [
+        "Inventariar todos os recursos executáveis e dependências com hashes e origem",
+        "Separar binários confirmados de nomes/strings e fechar pendências de empacotamento"
+      ],
+      "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/17",
+      "next_action": "Expandir descoberta offline de PE aninhado e recursos compactados"
+    },
+    {
+      "id": "REA-016",
+      "phase": "Cobertura integral",
+      "title": "Classificar todos os bytes executáveis e reconstruir funções/CFG",
+      "priority": "P0",
+      "status": "todo",
+      "depends_on": [
+        "REA-015"
+      ],
+      "evidence": [],
+      "acceptance": [
+        "Fechar denominadores executáveis de cada PE e arquitetura",
+        "Classificar código/dados/desconhecidos e resolver funções, desvios e chamadas",
+        "Manter intervalos sem sobreposição e testes de regressão"
+      ],
+      "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/18",
+      "next_action": "Implementar worklist por seção executável e checkpoints de bytes ainda desconhecidos"
+    },
+    {
+      "id": "REA-017",
+      "phase": "Cobertura integral",
+      "title": "Certificar contratos, interfaces e equivalência comportamental integral",
+      "priority": "P1",
+      "status": "todo",
+      "depends_on": [
+        "REA-008",
+        "REA-009",
+        "REA-016",
+        "REA-010",
+        "REA-011"
+      ],
+      "evidence": [],
+      "acceptance": [
+        "Cada função/integração tem contrato e evidência ou pendência explícita",
+        "Comparar comportamento observável em ambos Windows 7 SP1 x86/x64",
+        "Nunca emitir 100% sem validação e denominador global completos"
+      ],
+      "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/19",
+      "next_action": "Construir matriz de equivalência quando as etapas estruturais e de laboratório estiverem concluídas"
     }
   ]
 }
