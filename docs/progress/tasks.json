@@ -151,17 +151,22 @@
       "phase": "Reconstrução",
       "title": "Rastrear handles, buffers, tamanhos e retornos",
       "priority": "P0",
-      "status": "todo",
+      "status": "done",
       "depends_on": [
         "REA-005"
       ],
-      "evidence": [],
+      "evidence": [
+        "tools/rea_ioctl_contract.py",
+        "tests/test_rea_ioctl_contract.py",
+        "docs/contracts/rea008_buffer_provenance.json",
+        "docs/analyses/REA008_ARGUMENT_PROVENANCE.md"
+      ],
       "acceptance": [
         "Rastrear proveniência dos argumentos de CreateFileA/DeviceIoControl/CloseHandle",
         "Criar relatório JSON de proveniência com incerteza e testes"
       ],
       "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/10",
-      "next_action": "Investigar fluxos de EAX/EBX e origens dos argumentos [EBP+n]"
+      "next_action": "Manter a análise estática das duas janelas; semântica do driver, alvos reais e equivalência permanecem na REA-009/017."
     },
     {
       "id": "REA-009",

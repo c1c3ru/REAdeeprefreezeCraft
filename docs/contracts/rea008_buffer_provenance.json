@@ -1,0 +1,216 @@
+{
+  "schema": "rea-008-ioctl-provenance-v1",
+  "date": "2026-10-28",
+  "binary": {
+    "path": "Faronics_DFS/DFStd.exe",
+    "sha256": "2d7c171d4037660843a7e02c055679c5a26904af84d48fc8c557a67023f55c8b",
+    "method": "objdump --start-address/--stop-address on pinned PE32 x86"
+  },
+  "code_table": {
+    "source_va": "0x0094AF54",
+    "entries": [
+      "0x00071c08",
+      "0x0007200c",
+      "0x00071fc4",
+      "0x00071fc0",
+      "0x00071fbc",
+      "0x00071ff4",
+      "0x00071ff0",
+      "0x00071fec"
+    ],
+    "copy_instruction": "0x00438AE2",
+    "loop_max": 8
+  },
+  "caller": {
+    "entry": "0x00438AC0",
+    "end_exclusive": "0x00438B48",
+    "helper_call": "0x00438B0A",
+    "returned_length_frame": "[EBP-0x48]",
+    "output_dword_frame": "[EBP-0x4C]",
+    "output_buffer_bytes": 4,
+    "success_rule": "helper_return == 1 AND bytes_returned == 4 AND unsigned_output_dword > 0",
+    "stop_rule": "stops on first helper_return==1, even if caller rejects output",
+    "evidence": [
+      "0x00438B12",
+      "0x00438B15",
+      "0x00438B1B",
+      "0x00438B1F",
+      "0x00438B33"
+    ]
+  },
+  "helper": {
+    "entry": "0x00438B48",
+    "end_exclusive": "0x00438C41",
+    "max_path_attempts": 2,
+    "system_directory_call": "0x00438B81",
+    "created_handle_call": "0x00438BE5",
+    "invalid_handle_guard": "0x00438BEC",
+    "ioctl_call": "0x00438C08",
+    "close_handle_call": "0x00438C19",
+    "helper_return": "0x00438C2D",
+    "deviceiocontrol_arguments": [
+      {
+        "slot": 1,
+        "name": "hDevice",
+        "source": "EBX = CreateFileA return EAX after invalid-handle check",
+        "evidence": [
+          "0x00438BE5",
+          "0x00438BEA",
+          "0x00438BEC",
+          "0x00438C07"
+        ]
+      },
+      {
+        "slot": 2,
+        "name": "dwIoControlCode",
+        "source": "helper arg1 [EBP+0x8] from table [EDI]",
+        "evidence": [
+          "0x00438B07",
+          "0x00438B09",
+          "0x00438C03",
+          "0x00438C06"
+        ]
+      },
+      {
+        "slot": 3,
+        "name": "lpInBuffer",
+        "source": "literal NULL",
+        "evidence": [
+          "0x00438C01"
+        ]
+      },
+      {
+        "slot": 4,
+        "name": "nInBufferSize",
+        "source": "literal 0",
+        "evidence": [
+          "0x00438BFF"
+        ]
+      },
+      {
+        "slot": 5,
+        "name": "lpOutBuffer",
+        "source": "helper arg2 [EBP+0xC], caller local DWORD [EBP-0x4C]",
+        "evidence": [
+          "0x00438B01",
+          "0x00438B06",
+          "0x00438BFB",
+          "0x00438BFE"
+        ]
+      },
+      {
+        "slot": 6,
+        "name": "nOutBufferSize",
+        "source": "helper arg3 [EBP+0x10], literal caller 4",
+        "evidence": [
+          "0x00438B04",
+          "0x00438BF7",
+          "0x00438BFA"
+        ]
+      },
+      {
+        "slot": 7,
+        "name": "lpBytesReturned",
+        "source": "helper arg4 [EBP+0x14], caller local DWORD [EBP-0x48]",
+        "evidence": [
+          "0x00438AFD",
+          "0x00438B00",
+          "0x00438BF3",
+          "0x00438BF6"
+        ]
+      },
+      {
+        "slot": 8,
+        "name": "lpOverlapped",
+        "source": "literal NULL",
+        "evidence": [
+          "0x00438BF1"
+        ]
+      }
+    ],
+    "createfilea_arguments": [
+      {
+        "slot": 1,
+        "name": "lpFileName",
+        "source": "[ESI] from local two-entry candidate table",
+        "evidence": [
+          "0x00438BE2",
+          "0x00438BE4"
+        ]
+      },
+      {
+        "slot": 2,
+        "name": "dwDesiredAccess",
+        "source": "0",
+        "evidence": [
+          "0x00438BE0"
+        ]
+      },
+      {
+        "slot": 3,
+        "name": "dwShareMode",
+        "source": "0",
+        "evidence": [
+          "0x00438BDE"
+        ]
+      },
+      {
+        "slot": 4,
+        "name": "lpSecurityAttributes",
+        "source": "NULL",
+        "evidence": [
+          "0x00438BDC"
+        ]
+      },
+      {
+        "slot": 5,
+        "name": "dwCreationDisposition",
+        "source": "3 OPEN_EXISTING",
+        "evidence": [
+          "0x00438BDA"
+        ]
+      },
+      {
+        "slot": 6,
+        "name": "dwFlagsAndAttributes",
+        "source": "0x80 FILE_ATTRIBUTE_NORMAL",
+        "evidence": [
+          "0x00438BD5"
+        ]
+      },
+      {
+        "slot": 7,
+        "name": "hTemplateFile",
+        "source": "NULL",
+        "evidence": [
+          "0x00438BD3"
+        ]
+      }
+    ],
+    "closehandle_argument": {
+      "source": "EBX from successful CreateFileA path",
+      "evidence": [
+        "0x00438BEA",
+        "0x00438C18",
+        "0x00438C19"
+      ]
+    },
+    "return_status_rule": "0 unless DeviceIoControl EAX is nonzero on one of max two opened paths",
+    "flags_evidence": [
+      "0x00438C0D",
+      "0x00438C0F",
+      "0x00438C11",
+      "0x00438C26",
+      "0x00438C2B"
+    ]
+  },
+  "certainty": {
+    "static_argument_provenance": "bounded_observed",
+    "kernel_behavior": "unknown",
+    "device_target_identity": "unknown",
+    "vm_windows7_x86": "unverified",
+    "vm_windows7_x64": "unverified",
+    "behavioral_equivalence": false
+  },
+  "caveat": "No actual IOCTL sent. All outcome traces in tests are synthetic."
+}
