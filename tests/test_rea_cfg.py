@@ -6,7 +6,7 @@ import tempfile
 import unittest
 import zipfile
 
-from tests.test_rea_loop import fixture_with_calls
+from tests.test_rea_loop import fixture_with_call
 from tools.rea_cfg import (
     analyze_path, analyze_zip, disassemble_window, render_markdown, stack_trace,
     DisassemblyError,
@@ -16,7 +16,7 @@ HAS_OBJDUMP = bool(shutil.which("objdump"))
 
 
 def dynamic_fixture():
-    data = bytearray(fixture_with_calls())
+    data = bytearray(fixture_with_call())
     instructions = bytes.fromhex(
         "8b4d08"  # mov ecx, [ebp+8]
         "6a00"    # push 0
@@ -44,7 +44,7 @@ class CFGTests(unittest.TestCase):
         return path
 
     def test_decoded_call_matches_thunk(self):
-        path = self.with_pe(fixture_with_calls())
+        path = self.with_pe(fixture_with_call())
         result = analyze_path(path)
         self.assertEqual(result["validation"]["total_candidates"], 1)
         call = result["calls"][0]
