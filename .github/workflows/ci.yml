@@ -15,8 +15,8 @@ jobs:
       matrix:
         python-version: ['3.8', '3.12']
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
       - name: Require GNU objdump for structural disassembly fixtures
@@ -27,3 +27,10 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Validate REA action plan, evidence and status synchronization
         run: python -m tools.rea_progress --check
+      - name: Publish clear CI summary
+        if: success()
+        run: |
+          echo "### REA CI — Python ${{ matrix.python-version }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Unit tests: passed" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Documentation/evidence checks: passed" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Windows 7 driver validation: not executed" >> "$GITHUB_STEP_SUMMARY"

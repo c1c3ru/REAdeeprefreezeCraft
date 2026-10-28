@@ -10,6 +10,7 @@ Laboratório de **engenharia reversa auditável** para análise de componentes d
 - [Matriz de testes Windows 7](docs/WINDOWS7_LAB.md) — requisitos de laboratório e critérios de aceite.
 - [Roadmap](docs/ROADMAP.md) — fases de inventário, análise estrutural e validação semântica.
 - **[Plano de ação, metas e portões](docs/PLANO_DE_ACAO.md)** e **[status atualizado/pendências](docs/STATUS_ATUAL.md)** — controle vivo de execução do REA.
+- [Diagnóstico do CI e histórico de falhas resolvidas](docs/CI_DIAGNOSTICO.md) — como distinguir erros antigos, testes negativos esperados e workflows atuais.
 - `tools/rea_progress.py` + [manifesto versionado](docs/progress/tasks.json) — verificação automática de evidências, dependências e estado no CI.
 - `tools/rea_inventory.py` — inventário **sem extrair ou executar** entradas ZIP, SHA-256, cabeçalhos PE e referências de strings.
 - `tests/` — testes automatizados com arquivos sintéticos; sem incluir executáveis comerciais.
