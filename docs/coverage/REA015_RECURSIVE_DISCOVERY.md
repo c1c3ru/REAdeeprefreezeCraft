@@ -47,6 +47,16 @@ python -m tools.rea_coverage --check
 
 **Reprodutibilidade:** os números deste documento são um checkpoint local de inspeção estática do pacote original. O CI exercita a ferramenta sobre **fixtures sintéticas**, não inclui a amostra comercial. Regenerar o inventário antes de declarar o escopo fechado.
 
+## Subciclo 3 — distinguir 'MZ' isolado de PE válido
+
+Uma varredura conservadora dos **190 recursos visíveis** examinou ocorrências de `MZ` em **posições não iniciais**. Foram encontrados **167 marcadores** (151 nos recursos do executável principal e 16 nos recursos do CLOUD_INSTALLER; 0 no RSC_WU_CMD_LINE). **Nenhum dos 167 validou como novo PE** com o parser de cabeçalhos e seções.
+
+As duas ocorrências `MZ` na posição inicial de recursos do executável principal correspondem aos dois PEs já inventariados, e não representam módulos adicionais.
+
+A ferramenta `tools/rea_embedded_pe_candidates.py` separa `invalid_mz_hits` de `valid_pe_candidates` e impõe limites para o número de marcadores/recursos. Ela não executa código, não descompacta UPX e não publica bytes proprietários. **Ausência de outro PE válido nesses offsets não exclui código oculto por compressão, criptografia, instaladores externos ou recursos de formato desconhecido.**
+
+Reproduzir com `python -m tools.rea_embedded_pe_candidates --archive userfreezer.zip --expect-sha256 f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671 --json rea015_pe_candidates.json`.
+
 ## O que permanece para concluir REA-015
 
 1. A classificação do cabeçalho SIB como TsiLang foi concluída; **resta documentar o esquema interno dos registros** para fechar a cobertura de dados. Não inferir que as traduções tenham sido completamente decodificadas.
