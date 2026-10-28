@@ -46,12 +46,12 @@
       "path": "Faronics_DFS/DFStd.exe::BINARY/CLOUD_INSTALLER/4105",
       "sha256": "145c6b8461132fd077a42cee775aca318c2b697b5720283749e04fc6aa5b4772",
       "size_bytes": 9821321,
-      "architecture": "x86_unverified",
+      "architecture": "x86",
       "executable_sections": [],
       "decoded_intervals": [],
       "semantics_status": "unmeasured",
       "behavior_verified": false,
-      "note": "UPX-marked PE resource; no whole-module disassembly or verified section denominator"
+      "note": "PE32 x86 confirmed by PE header. UPX0/UPX1 compressed; 72 visible resource leaves, no executable-section denominator for unpacked code."
     },
     {
       "id": "RSC_WU_CMD_LINE",
@@ -60,12 +60,12 @@
       "path": "Faronics_DFS/DFStd.exe::BINARY/RSC_WU_CMD_LINE/4105",
       "sha256": "454a1a6a576cce0b69acbf320fbeebb4909891ee7592f20afd9df992db6a1351",
       "size_bytes": 584056,
-      "architecture": "x86_unverified",
+      "architecture": "x86",
       "executable_sections": [],
       "decoded_intervals": [],
       "semantics_status": "unmeasured",
       "behavior_verified": false,
-      "note": "UPX-marked PE resource; full semantics and entry points unverified"
+      "note": "PE32 x86 confirmed by PE header. UPX0/UPX1 compressed; 12 visible resource leaves, no executable-section denominator for unpacked code."
     },
     {
       "id": "DEEPFRZ_X86",

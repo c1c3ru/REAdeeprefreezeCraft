@@ -43,7 +43,7 @@ Priorize P0; cada tarefa avança em um PR, com testes e evidências.
 
 - **REA-008 (P0):** Investigar fluxos de EAX/EBX e origens dos argumentos [EBP+n]
 - **REA-009 (P0):** Catalogar recursos PE e verificar se os drivers podem ser obtidos sem execução
-- **REA-015 (P0):** Expandir descoberta offline de PE aninhado e recursos compactados
+- **REA-015 (P0):** Analisar os dados SIB e o conteúdo UPX não expandido, validar módulos externos e reconciliar o manifesto; não fechar REA-015 antes de comprovar o inventário total.
 
 ## Bloqueios e dependências abertas
 
@@ -204,6 +204,12 @@ Evidências:
 
 - [ ] Inventariar todos os recursos executáveis e dependências com hashes e origem
 - [ ] Separar binários confirmados de nomes/strings e fechar pendências de empacotamento
+
+Evidências:
+- [tools/rea_recursive_inventory.py](../tools/rea_recursive_inventory.py)
+- [tests/test_rea_recursive_inventory.py](../tests/test_rea_recursive_inventory.py)
+- [docs/coverage/REA015_RECURSIVE_DISCOVERY.md](../docs/coverage/REA015_RECURSIVE_DISCOVERY.md)
+- [docs/coverage/rea015_checkpoint.json](../docs/coverage/rea015_checkpoint.json)
 
 ### REA-016 — Classificar todos os bytes executáveis e reconstruir funções/CFG
 
