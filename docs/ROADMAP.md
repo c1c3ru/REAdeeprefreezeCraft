@@ -67,7 +67,7 @@ O backlog ativo, critérios de aceite e dependências passaram a ser mantidos em
 - [x] Definir portões técnicos G0–G6, prioridades P0/P1 e critérios para declarar entregas.
 - [x] Criar issues REA-007 a REA-013.
 - [x] Adicionar validador de status/evidências e testes sintéticos ao CI.
-- [ ] REA-007: condições de laços e saídas; próximo loop.
+- [x] REA-007: saídas, nove desvios condicionais e dois laços das duas janelas candidatas; ver [análise](analyses/REA_007_BRANCH_EXITS.md).
 - [ ] REA-008/009: proveniência de dados e identificação de drivers.
 - [ ] REA-010/011/012/013: laboratório Windows 7 e certificação contratual.
 

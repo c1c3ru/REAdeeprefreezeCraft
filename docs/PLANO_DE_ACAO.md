@@ -80,7 +80,7 @@ python -m tools.rea_progress --json
 4. **REA-010/011 — [issue #12](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/12):** preparar VMs isoladas Windows 7 SP1 x86/x64 com snapshots e evidências, após obter o material necessário.
 5. **REA-012/013 — [issue #13](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/13):** sintetizar contratos semânticos e emitir decisão documentada sobre o que foi efetivamente validado.
 
-**Primeiro próximo ciclo escolhido: REA-007.** REA-008 e REA-009 podem ser desenvolvidas em paralelo, desde que não dependam de interpretações ainda não sustentadas.
+**REA-007 concluída no escopo das duas janelas de função, com análise estática e testes.** As próximas tarefas prontas são **REA-008** e **REA-009**, que podem ser desenvolvidas em paralelo sem pressupor semântica ainda não verificada.
 
 ## 6. Riscos e desbloqueios
 
@@ -97,4 +97,5 @@ python -m tools.rea_progress --json
 - **28/10/2026:** auditado o histórico dos ciclos 1–6 e a linha de base de 44 testes.
 - **28/10/2026:** issues #9–#13 criadas com critérios de aceite.
 - **28/10/2026:** manifesto de tarefas e validação de progresso adicionados por PR; a conclusão desta entrega será confirmada pelo CI.
-- **Próximo checkpoint:** implementar REA-007, versionar evidência dos caminhos de controle e atualizar o quadro. Não há testes Windows 7 declarados nesta revisão.
+- **28/10/2026:** REA-007 documentada: 9 desvios condicionais, 2 arestas retroativas, 2 instruções de retorno e mecanismo de enumeração limitada; fluxos executáveis ainda não comprovados.
+- **Próximo checkpoint:** REA-008 (proveniência de buffers e handles), com REA-009 (driver/assinaturas) disponível em paralelo. Windows 7 SP1 x86/x64 segue não testado.

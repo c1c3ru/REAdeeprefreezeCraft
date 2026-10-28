@@ -23,6 +23,8 @@ Laboratório de **engenharia reversa auditável** para análise de componentes d
 - [Etapa 5: duas funções e contratos estruturais](docs/analyses/FUNCTION_CFG_2026-10-28.md) e [contratos JSON](docs/contracts/cycle5_functions.json).
 - `tools/rea_contract_trace.py` — ciclo 6: extrai uma tabela de oito dwords, valida importações via IAT, registra a cadeia entre chamador, auxiliar e DeviceIoControl e os caminhos de volume candidatos.
 - [Relatório do ciclo 6](docs/analyses/CONTRACT_CHAIN_2026-10-28.md) e [checkpoint curado](docs/contracts/cycle6_findings.json).
+- `tools/rea_path_coverage.py`: **REA-007** — enumeração limitada de desvios e saídas dos dois CFGs; separa retorno explícito, corte de laço e destino não resolvido.
+- [Relatório REA-007](docs/analyses/REA_007_BRANCH_EXITS.md) e [evidência JSON](docs/contracts/rea007_exit_paths.json).
 
 ## Executar localmente
 
@@ -41,6 +43,9 @@ python -m tools.rea_function_cfg --archive /caminho/para/userfreezer.zip \
 # Etapa 6: SHA-256 obrigatório para evitar aplicar offsets a outra versão
 python -m tools.rea_contract_trace --archive /caminho/para/userfreezer.zip \
   --json contract_cycle6.json
+# Etapa 7: caminhos sintáticos, sem executar PE/driver
+python -m tools.rea_path_coverage --archive /caminho/para/userfreezer.zip \
+  --json rea007.json --markdown rea007.md
 ```
 
 A análise `--archive` de CFG copia temporariamente apenas o membro PE selecionado para um diretório privado e apaga essa cópia ao concluir. Não faz commit nem instala o software. Os resultados JSON/Markdown são gerados apenas localmente; a documentacao versionada e curada manualmente. O arquivo `inventario.json` é gerado apenas localmente. **Não faça commit do ZIP, dos drivers originais, de chaves ou de dados pessoais.** O inventário rejeita arquivos grandes e caminhos suspeitos; o retorno `2` indica entradas ignoradas por segurança.
