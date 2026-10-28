@@ -48,6 +48,18 @@
 - [ ] Rastrear nomes de objetos, buffers e resultados sem deduzir valores não observados.
 - [ ] Verificar drivers e semântica em VMs isoladas Windows 7 SP1 x86/x64.
 
+## Etapa 6 — contrato interprocedural estático (2026-10-28)
+
+- [x] Ler tabela de oito dwords de `0x0094AF54` com limites de mapeamento PE.
+- [x] Correlacionar cópia local, laço de oito itens, argumento do auxiliar e a posição do código em `DeviceIoControl`.
+- [x] Resolver pela IAT as chamadas a `GetSystemDirectoryA`, `CreateFileA`, `DeviceIoControl` e `CloseHandle`.
+- [x] Documentar caminhos candidatos de volume e checagens de handle/retorno, sem inferir resultados.
+- [x] Exigir SHA-256 específico para prevenir extrapolação a outras versões.
+- [x] Incluir testes com PE sintético no CI e checkpoint de evidência.
+- [ ] Validar todos os caminhos e suas condições de parada sem execução de drivers.
+- [ ] Identificar o significado de cada código de controle com evidência independente/autorizada.
+- [ ] Executar teste de compatibilidade isolado Windows 7 SP1 x86/x64.
+
 ## Fases futuras
 
 1. **Inventário recursivo:** localizar PEs embutidos e drivers extraídos, obter metadados e assinaturas sem executar artefatos.

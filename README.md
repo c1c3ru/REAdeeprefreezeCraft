@@ -19,10 +19,12 @@ Laboratório de **engenharia reversa auditável** para análise de componentes d
 - [Evidências de desmontagem e CFG local](docs/analyses/CFG_LOCAL_2026-10-28.md).
 - `tools/rea_function_cfg.py`: grafo de fluxo por função delimitada, alcançabilidade, blocos básicos, dominadores, desvios retroativos e dependências de parâmetros x86.
 - [Etapa 5: duas funções e contratos estruturais](docs/analyses/FUNCTION_CFG_2026-10-28.md) e [contratos JSON](docs/contracts/cycle5_functions.json).
+- `tools/rea_contract_trace.py` — ciclo 6: extrai uma tabela de oito dwords, valida importações via IAT, registra a cadeia entre chamador, auxiliar e DeviceIoControl e os caminhos de volume candidatos.
+- [Relatório do ciclo 6](docs/analyses/CONTRACT_CHAIN_2026-10-28.md) e [checkpoint curado](docs/contracts/cycle6_findings.json).
 
 ## Executar localmente
 
-Requisito para inventário/loop: **Python 3.8+**, sem dependências Python de terceiros. Para os módulos `rea_cfg.py` e `rea_function_cfg.py` é necessário **GNU binutils (objdump)**. O analisador pode rodar em Linux, sem execução do arquivo Windows.
+Requisito para inventário/loop: **Python 3.8+**, sem dependências Python de terceiros. Para `rea_cfg.py`, `rea_function_cfg.py` e `rea_contract_trace.py` é necessário **GNU binutils (objdump)**. O analisador pode rodar em Linux, sem execução do arquivo Windows.
 
 ```bash
 python -m unittest discover -s tests -v
@@ -32,6 +34,9 @@ python -m tools.rea_loop --archive /caminho/para/userfreezer.zip --json rea_loop
 # Etapa 5: endereços virtuais do PE (VA), janela de função delimitada
 python -m tools.rea_function_cfg --archive /caminho/para/userfreezer.zip \
   --entry 0x438b48 --stop 0x438c41 --json cfg_function_helper.json
+# Etapa 6: SHA-256 obrigatório para evitar aplicar offsets a outra versão
+python -m tools.rea_contract_trace --archive /caminho/para/userfreezer.zip \
+  --json contract_cycle6.json
 ```
 
 A análise `--archive` de CFG copia temporariamente apenas o membro PE selecionado para um diretório privado e apaga essa cópia ao concluir. Não faz commit nem instala o software. Os resultados JSON/Markdown são gerados apenas localmente; a documentacao versionada e curada manualmente. O arquivo `inventario.json` é gerado apenas localmente. **Não faça commit do ZIP, dos drivers originais, de chaves ou de dados pessoais.** O inventário rejeita arquivos grandes e caminhos suspeitos; o retorno `2` indica entradas ignoradas por segurança.

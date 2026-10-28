@@ -17,3 +17,5 @@ cfg_local*.json
 cfg_local*.md
 
 cfg_function*.json
+
+contract_cycle6*.json
