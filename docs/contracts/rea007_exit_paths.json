@@ -1,0 +1,128 @@
+{
+  "schema": "rea-007-branch-exits-v1",
+  "date": "2026-10-28",
+  "source": {
+    "archive": "userfreezer.zip",
+    "zip_sha256": "f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671",
+    "member": "Faronics_DFS/DFStd.exe",
+    "sha256": "2d7c171d4037660843a7e02c055679c5a26904af84d48fc8c557a67023f55c8b",
+    "method": "offline x86 objdump disassembly and function-local CFG"
+  },
+  "scope": "two candidate function windows, not complete program CFG",
+  "functions": [
+    {
+      "name": "caller",
+      "entry_va": "0x00438AC0",
+      "stop_va_exclusive": "0x00438B48",
+      "prior_cycle_instructions_reachable": 55,
+      "return_va": "0x00438B47",
+      "branches": [
+        {
+          "site": "0x00438B13",
+          "mnemonic": "jne",
+          "taken": "0x00438B2C",
+          "fallthrough": "0x00438B15",
+          "predicate": "unresolved nearby"
+        },
+        {
+          "site": "0x00438B19",
+          "mnemonic": "jne",
+          "taken": "0x00438B21",
+          "fallthrough": "0x00438B1B",
+          "predicate": "cmp DWORD PTR [ebp-0x48],0x4 @0x00438B15"
+        },
+        {
+          "site": "0x00438B1F",
+          "mnemonic": "ja",
+          "taken": "0x00438B25",
+          "fallthrough": "0x00438B21",
+          "predicate": "cmp DWORD PTR [ebp-0x4c],0x0 @0x00438B1B"
+        },
+        {
+          "site": "0x00438B33",
+          "mnemonic": "jb",
+          "taken": "0x00438AF3",
+          "fallthrough": "0x00438B35",
+          "predicate": "cmp esi,0x8 @0x00438B30"
+        }
+      ],
+      "backward_edge": {
+        "source": "0x00438B33",
+        "target": "0x00438AF3",
+        "kind": "natural_loop_back_edge_candidate"
+      },
+      "conditional_sites": 4,
+      "unresolved_direct_branch_targets_in_window": 0
+    },
+    {
+      "name": "helper",
+      "entry_va": "0x00438B48",
+      "stop_va_exclusive": "0x00438C41",
+      "prior_cycle_instructions_reachable": 82,
+      "return_va": "0x00438C40",
+      "branches": [
+        {
+          "site": "0x00438B88",
+          "mnemonic": "je",
+          "taken": "0x00438C2D",
+          "fallthrough": "0x00438B8E",
+          "predicate": "test eax,eax @0x00438B86"
+        },
+        {
+          "site": "0x00438BEF",
+          "mnemonic": "je",
+          "taken": "0x00438C1E",
+          "fallthrough": "0x00438BF1",
+          "predicate": "cmp ebx,0xffffffff @0x00438BEC"
+        },
+        {
+          "site": "0x00438C0F",
+          "mnemonic": "je",
+          "taken": "0x00438C18",
+          "fallthrough": "0x00438C11",
+          "predicate": "test eax,eax @0x00438C0D"
+        },
+        {
+          "site": "0x00438C26",
+          "mnemonic": "jne",
+          "taken": "0x00438C2D",
+          "fallthrough": "0x00438C28",
+          "predicate": "cmp DWORD PTR [ebp-0x28],0x0 @0x00438C22"
+        },
+        {
+          "site": "0x00438C2B",
+          "mnemonic": "jb",
+          "taken": "0x00438BD3",
+          "fallthrough": "0x00438C2D",
+          "predicate": "cmp edi,0x2 @0x00438C28"
+        }
+      ],
+      "backward_edge": {
+        "source": "0x00438C2B",
+        "target": "0x00438BD3",
+        "kind": "backward_edge_without_dominance"
+      },
+      "conditional_sites": 5,
+      "unresolved_direct_branch_targets_in_window": 0
+    }
+  ],
+  "coverage": {
+    "total_conditional_sites": 9,
+    "total_syntactic_outcomes": 18,
+    "branch_directions": "taken and not_taken enumerated, not semantically feasible proven",
+    "explicit_returns": 2,
+    "backward_edges": 2,
+    "ret_sites": [
+      "0x00438B47",
+      "0x00438C40"
+    ],
+    "test_policy": "analysis uses bound max_visits_per_instruction=2; loop cuts are NOT program exits"
+  },
+  "unknowns": [
+    "Runtime feasibility of branch outcomes",
+    "Callee no-return behavior and exception edges",
+    "Architecture-specific runtime driver behavior",
+    "IOCTL protocol/driver identity",
+    "Windows 7 SP1 x86 and x64 verification"
+  ]
+}

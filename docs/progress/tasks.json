@@ -128,18 +128,23 @@
       "phase": "Reconstrução",
       "title": "Cobrir todas as saídas e condições dos laços das duas funções",
       "priority": "P0",
-      "status": "todo",
+      "status": "done",
       "depends_on": [
         "REA-006"
       ],
-      "evidence": [],
+      "evidence": [
+        "tools/rea_path_coverage.py",
+        "tests/test_rea_path_coverage.py",
+        "docs/contracts/rea007_exit_paths.json",
+        "docs/analyses/REA_007_BRANCH_EXITS.md"
+      ],
       "acceptance": [
         "Inventariar ramos condicionais e saídas por endereço",
         "Ter teste sintético para saídas antecipadas, saltos não resolvidos e limites",
         "Atualizar contratos sem afirmar CFG global completo"
       ],
       "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/9",
-      "next_action": "Começar pelo laço 0x00438AC0 e função auxiliar 0x00438B48"
+      "next_action": "Manter análise delimitada e revalidar evidências se mudar o SHA-256"
     },
     {
       "id": "REA-008",

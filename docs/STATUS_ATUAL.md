@@ -8,8 +8,8 @@
 
 ## Indicadores de entregas
 
-- Concluídas: **6/13**.
-- Prontas: **3**.
+- Concluídas: **7/13**.
+- Prontas: **2**.
 - Aguardando dependências: **2**.
 - Bloqueadas explicitamente: **2**.
 
@@ -25,7 +25,7 @@
 | REA-004 | Desmontar chamadas e construir CFGs delimitados | done | P0 | REA-003 | — |
 | REA-005 | Rastrear a cadeia interprocedural e dados estáticos | done | P0 | REA-004 | — |
 | REA-006 | Instituir plano, status verificável e ciclos de avanço | done | P0 | REA-005 | — |
-| REA-007 | Cobrir todas as saídas e condições dos laços das duas funções | todo | P0 | REA-006 | [#9](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/9) |
+| REA-007 | Cobrir todas as saídas e condições dos laços das duas funções | done | P0 | REA-006 | [#9](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/9) |
 | REA-008 | Rastrear handles, buffers, tamanhos e retornos | todo | P0 | REA-005 | [#10](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/10) |
 | REA-009 | Localizar drivers reais e validar assinaturas | todo | P0 | REA-002 | [#11](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/11) |
 | REA-010 | Validar Windows 7 SP1 x86 em VM isolada | blocked | P1 | REA-009 | [#12](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/12) |
@@ -37,13 +37,12 @@
 
 Priorize P0; cada tarefa avança em um PR, com testes e evidências.
 
-- **REA-007 (P0):** Começar pelo laço 0x00438AC0 e função auxiliar 0x00438B48
 - **REA-008 (P0):** Investigar fluxos de EAX/EBX e origens dos argumentos [EBP+n]
 - **REA-009 (P0):** Catalogar recursos PE e verificar se os drivers podem ser obtidos sem execução
 
 ## Bloqueios e dependências abertas
 
-- **REA-012** aguarda: REA-007, REA-008, REA-009.
+- **REA-012** aguarda: REA-008, REA-009.
 - **REA-013** aguarda: REA-010, REA-011, REA-012.
 - **REA-010** bloqueada: Faltam VM Windows 7 SP1 x86 autorizada, snapshots e artefatos/assinaturas verificados.
 - **REA-011** bloqueada: Faltam VM Windows 7 SP1 x64 autorizada, snapshots e artefatos/assinaturas verificados.
@@ -124,11 +123,17 @@ Evidências:
 
 ### REA-007 — Cobrir todas as saídas e condições dos laços das duas funções
 
-**Status:** todo · **Etapa:** Reconstrução
+**Status:** done · **Etapa:** Reconstrução
 
-- [ ] Inventariar ramos condicionais e saídas por endereço
-- [ ] Ter teste sintético para saídas antecipadas, saltos não resolvidos e limites
-- [ ] Atualizar contratos sem afirmar CFG global completo
+- [x] Inventariar ramos condicionais e saídas por endereço
+- [x] Ter teste sintético para saídas antecipadas, saltos não resolvidos e limites
+- [x] Atualizar contratos sem afirmar CFG global completo
+
+Evidências:
+- [tools/rea_path_coverage.py](../tools/rea_path_coverage.py)
+- [tests/test_rea_path_coverage.py](../tests/test_rea_path_coverage.py)
+- [docs/contracts/rea007_exit_paths.json](../docs/contracts/rea007_exit_paths.json)
+- [docs/analyses/REA_007_BRANCH_EXITS.md](../docs/analyses/REA_007_BRANCH_EXITS.md)
 
 ### REA-008 — Rastrear handles, buffers, tamanhos e retornos
 
