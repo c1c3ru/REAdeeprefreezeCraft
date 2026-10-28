@@ -60,6 +60,17 @@
 - [ ] Identificar o significado de cada código de controle com evidência independente/autorizada.
 - [ ] Executar teste de compatibilidade isolado Windows 7 SP1 x86/x64.
 
+## Governança dos ciclos — plano executável
+
+O backlog ativo, critérios de aceite e dependências passaram a ser mantidos em [tasks.json](progress/tasks.json), com quadro reprodutível [STATUS_ATUAL.md](STATUS_ATUAL.md) e [plano de ação](PLANO_DE_ACAO.md).
+
+- [x] Definir portões técnicos G0–G6, prioridades P0/P1 e critérios para declarar entregas.
+- [x] Criar issues REA-007 a REA-013.
+- [x] Adicionar validador de status/evidências e testes sintéticos ao CI.
+- [ ] REA-007: condições de laços e saídas; próximo loop.
+- [ ] REA-008/009: proveniência de dados e identificação de drivers.
+- [ ] REA-010/011/012/013: laboratório Windows 7 e certificação contratual.
+
 ## Fases futuras
 
 1. **Inventário recursivo:** localizar PEs embutidos e drivers extraídos, obter metadados e assinaturas sem executar artefatos.

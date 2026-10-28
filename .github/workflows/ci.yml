@@ -25,3 +25,5 @@ jobs:
         run: python -m compileall -q tools tests
       - name: Execute unit tests
         run: python -m unittest discover -s tests -v
+      - name: Validate REA action plan, evidence and status synchronization
+        run: python -m tools.rea_progress --check

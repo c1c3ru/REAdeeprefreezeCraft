@@ -1,0 +1,253 @@
+{
+  "schema": "rea-progress-v1",
+  "as_of": "2026-10-28",
+  "project": "c1c3ru/REAdeeprefreezeCraft",
+  "objective": "Especificar e validar comportamentos observáveis dos componentes analisados do Deep Freeze, com contratos rastreáveis e validação independente em Windows 7 SP1 x86 e x64, sem redistribuir código proprietário.",
+  "scope_note": "Conclusões estáticas não comprovam semântica, operação de drivers, proteção de disco ou compatibilidade do produto. A contagem de tarefas concluídas não mede percentual de engenharia reversa completa.",
+  "tasks": [
+    {
+      "id": "REA-001",
+      "phase": "Fundação",
+      "title": "Inventariar o pacote e preservar proveniência",
+      "priority": "P0",
+      "status": "done",
+      "depends_on": [],
+      "evidence": [
+        "tools/rea_inventory.py",
+        "docs/analyses/DeepFreeze_9.00.020.5760.md"
+      ],
+      "acceptance": [
+        "Identificar o PE, hashes e restrições da análise estática",
+        "Documentar separação entre ZIP comercial e código próprio"
+      ],
+      "next_action": "Manter os hashes para novas verificações"
+    },
+    {
+      "id": "REA-002",
+      "phase": "Fundação",
+      "title": "Mapear PE embutidos, importações e interfaces preliminares",
+      "priority": "P0",
+      "status": "done",
+      "depends_on": [
+        "REA-001"
+      ],
+      "evidence": [
+        "tools/rea_structural.py",
+        "docs/analyses/STRUCTURAL_2026-10-28.md",
+        "docs/INTERFACES_USER_KERNEL.md"
+      ],
+      "acceptance": [
+        "Catalogar recursos PE, imports e referências a drivers",
+        "Registrar limitações do empacotamento e strings"
+      ],
+      "next_action": "Revalidar em novos artefatos"
+    },
+    {
+      "id": "REA-003",
+      "phase": "Fundação",
+      "title": "Automatizar descoberta de thunks e calls x86",
+      "priority": "P0",
+      "status": "done",
+      "depends_on": [
+        "REA-002"
+      ],
+      "evidence": [
+        "tools/rea_loop.py",
+        "docs/analyses/LOOP_DEVICEIO_2026-10-28.md"
+      ],
+      "acceptance": [
+        "Mapear candidatos E8/FF25 e seus endereços",
+        "Classificar constantes como hipóteses, não chamadas comprovadas"
+      ],
+      "next_action": "Usar saídas como candidatos nos próximos ciclos"
+    },
+    {
+      "id": "REA-004",
+      "phase": "Fundação",
+      "title": "Desmontar chamadas e construir CFGs delimitados",
+      "priority": "P0",
+      "status": "done",
+      "depends_on": [
+        "REA-003"
+      ],
+      "evidence": [
+        "tools/rea_cfg.py",
+        "tools/rea_function_cfg.py",
+        "docs/analyses/FUNCTION_CFG_2026-10-28.md"
+      ],
+      "acceptance": [
+        "Registrar RVA, bloco, arestas locais e dominadores",
+        "Diferenciar CFG local de cobertura de execução"
+      ],
+      "next_action": "Ampliar para as condições de saída no REA-007"
+    },
+    {
+      "id": "REA-005",
+      "phase": "Fundação",
+      "title": "Rastrear a cadeia interprocedural e dados estáticos",
+      "priority": "P0",
+      "status": "done",
+      "depends_on": [
+        "REA-004"
+      ],
+      "evidence": [
+        "tools/rea_contract_trace.py",
+        "docs/analyses/CONTRACT_CHAIN_2026-10-28.md",
+        "docs/contracts/cycle6_findings.json"
+      ],
+      "acceptance": [
+        "Documentar a cadeia tabela → função auxiliar → API",
+        "Manter identidade do dispositivo e efeitos como desconhecidos"
+      ],
+      "next_action": "Aprofundar buffers/handles no REA-008"
+    },
+    {
+      "id": "REA-006",
+      "phase": "Governança",
+      "title": "Instituir plano, status verificável e ciclos de avanço",
+      "priority": "P0",
+      "status": "done",
+      "depends_on": [
+        "REA-005"
+      ],
+      "evidence": [
+        "docs/PLANO_DE_ACAO.md",
+        "docs/STATUS_ATUAL.md",
+        "docs/progress/tasks.json",
+        "tools/rea_progress.py",
+        "tests/test_rea_progress.py"
+      ],
+      "acceptance": [
+        "Registrar metas, aceite, dependências, riscos e evidências",
+        "Executar validação automática do status no CI"
+      ],
+      "next_action": "Selecionar REA-007 como próximo ciclo de engenharia"
+    },
+    {
+      "id": "REA-007",
+      "phase": "Reconstrução",
+      "title": "Cobrir todas as saídas e condições dos laços das duas funções",
+      "priority": "P0",
+      "status": "todo",
+      "depends_on": [
+        "REA-006"
+      ],
+      "evidence": [],
+      "acceptance": [
+        "Inventariar ramos condicionais e saídas por endereço",
+        "Ter teste sintético para saídas antecipadas, saltos não resolvidos e limites",
+        "Atualizar contratos sem afirmar CFG global completo"
+      ],
+      "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/9",
+      "next_action": "Começar pelo laço 0x00438AC0 e função auxiliar 0x00438B48"
+    },
+    {
+      "id": "REA-008",
+      "phase": "Reconstrução",
+      "title": "Rastrear handles, buffers, tamanhos e retornos",
+      "priority": "P0",
+      "status": "todo",
+      "depends_on": [
+        "REA-005"
+      ],
+      "evidence": [],
+      "acceptance": [
+        "Rastrear proveniência dos argumentos de CreateFileA/DeviceIoControl/CloseHandle",
+        "Criar relatório JSON de proveniência com incerteza e testes"
+      ],
+      "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/10",
+      "next_action": "Investigar fluxos de EAX/EBX e origens dos argumentos [EBP+n]"
+    },
+    {
+      "id": "REA-009",
+      "phase": "Reconstrução",
+      "title": "Localizar drivers reais e validar assinaturas",
+      "priority": "P0",
+      "status": "todo",
+      "depends_on": [
+        "REA-002"
+      ],
+      "evidence": [],
+      "acceptance": [
+        "Separar referências textuais de drivers efetivamente encontrados",
+        "Registrar SHA-256, arquitetura e verificação de assinatura de cada artefato"
+      ],
+      "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/11",
+      "next_action": "Catalogar recursos PE e verificar se os drivers podem ser obtidos sem execução"
+    },
+    {
+      "id": "REA-010",
+      "phase": "Laboratório",
+      "title": "Validar Windows 7 SP1 x86 em VM isolada",
+      "priority": "P1",
+      "status": "blocked",
+      "depends_on": [
+        "REA-009"
+      ],
+      "evidence": [],
+      "acceptance": [
+        "Documentar VM, patches, driver, instalação, boot, remoção e falhas",
+        "Anexar resultados verificáveis e snapshots da arquitetura x86"
+      ],
+      "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/12",
+      "next_action": "Preparar VM descartável x86 e acesso autorizado",
+      "blocker": "Faltam VM Windows 7 SP1 x86 autorizada, snapshots e artefatos/assinaturas verificados"
+    },
+    {
+      "id": "REA-011",
+      "phase": "Laboratório",
+      "title": "Validar Windows 7 SP1 x64 em VM isolada",
+      "priority": "P1",
+      "status": "blocked",
+      "depends_on": [
+        "REA-009"
+      ],
+      "evidence": [],
+      "acceptance": [
+        "Documentar VM, patches, driver, instalação, boot, remoção e falhas",
+        "Anexar resultados verificáveis e snapshots da arquitetura x64"
+      ],
+      "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/12",
+      "next_action": "Preparar VM descartável x64 e acesso autorizado",
+      "blocker": "Faltam VM Windows 7 SP1 x64 autorizada, snapshots e artefatos/assinaturas verificados"
+    },
+    {
+      "id": "REA-012",
+      "phase": "Semântica",
+      "title": "Construir contratos e testes de equivalência observável",
+      "priority": "P1",
+      "status": "todo",
+      "depends_on": [
+        "REA-007",
+        "REA-008",
+        "REA-009"
+      ],
+      "evidence": [],
+      "acceptance": [
+        "Descrever entradas, saídas, buffers e efeitos por rotina sem inventar lacunas",
+        "Criar casos positivos, negativos e limites de confiança"
+      ],
+      "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/13",
+      "next_action": "Definir matriz de contratos após fechar CFG, buffers e proveniência dos drivers"
+    },
+    {
+      "id": "REA-013",
+      "phase": "Entrega",
+      "title": "Certificar o escopo validado e registrar limites Windows 7",
+      "priority": "P1",
+      "status": "todo",
+      "depends_on": [
+        "REA-010",
+        "REA-011",
+        "REA-012"
+      ],
+      "evidence": [],
+      "acceptance": [
+        "Exigir evidências independentes x86 e x64",
+        "Publicar aprovação/reprovação ou não verificado por contrato, com rastreabilidade"
+      ],
+      "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/13",
+      "next_action": "Não iniciar antes de validação experimental e contratos do escopo"
+    }
+  ]
+}
