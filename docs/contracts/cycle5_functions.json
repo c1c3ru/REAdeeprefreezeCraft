@@ -1,0 +1,93 @@
+{
+  "schema": "rea-structural-contract-v1",
+  "date": "2026-10-28",
+  "source": {
+    "path": "Faronics_DFS/DFStd.exe",
+    "sha256": "2d7c171d4037660843a7e02c055679c5a26904af84d48fc8c557a67023f55c8b"
+  },
+  "status": "static_hypotheses_only",
+  "contracts": [
+    {
+      "id": "FUN_00438AC0",
+      "entry_va": "0x00438AC0",
+      "stop_exclusive_va": "0x00438B48",
+      "candidate_prologue": true,
+      "instructions": 55,
+      "reachable_instructions": 55,
+      "basic_blocks": 8,
+      "backward_edges": [
+        {
+          "source": "0x00438B33",
+          "target": "0x00438AF3",
+          "classification": "natural_loop_back_edge_candidate"
+        }
+      ],
+      "internal_calls": [
+        {
+          "site_va": "0x00438B0A",
+          "target_va": "0x00438B48"
+        }
+      ],
+      "observations": [
+        "ESI compared against 8 before backward conditional jump",
+        "EAX is assigned from EBX before the return"
+      ],
+      "uncertainties": [
+        "No proof of semantics of iteration",
+        "Entry and exit may require cross-reference validation"
+      ]
+    },
+    {
+      "id": "FUN_00438B48",
+      "entry_va": "0x00438B48",
+      "stop_exclusive_va": "0x00438C41",
+      "candidate_prologue": true,
+      "instructions": 82,
+      "reachable_instructions": 82,
+      "basic_blocks": 10,
+      "backward_edges": [
+        {
+          "source": "0x00438C2B",
+          "target": "0x00438BD3",
+          "classification": "backward_edge_without_dominance"
+        }
+      ],
+      "imports_observed": [
+        {
+          "name": "CreateFileA",
+          "site_va": "0x00438BE5"
+        },
+        {
+          "name": "DeviceIoControl",
+          "site_va": "0x00438C08"
+        }
+      ],
+      "stack_argument_candidates": [
+        "[EBP+0x08]",
+        "[EBP+0x0C]",
+        "[EBP+0x10]",
+        "[EBP+0x14]"
+      ],
+      "observations": [
+        "Candidate code argument loaded from [EBP+0x08]",
+        "The CreateFileA result is copied to EBX and compared with 0xFFFFFFFF",
+        "A conditional branch precedes DeviceIoControl",
+        "EDI is compared with 2 before a backward branch",
+        "A local status at [EBP-0x28] is moved to EAX before return"
+      ],
+      "uncertainties": [
+        "Actual target object/device name",
+        "Input and output buffer contents",
+        "IOCTL semantics and runtime values",
+        "Driver identity and runtime reachability"
+      ]
+    }
+  ],
+  "validation": {
+    "technique": "bounded objdump decode and local CFG",
+    "driver_execution": false,
+    "windows7_x86_verified": false,
+    "windows7_x64_verified": false,
+    "proprietary_binary_in_repository": false
+  }
+}

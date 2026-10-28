@@ -37,6 +37,17 @@
 - [ ] Confirmar origem e tipos reais de handles, valores IOCTL em runtime e contratos de buffers.
 - [ ] Inventariar drivers instalados e suas assinaturas em Windows 7 SP1 x86/x64.
 
+## Etapa 5 — CFG delimitado e contratos estruturais (2026-10-28)
+
+- [x] Automatizar CFG por janela de função com limites conhecidos, análise de alcançabilidade, blocos básicos, dominadores e desvios retroativos.
+- [x] Registrar dois candidatos de função contíguos em DFStd.exe, com proveniência e hashes.
+- [x] Gerar contratos JSON preliminares (entradas observadas, chamadas, retornos e lacunas).
+- [x] Adicionar testes sintéticos (compatibilidade Python 3.8+; GNU objdump para fixtures PE).
+- [ ] Reconhecer entradas/saídas de funções automaticamente com evidências suficientes.
+- [ ] Validar caminhos com saltos indiretos, chamadas dinâmicas e exceções.
+- [ ] Rastrear nomes de objetos, buffers e resultados sem deduzir valores não observados.
+- [ ] Verificar drivers e semântica em VMs isoladas Windows 7 SP1 x86/x64.
+
 ## Fases futuras
 
 1. **Inventário recursivo:** localizar PEs embutidos e drivers extraídos, obter metadados e assinaturas sem executar artefatos.

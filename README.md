@@ -17,16 +17,21 @@ Laboratório de **engenharia reversa auditável** para análise de componentes d
 - [Descobertas do loop](docs/analyses/LOOP_DEVICEIO_2026-10-28.md) e [metodologia/limitações](docs/LOOP_METHODOLOGY.md).
 - `tools/rea_cfg.py`: desmontagem offline com GNU objdump, confirmação localizada de chamadas, grafo de saltos locais e rastreamento simbólico conservador dos argumentos.
 - [Evidências de desmontagem e CFG local](docs/analyses/CFG_LOCAL_2026-10-28.md).
+- `tools/rea_function_cfg.py`: grafo de fluxo por função delimitada, alcançabilidade, blocos básicos, dominadores, desvios retroativos e dependências de parâmetros x86.
+- [Etapa 5: duas funções e contratos estruturais](docs/analyses/FUNCTION_CFG_2026-10-28.md) e [contratos JSON](docs/contracts/cycle5_functions.json).
 
 ## Executar localmente
 
-Requisito para inventário/loop: **Python 3.8+**, sem dependências Python de terceiros. Para `rea_cfg.py` é necessário **GNU binutils (objdump)**. O analisador pode rodar em Linux, sem execução do arquivo Windows.
+Requisito para inventário/loop: **Python 3.8+**, sem dependências Python de terceiros. Para os módulos `rea_cfg.py` e `rea_function_cfg.py` é necessário **GNU binutils (objdump)**. O analisador pode rodar em Linux, sem execução do arquivo Windows.
 
 ```bash
 python -m unittest discover -s tests -v
 python tools/rea_inventory.py /caminho/para/userfreezer.zip --output inventario.json
 python -m tools.rea_structural --archive /caminho/para/userfreezer.zip --json estrutura.json --markdown interfaces.md
 python -m tools.rea_loop --archive /caminho/para/userfreezer.zip --json rea_loop.json --markdown rea_loop.md
+# Etapa 5: endereços virtuais do PE (VA), janela de função delimitada
+python -m tools.rea_function_cfg --archive /caminho/para/userfreezer.zip \
+  --entry 0x438b48 --stop 0x438c41 --json cfg_function_helper.json
 ```
 
 A análise `--archive` de CFG copia temporariamente apenas o membro PE selecionado para um diretório privado e apaga essa cópia ao concluir. Não faz commit nem instala o software. Os resultados JSON/Markdown são gerados apenas localmente; a documentacao versionada e curada manualmente. O arquivo `inventario.json` é gerado apenas localmente. **Não faça commit do ZIP, dos drivers originais, de chaves ou de dados pessoais.** O inventário rejeita arquivos grandes e caminhos suspeitos; o retorno `2` indica entradas ignoradas por segurança.
