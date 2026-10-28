@@ -15,10 +15,12 @@ Laboratório de **engenharia reversa auditável** para análise de componentes d
 - [Evidências estruturais](docs/analyses/STRUCTURAL_2026-10-28.md) e [fronteiras usuário/kernel](docs/INTERFACES_USER_KERNEL.md).
 - `tools/rea_loop.py`: loop estático automatizado **IAT → thunks → chamadas candidatas → literais de argumentos → ponto fixo**.
 - [Descobertas do loop](docs/analyses/LOOP_DEVICEIO_2026-10-28.md) e [metodologia/limitações](docs/LOOP_METHODOLOGY.md).
+- `tools/rea_cfg.py`: desmontagem offline com GNU objdump, confirmação localizada de chamadas, grafo de saltos locais e rastreamento simbólico conservador dos argumentos.
+- [Evidências de desmontagem e CFG local](docs/analyses/CFG_LOCAL_2026-10-28.md).
 
 ## Executar localmente
 
-Requisito: **Python 3.8+**, sem dependências de terceiros (execução do analisador também em Linux).
+Requisito para inventário/loop: **Python 3.8+**, sem dependências Python de terceiros. Para `rea_cfg.py` é necessário **GNU binutils (objdump)**. O analisador pode rodar em Linux, sem execução do arquivo Windows.
 
 ```bash
 python -m unittest discover -s tests -v
@@ -27,7 +29,7 @@ python -m tools.rea_structural --archive /caminho/para/userfreezer.zip --json es
 python -m tools.rea_loop --archive /caminho/para/userfreezer.zip --json rea_loop.json --markdown rea_loop.md
 ```
 
-Os resultados JSON/Markdown sao gerados apenas localmente; a documentacao versionada e curada manualmente. O arquivo `inventario.json` é gerado apenas localmente. **Não faça commit do ZIP, dos drivers originais, de chaves ou de dados pessoais.** O inventário rejeita arquivos grandes e caminhos suspeitos; o retorno `2` indica entradas ignoradas por segurança.
+A análise `--archive` de CFG copia temporariamente apenas o membro PE selecionado para um diretório privado e apaga essa cópia ao concluir. Não faz commit nem instala o software. Os resultados JSON/Markdown são gerados apenas localmente; a documentacao versionada e curada manualmente. O arquivo `inventario.json` é gerado apenas localmente. **Não faça commit do ZIP, dos drivers originais, de chaves ou de dados pessoais.** O inventário rejeita arquivos grandes e caminhos suspeitos; o retorno `2` indica entradas ignoradas por segurança.
 
 ## Compatibilidade e escopo
 

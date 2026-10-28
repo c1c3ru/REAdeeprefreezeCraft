@@ -19,6 +19,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Require GNU objdump for structural disassembly fixtures
+        run: command -v objdump && objdump --version | head -1
       - name: Compile source
         run: python -m compileall -q tools tests
       - name: Execute unit tests
