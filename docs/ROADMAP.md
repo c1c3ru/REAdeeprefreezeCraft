@@ -27,6 +27,16 @@
 - [ ] Derivar parâmetros reais (não somente literais) e vincular chamadas a handles.
 - [ ] Localizar drivers reais e construir contratos semânticos testáveis em VMs.
 
+## Etapa 4 — desmontagem localizada e rastreamento conservador
+
+- [x] Verificar por `objdump` as 51 chamadas candidatas nas três janelas de desmontagem (resultado local).
+- [x] Automatizar a decodificação de chamadas x86 e extração de saltos locais (CFG parcial).
+- [x] Acrescentar rastreamento local de empilhamentos/registradores e checkpoint JSON/Markdown.
+- [x] Investigar o parâmetro dinâmico de `DeviceIoControl` em RVA `0x038C08`: origem imediata `[EBP+0x08]`.
+- [ ] Obter CFG global validado a partir de entradas de funções e referências de salto.
+- [ ] Confirmar origem e tipos reais de handles, valores IOCTL em runtime e contratos de buffers.
+- [ ] Inventariar drivers instalados e suas assinaturas em Windows 7 SP1 x86/x64.
+
 ## Fases futuras
 
 1. **Inventário recursivo:** localizar PEs embutidos e drivers extraídos, obter metadados e assinaturas sem executar artefatos.

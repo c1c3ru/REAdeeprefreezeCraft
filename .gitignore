@@ -12,3 +12,6 @@ loop.json
 rea_loop*.json
 rea_loop*.md
 .DS_Store
+
+cfg_local*.json
+cfg_local*.md
