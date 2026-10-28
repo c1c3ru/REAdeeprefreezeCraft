@@ -1,7 +1,7 @@
 {
   "schema": "rea-015-recursive-checkpoint-v1",
   "date": "2026-10-28",
-  "stage": "partial",
+  "stage": "partial_subcycle_2",
   "source": {
     "archive": "userfreezer.zip",
     "sha256": "f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671"
@@ -30,7 +30,18 @@
         "UPX0",
         "UPX1"
       ],
-      "nested_visible_pe_count": 0
+      "nested_visible_pe_count": 0,
+      "packed_section_layout": {
+        "UPX0": {
+          "raw_bytes": 0,
+          "virtual_bytes": 5636096
+        },
+        "UPX1": {
+          "raw_bytes": 1958400,
+          "virtual_bytes": 1961984
+        }
+      },
+      "unpacked_code_recovered": false
     },
     {
       "path": "BINARY/RSC_WU_CMD_LINE/4105",
@@ -42,24 +53,44 @@
         "UPX0",
         "UPX1"
       ],
-      "nested_visible_pe_count": 0
+      "nested_visible_pe_count": 0,
+      "packed_section_layout": {
+        "UPX0": {
+          "raw_bytes": 0,
+          "virtual_bytes": 663552
+        },
+        "UPX1": {
+          "raw_bytes": 136704,
+          "virtual_bytes": 139264
+        }
+      },
+      "unpacked_code_recovered": false
     }
   ],
-  "unknown_containers": [
-    {
-      "path": "BINARY/STD_INSTALL_SIB/4105",
-      "bytes": 152243,
-      "signature": "SIB file",
-      "classification": "format_not_reverse_engineered"
-    }
-  ],
+  "unknown_containers": [],
   "visible_resource_leaves_total": 190,
   "fully_recovered_driver_pe_count": 0,
   "discovery_closed": false,
   "unresolved": [
     "UPX-compressed sections not expanded",
-    "SIB resource format not understood",
     "Driver binaries not verified",
-    "Potential runtime-installed/dependent components not enumerated"
+    "Potential runtime-installed/dependent components not enumerated",
+    "TsiLang SIB internal records not fully parsed; format itself identified by header"
+  ],
+  "identified_data_resources": [
+    {
+      "path": "BINARY/STD_INSTALL_SIB/4105",
+      "size_bytes": 152243,
+      "sha256": "791d980f9f329d37d1abab02e334208991c68c162b086b68bbe975d73e1c74f3",
+      "classification": "tsilang_translation_data",
+      "header": "SIB file: TsiLang binary translation data",
+      "observed_labels": [
+        "PORTUGUESE",
+        "JAPANESE",
+        "CHINESE_SIMPLIFIED"
+      ],
+      "records_parsed": false,
+      "execution_performed": false
+    }
   ]
 }

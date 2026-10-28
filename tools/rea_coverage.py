@@ -108,6 +108,26 @@ def validate(manifest, root=None):
             raise CoverageError("Measured intervals cannot be marked unmeasured")
         if comp["semantics_status"] == "verified" and not comp["behavior_verified"]:
             raise CoverageError("Semantic verification requires behavioral evidence")
+    # Identified data cannot silently become executable code coverage.
+    identified = manifest.get("identified_data_resources", [])
+    if not isinstance(identified, list):
+        raise CoverageError("Identified data resources must be a list")
+    identifiers = set()
+    for item in identified:
+        identifier = item.get("id") if isinstance(item, dict) else None
+        if not isinstance(identifier, str) or not identifier or identifier in identifiers:
+            raise CoverageError("Duplicate or missing identified data ID")
+        identifiers.add(identifier)
+        if not re.fullmatch(r"[0-9a-f]{64}", str(item.get("sha256", ""))):
+            raise CoverageError("Identified data missing verified SHA256")
+        if type(item.get("size_bytes")) is not int or item["size_bytes"] < 1:
+            raise CoverageError("Identified data has invalid size")
+        if item.get("format") != "tsilang_translation_data":
+            raise CoverageError("Unrecognized identified data format")
+        if type(item.get("records_parsed")) is not bool:
+            raise CoverageError("Translation record parse status must be Boolean")
+        if not isinstance(item.get("path"), str) or not item["path"]:
+            raise CoverageError("Identified data path missing")
     if not isinstance(manifest.get("unknowns"), list):
         raise CoverageError("Unknowns must be explicit")
     return manifest
@@ -146,10 +166,12 @@ def measure(manifest, root=None):
         "discovery_closed", "reconstruction_complete", "semantic_equivalence_verified",
         "windows7_sp1_x86_verified", "windows7_sp1_x64_verified")}
     certified = (fully_measured_and_verified and all(gates.values())
-                 and not missing_denominator and not driver_refs and not manifest["unknowns"])
+                 and not missing_denominator and not driver_refs and not manifest["unknowns"]
+                 and all(item["records_parsed"] for item in manifest.get("identified_data_resources", [])))
     return {
         "schema": "rea-coverage-report-v1",
         "known_pes": len(details),
+        "identified_data_resource_count": len(manifest.get("identified_data_resources", [])),
         "unrecovered_driver_name_references": driver_refs,
         "unknown_executable_denominators": missing_denominator,
         "measured_executable_bytes": known,
@@ -174,6 +196,7 @@ def render(manifest, report):
         "**Objetivo:** " + manifest["objective"], "",
         "## Linha de base", "",
         "- PEs identificados: **%d**." % report["known_pes"],
+        "- Recursos não-PE com formato identificado: **%d**." % report["identified_data_resource_count"],
         "- Referências a nomes de driver sem binário: **%d**." %
         report["unrecovered_driver_name_references"],
         "- PEs com denominador executivo desconhecido: **%d**." %
@@ -200,6 +223,13 @@ def render(manifest, report):
                    "%.8f%%" % item["decoded_percent"])
         lines.append("| %s | %s | %d | %s | %s |" %
                      (item["id"], value, item["decoded_bytes"], percent, item["semantics"]))
+    lines += ["", "## Recursos de dados identificados", "",
+              "| Identificador | Formato | Bytes | Registros internos verificados |",
+              "|---|---|---:|---|"]
+    for item in manifest.get("identified_data_resources", []):
+        lines.append("| %s | %s | %d | %s |" %
+                     (item["id"], item["format"], item["size_bytes"],
+                      "sim" if item["records_parsed"] else "não"))
     lines += ["", "## Desconhecidos que impedem 100%", ""]
     lines.extend("- " + str(v) for v in report["unknowns"])
     lines += ["", "## Engenharia de loop — próximos alvos", ""]

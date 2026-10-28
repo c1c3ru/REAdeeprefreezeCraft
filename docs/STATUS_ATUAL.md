@@ -43,7 +43,7 @@ Priorize P0; cada tarefa avança em um PR, com testes e evidências.
 
 - **REA-008 (P0):** Investigar fluxos de EAX/EBX e origens dos argumentos [EBP+n]
 - **REA-009 (P0):** Catalogar recursos PE e verificar se os drivers podem ser obtidos sem execução
-- **REA-015 (P0):** Analisar os dados SIB e o conteúdo UPX não expandido, validar módulos externos e reconciliar o manifesto; não fechar REA-015 antes de comprovar o inventário total.
+- **REA-015 (P0):** Completar o esquema interno dos registros TsiLang, investigar código ainda compactado em UPX e localizar artefatos de drivers; não fechar o inventário antes disso.
 
 ## Bloqueios e dependências abertas
 

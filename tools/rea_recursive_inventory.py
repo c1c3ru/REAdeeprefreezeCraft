@@ -26,6 +26,8 @@ MAX_TOTAL_BYTES = 256 * 1024 * 1024
 MAX_RESOURCE_LEAVES = 4096
 KNOWN_DRIVER_NAMES = ("DeepFrz.sys", "DeepFrzx64.sys",
                       "FarSpace.sys", "FarSpaceX64.sys")
+TSILANG_HEADER = b"SIB file: TsiLang binary translation data\x00"
+KNOWN_LANGUAGE_TOKENS = (b"PORTUGUESE", b"JAPANESE", b"CHINESE_SIMPLIFIED")
 
 
 class InventoryError(ValueError):
@@ -41,6 +43,8 @@ def classify(data, name):
         return "pe_candidate"
     if data.startswith(b"PK\x03\x04"):
         return "zip_container"
+    if data.startswith(TSILANG_HEADER):
+        return "tsilang_translation_data"
     if data.startswith(b"SIB file"):
         return "sib_container_unknown"
     if data.startswith(b"\x89PNG\r\n\x1a\n"):
@@ -104,6 +108,18 @@ def scan_payload(data, label, origin, depth, state, declared_path=None):
         scan_zip(io.BytesIO(data), label, depth + 1, state)
         return
     if kind != "pe_candidate":
+        if kind == "tsilang_translation_data":
+            # Header-based classification only, not a full binary record parser.
+            record["format_evidence"] = {
+                "signature": TSILANG_HEADER[:-1].decode("ascii"),
+                "header_terminated": True,
+                "recognized_language_labels": [
+                    token.decode("ascii") for token in KNOWN_LANGUAGE_TOKENS
+                    if token in data[:8192]
+                ],
+                "records_parsed": False,
+                "executable_claim": False,
+            }
         if kind in ("unclassified_data", "sib_container_unknown"):
             state["unresolved"].append({
                 "path": label, "reason": "unknown_container_or_data_format",
@@ -123,6 +139,19 @@ def scan_payload(data, label, origin, depth, state, declared_path=None):
     record["entry_rva"] = "0x%x" % view.entry_rva
     record["executable_sections"] = sections
     record["packer_markers"] = markers
+    if markers:
+        # UPX0 with virtual bytes and no raw bytes is a packaging indicator;
+        # the original code is NOT present/decoded in that on-disk section.
+        record["packed_layout"] = {
+            "zero_raw_executable_sections": [
+                section["name"] for section in sections
+                if section["raw_bytes"] == 0 and section["virtual_bytes"] > 0
+            ],
+            "upx1_raw_bytes": sum(
+                sec["raw_size"] for sec in view.sections if sec["name"] == "UPX1"
+            ),
+            "unpacked_code_recovered": False,
+        }
     record["resource_count"] = 0
     state["pe_count"] += 1
     if markers:
