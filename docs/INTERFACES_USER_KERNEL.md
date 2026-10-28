@@ -39,7 +39,9 @@ Setas **contínuas** representam metadados observados; **pontilhadas** são rela
 4. Controle: caminhos de sucesso, falha, reinicialização e mudanças Frozen/Thawed.
 5. Evidências: offset, instrução ou registro controlado em VM, confiança e lacunas.
 
-Ainda **desconhecidos**: nomes dos objetos de dispositivo, valores IOCTL, IRPs, layouts de comunicação, função DriverEntry, drivers carregados e semântica de proteção. Não inferir desses elementos apenas com imports do instalador.
+A etapa 3 adicionou **valores constantes candidatos** extraídos do padrão de pilha nas chamadas a DeviceIoControl. Ver [loop REA](analyses/LOOP_DEVICEIO_2026-10-28.md). Isso **não** prova o valor do argumento em execução, o dispositivo de destino nem o significado dos comandos.
+
+Ainda **desconhecidos**: nomes dos objetos de dispositivo, valores IOCTL confirmados, IRPs, layouts de comunicação, função DriverEntry, drivers carregados e semântica de proteção. Não inferir desses elementos apenas com imports do instalador.
 
 ## Requisitos Windows 7
 
