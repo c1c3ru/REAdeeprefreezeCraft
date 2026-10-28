@@ -8,8 +8,8 @@
 
 ## Indicadores de entregas
 
-- Concluídas: **8/17**.
-- Prontas: **3**.
+- Concluídas: **9/17**.
+- Prontas: **2**.
 - Aguardando dependências: **4**.
 - Bloqueadas explicitamente: **2**.
 
@@ -26,7 +26,7 @@
 | REA-005 | Rastrear a cadeia interprocedural e dados estáticos | done | P0 | REA-004 | — |
 | REA-006 | Instituir plano, status verificável e ciclos de avanço | done | P0 | REA-005 | — |
 | REA-007 | Cobrir todas as saídas e condições dos laços das duas funções | done | P0 | REA-006 | [#9](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/9) |
-| REA-008 | Rastrear handles, buffers, tamanhos e retornos | todo | P0 | REA-005 | [#10](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/10) |
+| REA-008 | Rastrear handles, buffers, tamanhos e retornos | done | P0 | REA-005 | [#10](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/10) |
 | REA-009 | Localizar drivers reais e validar assinaturas | todo | P0 | REA-002 | [#11](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/11) |
 | REA-010 | Validar Windows 7 SP1 x86 em VM isolada | blocked | P1 | REA-009 | [#12](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/12) |
 | REA-011 | Validar Windows 7 SP1 x64 em VM isolada | blocked | P1 | REA-009 | [#12](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/12) |
@@ -41,16 +41,15 @@
 
 Priorize P0; cada tarefa avança em um PR, com testes e evidências.
 
-- **REA-008 (P0):** Investigar fluxos de EAX/EBX e origens dos argumentos [EBP+n]
 - **REA-009 (P0):** Catalogar recursos PE e verificar se os drivers podem ser obtidos sem execução
 - **REA-015 (P0):** Obter de modo reproduzível os bytes descompactados dos dois módulos UPX e seus denominadores, sem executar drivers; confirmar binários de drivers e demais dependências.
 
 ## Bloqueios e dependências abertas
 
-- **REA-012** aguarda: REA-008, REA-009.
+- **REA-012** aguarda: REA-009.
 - **REA-013** aguarda: REA-010, REA-011, REA-012.
 - **REA-016** aguarda: REA-015.
-- **REA-017** aguarda: REA-008, REA-009, REA-016, REA-010, REA-011.
+- **REA-017** aguarda: REA-009, REA-016, REA-010, REA-011.
 - **REA-010** bloqueada: Faltam VM Windows 7 SP1 x86 autorizada, snapshots e artefatos/assinaturas verificados.
 - **REA-011** bloqueada: Faltam VM Windows 7 SP1 x64 autorizada, snapshots e artefatos/assinaturas verificados.
 
@@ -144,10 +143,16 @@ Evidências:
 
 ### REA-008 — Rastrear handles, buffers, tamanhos e retornos
 
-**Status:** todo · **Etapa:** Reconstrução
+**Status:** done · **Etapa:** Reconstrução
 
-- [ ] Rastrear proveniência dos argumentos de CreateFileA/DeviceIoControl/CloseHandle
-- [ ] Criar relatório JSON de proveniência com incerteza e testes
+- [x] Rastrear proveniência dos argumentos de CreateFileA/DeviceIoControl/CloseHandle
+- [x] Criar relatório JSON de proveniência com incerteza e testes
+
+Evidências:
+- [tools/rea_ioctl_contract.py](../tools/rea_ioctl_contract.py)
+- [tests/test_rea_ioctl_contract.py](../tests/test_rea_ioctl_contract.py)
+- [docs/contracts/rea008_buffer_provenance.json](../docs/contracts/rea008_buffer_provenance.json)
+- [docs/analyses/REA008_ARGUMENT_PROVENANCE.md](../docs/analyses/REA008_ARGUMENT_PROVENANCE.md)
 
 ### REA-009 — Localizar drivers reais e validar assinaturas
 
