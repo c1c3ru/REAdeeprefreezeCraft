@@ -12,6 +12,8 @@
 - Referências a nomes de driver sem binário: **4**.
 - PEs com denominador executivo desconhecido: **2**.
 - Bytes executáveis medidos: **5246976**.
+- Bytes físicos UPX1 (compactados, NÃO decodificados): **2095104**.
+- Módulos UPX com código original não recuperado: **2**.
 - Bytes de janelas estruturalmente desmontadas: **385**.
 - Fração das janelas sobre o denominador conhecido: **0.00733756%**.
 - Denominador global do produto fechado: **não**.

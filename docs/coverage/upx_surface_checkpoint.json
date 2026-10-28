@@ -1,0 +1,81 @@
+{
+  "schema": "rea-015-upx-surface-v1",
+  "archive_sha256": "f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671",
+  "root_pe_sha256": "2d7c171d4037660843a7e02c055679c5a26904af84d48fc8c557a67023f55c8b",
+  "components": [
+    {
+      "sha256": "145c6b8461132fd077a42cee775aca318c2b697b5720283749e04fc6aa5b4772",
+      "architecture": "x86",
+      "entrypoint_rva": "0x73edd0",
+      "entrypoint_file_offset": "0x1de1d0",
+      "entrypoint_section": "UPX1",
+      "entrypoint_first_32_bytes_sha256": "0e62ba877af8aea1e26c42421032c25061f7f12d45bd25e5e487e0b201269c5a",
+      "upx_header_markers": [
+        "0x3e0"
+      ],
+      "upx0": {
+        "name": "UPX0",
+        "rva": 4096,
+        "virtual_bytes": 5636096,
+        "raw_bytes": 0,
+        "raw_offset": 1024,
+        "executable_flag": true,
+        "raw_sha256": null
+      },
+      "upx1": {
+        "name": "UPX1",
+        "rva": 5640192,
+        "virtual_bytes": 1961984,
+        "raw_bytes": 1958400,
+        "raw_offset": 1024,
+        "executable_flag": true,
+        "raw_sha256": "cc1a67e0060bb4fb13f8ef0b08c963c3cafd880a70b839b72cdd55eb6fbb5e1b"
+      },
+      "packed_executable_on_disk_bytes": 1958400,
+      "unpacked_code_recovered": false,
+      "original_entrypoint_recovered": false,
+      "code_coverage_percent": null,
+      "caveat": "UPX0 contains no on-disk code bytes; UPX1 entry is the loader stub, not proof of original code recovery.",
+      "source_resource": "BINARY/CLOUD_INSTALLER/4105"
+    },
+    {
+      "sha256": "454a1a6a576cce0b69acbf320fbeebb4909891ee7592f20afd9df992db6a1351",
+      "architecture": "x86",
+      "entrypoint_rva": "0xc41b0",
+      "entrypoint_file_offset": "0x215b0",
+      "entrypoint_section": "UPX1",
+      "entrypoint_first_32_bytes_sha256": "99883b7e06925d4a31ddd83d78c30e6c4d2f8a9ab7ba818ab24c30056a4a3aca",
+      "upx_header_markers": [
+        "0x3e0"
+      ],
+      "upx0": {
+        "name": "UPX0",
+        "rva": 4096,
+        "virtual_bytes": 663552,
+        "raw_bytes": 0,
+        "raw_offset": 1024,
+        "executable_flag": true,
+        "raw_sha256": null
+      },
+      "upx1": {
+        "name": "UPX1",
+        "rva": 667648,
+        "virtual_bytes": 139264,
+        "raw_bytes": 136704,
+        "raw_offset": 1024,
+        "executable_flag": true,
+        "raw_sha256": "2b346ea50e275436952384a345caee6baeea1b94ea223626fcdb3a730f887406"
+      },
+      "packed_executable_on_disk_bytes": 136704,
+      "unpacked_code_recovered": false,
+      "original_entrypoint_recovered": false,
+      "code_coverage_percent": null,
+      "caveat": "UPX0 contains no on-disk code bytes; UPX1 entry is the loader stub, not proof of original code recovery.",
+      "source_resource": "BINARY/RSC_WU_CMD_LINE/4105"
+    }
+  ],
+  "packed_modules_verified": 2,
+  "full_reverse_engineering_complete": false,
+  "windows7_runtime_tested": false,
+  "method": "Bounded static PE header and raw section inspection; no binary execution, unpacking or publication."
+}

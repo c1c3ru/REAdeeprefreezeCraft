@@ -57,6 +57,12 @@ A ferramenta `tools/rea_embedded_pe_candidates.py` separa `invalid_mz_hits` de `
 
 Reproduzir com `python -m tools.rea_embedded_pe_candidates --archive userfreezer.zip --expect-sha256 f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671 --json rea015_pe_candidates.json`.
 
+## Subciclo 4 — superfície do empacotador e ponto de entrada
+
+O levantamento verificou os RVAs de entrada `0x73EDD0` (CLOUD_INSTALLER) e `0x0C41B0` (RSC_WU_CMD_LINE), com offset de entrada correspondente a `0x1DE1D0` e `0x0215B0`. Ambos pertencem à seção física `UPX1` e trazem marcador `UPX!` no cabeçalho. Os hashes dos **2.095.104 bytes de payloads empacotados fisicamente presentes** estão no [checkpoint de superfície UPX](UPX_SURFACE_2026-10-28.md); **o código original ainda não foi recuperado**.
+
+Esses bytes foram incluídos no monitoramento de cobertura como **física compactada**, explicitamente **fora** do denominador de código reconstruído e da porcentagem semântica.
+
 ## O que permanece para concluir REA-015
 
 1. A classificação do cabeçalho SIB como TsiLang foi concluída; **resta documentar o esquema interno dos registros** para fechar a cobertura de dados. Não inferir que as traduções tenham sido completamente decodificadas.
