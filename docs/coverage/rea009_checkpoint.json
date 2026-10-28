@@ -1,0 +1,103 @@
+{
+  "schema": "rea-009-driver-provenance-v1",
+  "date": "2026-10-28",
+  "archive": {
+    "name": "userfreezer.zip",
+    "sha256": "f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671",
+    "top_level_file_entries": 15,
+    "direct_sys_members": 0
+  },
+  "static_pe_resource_tree": {
+    "observed_pe_count": 3,
+    "visible_leaf_resources": 190,
+    "confirmed_driver_pe_count": 0,
+    "caveat": "No driver PE confirmed in directly visible ZIP/PE resources; packed or overlay components not ruled out"
+  },
+  "observed_pe": [
+    {
+      "component": "DFSTD_MAIN",
+      "sha256": "2d7c171d4037660843a7e02c055679c5a26904af84d48fc8c557a67023f55c8b",
+      "machine": "0x014c",
+      "subsystem": 2,
+      "certificate": {
+        "win_certificate_present": true,
+        "file_offset": 18345984,
+        "table_length": 10616,
+        "pkcs7_blob_sha256": "04cf95094e3a01de463ebfb985fe3c26d60fe56bccad87d646613675f2cc9ec6",
+        "win_certificate_type": "0x0002",
+        "local_openssl_certificates_decoded": true,
+        "extracted_subject": "Faronics Corporation",
+        "issuer_summary": "DigiCert Trusted G4 Code Signing RSA4096 SHA384 2021 CA1",
+        "cryptographic_validity_verified": false,
+        "trust_chain_verified": false
+      },
+      "overlay": {
+        "size_bytes": 0
+      },
+      "driver_filename_reference_counts": {
+        "DeepFrz.sys": 3,
+        "DeepFrzx64.sys": 2,
+        "FarSpace.sys": 9,
+        "FarSpaceX64.sys": 4
+      }
+    },
+    {
+      "component": "CLOUD_INSTALLER",
+      "sha256": "145c6b8461132fd077a42cee775aca318c2b697b5720283749e04fc6aa5b4772",
+      "machine": "0x014c",
+      "subsystem": 2,
+      "certificate": {
+        "win_certificate_present": false,
+        "cryptographic_validity_verified": false,
+        "trust_chain_verified": false
+      },
+      "overlay": {
+        "size_bytes": 7836809,
+        "offset_hex": "0x1e4800",
+        "sha256": "9453669c5ae280cb8718761159895da425168ccbba1e4e56d376b5165554b9e2",
+        "format": "unknown",
+        "contains_driver": "unknown"
+      },
+      "driver_filename_reference_counts": {}
+    },
+    {
+      "component": "RSC_WU_CMD_LINE",
+      "sha256": "454a1a6a576cce0b69acbf320fbeebb4909891ee7592f20afd9df992db6a1351",
+      "machine": "0x014c",
+      "subsystem": 3,
+      "certificate": {
+        "win_certificate_present": true,
+        "file_offset": 573440,
+        "table_length": 10616,
+        "pkcs7_blob_sha256": "fafe2034b074657244bfe6fa9aee5fd79e8695177140dc414f7e5e9f0232bf64",
+        "win_certificate_type": "0x0002",
+        "local_openssl_certificates_decoded": true,
+        "extracted_subject": "Faronics Corporation",
+        "issuer_summary": "DigiCert Trusted G4 Code Signing RSA4096 SHA384 2021 CA1",
+        "cryptographic_validity_verified": false,
+        "trust_chain_verified": false
+      },
+      "overlay": {
+        "size_bytes": 0
+      },
+      "driver_filename_reference_counts": {}
+    }
+  ],
+  "driver_names_without_confirmed_files": [
+    "DeepFrz.sys",
+    "DeepFrzx64.sys",
+    "FarSpace.sys",
+    "FarSpaceX64.sys"
+  ],
+  "windows7_sha2_support_requirements_not_tested": true,
+  "windows7_x86_validated": false,
+  "windows7_x64_validated": false,
+  "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/11",
+  "task_status": "blocked_waiting_for_real_driver_binaries",
+  "next_actions": [
+    "Recover .sys driver samples from an authorized installation/VM or validated installer payload",
+    "Record SHA-256 and PE machine for each confirmed .sys",
+    "Cryptographically verify Authenticode/catalog signature and trust chain in Win7 SP1 x86/x64",
+    "Identify and classify CLOUD_INSTALLER 7.84MB appended payload"
+  ]
+}

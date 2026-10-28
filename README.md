@@ -11,6 +11,7 @@ Laboratório de **engenharia reversa auditável** para análise de componentes d
 - [Roadmap](docs/ROADMAP.md) — fases de inventário, análise estrutural e validação semântica.
 - **[Cobertura integral de engenharia reversa](docs/coverage/STATUS.md)** e [manifesto de componentes](docs/coverage/scope.json): cobertura por byte de módulo medido, denominadores desconhecidos e gates de equivalência; sem percentual global inventado.
 - `tools/rea_coverage.py`: validador/gerador da cobertura integral, integrado ao CI.
+- `tools/rea_driver_evidence.py` — REA-009: identifica arquivos .sys **reais** versus strings, registra tabelas Authenticode e overlays não classificados sem validar criptograficamente a assinatura; [checkpoint](docs/coverage/REA009_DRIVER_PROVENANCE.md).
 - `tools/rea_ioctl_contract.py` — REA-008: contrato estático das oito posições de `DeviceIoControl`, `CreateFileA`, buffers e status de retorno; [análise](docs/analyses/REA008_ARGUMENT_PROVENANCE.md).
 - `tools/rea_upx_surface.py` — REA-015: valida entradas PE, hashes das seções UPX0/UPX1 e bytes compactados, sem supor código reconstruído; [relatório](docs/coverage/UPX_SURFACE_2026-10-28.md).
 - `tools/rea_embedded_pe_candidates.py` — REA-015: verifica marcadores MZ em offsets não iniciais dos recursos e separa falsos positivos de candidatos PE válidos.
@@ -43,6 +44,7 @@ python -m tools.rea_progress --check
 python -m tools.rea_progress --json
 python -m tools.rea_coverage --check
 python -m tools.rea_coverage --json
+python -m tools.rea_driver_evidence --archive /caminho/para/userfreezer.zip --expect-sha256 f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671 --json rea009_driver_scan.json
 python -m tools.rea_upx_surface --archive /caminho/para/userfreezer.zip \
   --json rea015_upx_surface.json
 # Inventário recursivo da amostra original (sem executar nem escrever executáveis)

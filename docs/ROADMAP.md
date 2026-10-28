@@ -69,7 +69,7 @@ O backlog ativo, critérios de aceite e dependências passaram a ser mantidos em
 - [x] Adicionar validador de status/evidências e testes sintéticos ao CI.
 - [x] REA-007: saídas, nove desvios condicionais e dois laços das duas janelas candidatas; ver [análise](analyses/REA_007_BRANCH_EXITS.md).
 - [x] REA-008: proveniência estática de handles/buffers/retornos nas duas funções, [relatório](analyses/REA008_ARGUMENT_PROVENANCE.md).
-- [ ] REA-009: identificação dos binários de driver e assinaturas, ainda pendente.
+- [ ] REA-009: **bloqueada por ausência dos `.sys` reais e assinaturas verificadas**; auditoria dos três PEs e do overlay em [checkpoint](coverage/REA009_DRIVER_PROVENANCE.md).
 - [ ] REA-010/011/012/013: laboratório Windows 7 e certificação contratual.
 
 ## Expansão para 100% de cobertura verificável

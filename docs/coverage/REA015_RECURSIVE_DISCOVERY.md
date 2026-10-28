@@ -63,6 +63,12 @@ O levantamento verificou os RVAs de entrada `0x73EDD0` (CLOUD_INSTALLER) e `0x0C
 
 Esses bytes foram incluídos no monitoramento de cobertura como **física compactada**, explicitamente **fora** do denominador de código reconstruído e da porcentagem semântica.
 
+## Subciclo 5 — descoberta de overlay ainda não classificado
+
+A inspeção de três PEs revelou uma região adicional no `CLOUD_INSTALLER`, após a última seção física (`0x1E4800`), com **7.836.809 bytes** e SHA-256 `9453669c5ae280cb8718761159895da425168ccbba1e4e56d376b5165554b9e2`. Essa região está **fora das seções UPX0/UPX1** já medidas e não tem formato identificado; não deve ser contabilizada como código recuperado, driver ou recurso sem prova. O [checkpoint REA-009](REA009_DRIVER_PROVENANCE.md) registra também a ausência de arquivos .sys diretamente no ZIP e as tabelas de certificados estruturais dos executáveis.
+
+O próximo loop REA-015 deverá investigar a estrutura do overlay, identificar componentes que ele eventualmente contenha e conferir dependências externas. **Não fechar a descoberta com base somente no inventário visível.**
+
 ## O que permanece para concluir REA-015
 
 1. A classificação do cabeçalho SIB como TsiLang foi concluída; **resta documentar o esquema interno dos registros** para fechar a cobertura de dados. Não inferir que as traduções tenham sido completamente decodificadas.
