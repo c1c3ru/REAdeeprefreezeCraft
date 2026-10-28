@@ -1,0 +1,65 @@
+{
+  "schema": "rea-015-recursive-checkpoint-v1",
+  "date": "2026-10-28",
+  "stage": "partial",
+  "source": {
+    "archive": "userfreezer.zip",
+    "sha256": "f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671"
+  },
+  "zip": {
+    "entries_total": 23,
+    "file_entries": 15,
+    "directory_entries": 8,
+    "pe_file_members": 1,
+    "url_shortcut_members": 13,
+    "txt_members": 1
+  },
+  "root_pe": {
+    "path": "Faronics_DFS/DFStd.exe",
+    "sha256": "2d7c171d4037660843a7e02c055679c5a26904af84d48fc8c557a67023f55c8b",
+    "visible_resource_leaves": 106
+  },
+  "embedded": [
+    {
+      "path": "BINARY/CLOUD_INSTALLER/4105",
+      "sha256": "145c6b8461132fd077a42cee775aca318c2b697b5720283749e04fc6aa5b4772",
+      "size_bytes": 9821321,
+      "machine": "0x014c",
+      "resource_leaves": 72,
+      "packed_section_markers": [
+        "UPX0",
+        "UPX1"
+      ],
+      "nested_visible_pe_count": 0
+    },
+    {
+      "path": "BINARY/RSC_WU_CMD_LINE/4105",
+      "sha256": "454a1a6a576cce0b69acbf320fbeebb4909891ee7592f20afd9df992db6a1351",
+      "size_bytes": 584056,
+      "machine": "0x014c",
+      "resource_leaves": 12,
+      "packed_section_markers": [
+        "UPX0",
+        "UPX1"
+      ],
+      "nested_visible_pe_count": 0
+    }
+  ],
+  "unknown_containers": [
+    {
+      "path": "BINARY/STD_INSTALL_SIB/4105",
+      "bytes": 152243,
+      "signature": "SIB file",
+      "classification": "format_not_reverse_engineered"
+    }
+  ],
+  "visible_resource_leaves_total": 190,
+  "fully_recovered_driver_pe_count": 0,
+  "discovery_closed": false,
+  "unresolved": [
+    "UPX-compressed sections not expanded",
+    "SIB resource format not understood",
+    "Driver binaries not verified",
+    "Potential runtime-installed/dependent components not enumerated"
+  ]
+}

@@ -285,13 +285,18 @@
       "depends_on": [
         "REA-014"
       ],
-      "evidence": [],
+      "evidence": [
+        "tools/rea_recursive_inventory.py",
+        "tests/test_rea_recursive_inventory.py",
+        "docs/coverage/REA015_RECURSIVE_DISCOVERY.md",
+        "docs/coverage/rea015_checkpoint.json"
+      ],
       "acceptance": [
         "Inventariar todos os recursos executáveis e dependências com hashes e origem",
         "Separar binários confirmados de nomes/strings e fechar pendências de empacotamento"
       ],
       "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/17",
-      "next_action": "Expandir descoberta offline de PE aninhado e recursos compactados"
+      "next_action": "Analisar os dados SIB e o conteúdo UPX não expandido, validar módulos externos e reconciliar o manifesto; não fechar REA-015 antes de comprovar o inventário total."
     },
     {
       "id": "REA-016",
