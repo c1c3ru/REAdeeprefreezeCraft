@@ -9,9 +9,9 @@
 ## Indicadores de entregas
 
 - Concluídas: **9/17**.
-- Prontas: **2**.
+- Prontas: **1**.
 - Aguardando dependências: **4**.
-- Bloqueadas explicitamente: **2**.
+- Bloqueadas explicitamente: **3**.
 
 > Entregas concluídas são marcos do projeto, não percentuais de cobertura. O denominador global ainda não está fechado: ver docs/coverage/STATUS.md; somente uma dimensão integralmente comprovada poderá chegar a 100%.
 
@@ -27,7 +27,7 @@
 | REA-006 | Instituir plano, status verificável e ciclos de avanço | done | P0 | REA-005 | — |
 | REA-007 | Cobrir todas as saídas e condições dos laços das duas funções | done | P0 | REA-006 | [#9](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/9) |
 | REA-008 | Rastrear handles, buffers, tamanhos e retornos | done | P0 | REA-005 | [#10](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/10) |
-| REA-009 | Localizar drivers reais e validar assinaturas | todo | P0 | REA-002 | [#11](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/11) |
+| REA-009 | Localizar drivers reais e validar assinaturas | blocked | P0 | REA-002 | [#11](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/11) |
 | REA-010 | Validar Windows 7 SP1 x86 em VM isolada | blocked | P1 | REA-009 | [#12](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/12) |
 | REA-011 | Validar Windows 7 SP1 x64 em VM isolada | blocked | P1 | REA-009 | [#12](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/12) |
 | REA-012 | Construir contratos e testes de equivalência observável | todo | P1 | REA-007, REA-008, REA-009 | [#13](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/13) |
@@ -41,7 +41,6 @@
 
 Priorize P0; cada tarefa avança em um PR, com testes e evidências.
 
-- **REA-009 (P0):** Catalogar recursos PE e verificar se os drivers podem ser obtidos sem execução
 - **REA-015 (P0):** Obter de modo reproduzível os bytes descompactados dos dois módulos UPX e seus denominadores, sem executar drivers; confirmar binários de drivers e demais dependências.
 
 ## Bloqueios e dependências abertas
@@ -50,6 +49,7 @@ Priorize P0; cada tarefa avança em um PR, com testes e evidências.
 - **REA-013** aguarda: REA-010, REA-011, REA-012.
 - **REA-016** aguarda: REA-015.
 - **REA-017** aguarda: REA-009, REA-016, REA-010, REA-011.
+- **REA-009** bloqueada: Binários completos .sys e eventuais catálogos de assinatura não estão presentes no pacote ZIP visível; o overlay de 7.836.809 bytes e o conteúdo UPX ainda não foram classificados; exigir artefatos legítimos/VM para verificar SHA-256, arquitetura e assinatura por driver.
 - **REA-010** bloqueada: Faltam VM Windows 7 SP1 x86 autorizada, snapshots e artefatos/assinaturas verificados.
 - **REA-011** bloqueada: Faltam VM Windows 7 SP1 x64 autorizada, snapshots e artefatos/assinaturas verificados.
 
@@ -156,10 +156,16 @@ Evidências:
 
 ### REA-009 — Localizar drivers reais e validar assinaturas
 
-**Status:** todo · **Etapa:** Reconstrução
+**Status:** blocked · **Etapa:** Reconstrução
 
 - [ ] Separar referências textuais de drivers efetivamente encontrados
 - [ ] Registrar SHA-256, arquitetura e verificação de assinatura de cada artefato
+
+Evidências:
+- [tools/rea_driver_evidence.py](../tools/rea_driver_evidence.py)
+- [tests/test_rea_driver_evidence.py](../tests/test_rea_driver_evidence.py)
+- [docs/coverage/REA009_DRIVER_PROVENANCE.md](../docs/coverage/REA009_DRIVER_PROVENANCE.md)
+- [docs/coverage/rea009_checkpoint.json](../docs/coverage/rea009_checkpoint.json)
 
 ### REA-010 — Validar Windows 7 SP1 x86 em VM isolada
 

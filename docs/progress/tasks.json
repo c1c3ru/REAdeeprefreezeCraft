@@ -173,17 +173,23 @@
       "phase": "Reconstrução",
       "title": "Localizar drivers reais e validar assinaturas",
       "priority": "P0",
-      "status": "todo",
+      "status": "blocked",
       "depends_on": [
         "REA-002"
       ],
-      "evidence": [],
+      "evidence": [
+        "tools/rea_driver_evidence.py",
+        "tests/test_rea_driver_evidence.py",
+        "docs/coverage/REA009_DRIVER_PROVENANCE.md",
+        "docs/coverage/rea009_checkpoint.json"
+      ],
       "acceptance": [
         "Separar referências textuais de drivers efetivamente encontrados",
         "Registrar SHA-256, arquitetura e verificação de assinatura de cada artefato"
       ],
       "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/11",
-      "next_action": "Catalogar recursos PE e verificar se os drivers podem ser obtidos sem execução"
+      "next_action": "Recuperar arquivos .sys legítimos e eventuais catálogos de uma instalação autorizada; validar assinatura/créditos/arquitetura em laboratório Windows 7 x86 e x64.",
+      "blocker": "Binários completos .sys e eventuais catálogos de assinatura não estão presentes no pacote ZIP visível; o overlay de 7.836.809 bytes e o conteúdo UPX ainda não foram classificados; exigir artefatos legítimos/VM para verificar SHA-256, arquitetura e assinatura por driver."
     },
     {
       "id": "REA-010",

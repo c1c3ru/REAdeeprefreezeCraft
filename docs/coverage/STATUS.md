@@ -46,6 +46,7 @@ A fração local não é cobertura do produto completo; portanto o percentual gl
 - No global function or instruction coverage; no semantic equivalence established
 - Windows 7 SP1 x86/x64 dynamic validation is absent
 - TsiLang SIB translation records are not parsed beyond exact format header
+- CLOUD_INSTALLER appended 7,836,809-byte overlay remains unclassified; no driver binaries verified from it
 
 ## Engenharia de loop — próximos alvos
 
