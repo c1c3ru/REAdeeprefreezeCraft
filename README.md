@@ -13,6 +13,8 @@ Laboratório de **engenharia reversa auditável** para análise de componentes d
 - `tests/` — testes automatizados com arquivos sintéticos; sem incluir executáveis comerciais.
 - `tools/rea_structural.py` — importações PE, árvore de recursos, PE embutidos, strings de drivers e mapa de interfaces.
 - [Evidências estruturais](docs/analyses/STRUCTURAL_2026-10-28.md) e [fronteiras usuário/kernel](docs/INTERFACES_USER_KERNEL.md).
+- `tools/rea_loop.py`: loop estático automatizado **IAT → thunks → chamadas candidatas → literais de argumentos → ponto fixo**.
+- [Descobertas do loop](docs/analyses/LOOP_DEVICEIO_2026-10-28.md) e [metodologia/limitações](docs/LOOP_METHODOLOGY.md).
 
 ## Executar localmente
 
@@ -22,9 +24,10 @@ Requisito: **Python 3.8+**, sem dependências de terceiros (execução do analis
 python -m unittest discover -s tests -v
 python tools/rea_inventory.py /caminho/para/userfreezer.zip --output inventario.json
 python -m tools.rea_structural --archive /caminho/para/userfreezer.zip --json estrutura.json --markdown interfaces.md
+python -m tools.rea_loop --archive /caminho/para/userfreezer.zip --json rea_loop.json --markdown rea_loop.md
 ```
 
-O arquivo `inventario.json` é gerado apenas localmente. **Não faça commit do ZIP, dos drivers originais, de chaves ou de dados pessoais.** O inventário rejeita arquivos grandes e caminhos suspeitos; o retorno `2` indica entradas ignoradas por segurança.
+Os resultados JSON/Markdown sao gerados apenas localmente; a documentacao versionada e curada manualmente. O arquivo `inventario.json` é gerado apenas localmente. **Não faça commit do ZIP, dos drivers originais, de chaves ou de dados pessoais.** O inventário rejeita arquivos grandes e caminhos suspeitos; o retorno `2` indica entradas ignoradas por segurança.
 
 ## Compatibilidade e escopo
 

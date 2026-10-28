@@ -8,4 +8,7 @@ __pycache__/
 *.sys
 *.p7b
 inventario*.json
+loop.json
+rea_loop*.json
+rea_loop*.md
 .DS_Store
