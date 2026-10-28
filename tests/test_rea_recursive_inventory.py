@@ -130,6 +130,34 @@ class RecursiveInventoryTests(unittest.TestCase):
         self.assertEqual(a, b)
         self.assertIn("REA-015", to_markdown(a))
 
+    def test_exact_tsilang_header_is_data_not_unknown_executable(self):
+        payload = (b"SIB file: TsiLang binary translation data\x00"
+                   b"Form\x00PORTUGUESE\x00JAPANESE\x00")
+        make_zip(self.archive, [("locale.dat", payload)])
+        report = analyze_archive(self.archive)
+        item = report["artifacts"][0]
+        self.assertEqual(item["classification"], "tsilang_translation_data")
+        self.assertFalse(item["format_evidence"]["records_parsed"])
+        self.assertIn("PORTUGUESE", item["format_evidence"]["recognized_language_labels"])
+        self.assertEqual(report["pe_count"], 0)
+        self.assertEqual(report["unresolved"], [])
+
+    def test_sib_prefix_is_insufficient_for_format_identification(self):
+        make_zip(self.archive, [("maybe.sib", b"SIB file: unknown scheme")])
+        report = analyze_archive(self.archive)
+        self.assertEqual(report["artifacts"][0]["classification"], "sib_container_unknown")
+        self.assertEqual(report["unresolved"][0]["reason"], "unknown_container_or_data_format")
+
+    def test_upx_markers_do_not_claim_unpacked_code(self):
+        value = bytearray(fixture_pe())
+        section = 0x98 + 224
+        value[section:section + 8] = b"UPX0\x00\x00\x00\x00"
+        make_zip(self.archive, [("packed.exe", bytes(value))])
+        report = analyze_archive(self.archive)
+        meta = report["artifacts"][0]["packed_layout"]
+        self.assertFalse(meta["unpacked_code_recovered"])
+        self.assertEqual(meta["upx1_raw_bytes"], 0)
+
     def test_root_repository_tool_exists(self):
         root = pathlib.Path(__file__).resolve().parents[1]
         self.assertTrue((root / "tools/rea_recursive_inventory.py").is_file())

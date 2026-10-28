@@ -8,6 +8,7 @@
 ## Linha de base
 
 - PEs identificados: **3**.
+- Recursos não-PE com formato identificado: **1**.
 - Referências a nomes de driver sem binário: **4**.
 - PEs com denominador executivo desconhecido: **2**.
 - Bytes executáveis medidos: **5246976**.
@@ -28,6 +29,12 @@ A fração local não é cobertura do produto completo; portanto o percentual gl
 | CLOUD_INSTALLER | desconhecido | 0 | — | unmeasured |
 | RSC_WU_CMD_LINE | desconhecido | 0 | — | unmeasured |
 
+## Recursos de dados identificados
+
+| Identificador | Formato | Bytes | Registros internos verificados |
+|---|---|---:|---|
+| TSILANG_STD_INSTALL | tsilang_translation_data | 152243 | não |
+
 ## Desconhecidos que impedem 100%
 
 - Recursive resource/archive discovery is not closed
@@ -36,6 +43,7 @@ A fração local não é cobertura do produto completo; portanto o percentual gl
 - Only two candidate functions of the main PE have bounded structural decoding
 - No global function or instruction coverage; no semantic equivalence established
 - Windows 7 SP1 x86/x64 dynamic validation is absent
+- TsiLang SIB translation records are not parsed beyond exact format header
 
 ## Engenharia de loop — próximos alvos
 

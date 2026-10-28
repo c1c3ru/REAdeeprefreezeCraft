@@ -128,6 +128,27 @@ class CoverageTests(unittest.TestCase):
         self.assertEqual(render(self.data, r), render(self.data, r))
         self.assertIn("indeterminado", render(self.data, r))
 
+    def test_identified_translation_is_not_executable_coverage(self):
+        self.data["identified_data_resources"] = [{
+            "id": "TRANSLATION", "format": "tsilang_translation_data",
+            "path": "bin/locale.sib", "sha256": hashlib.sha256(b"data").hexdigest(),
+            "size_bytes": 50, "records_parsed": False,
+        }]
+        report = measure(self.data, self.root)
+        self.assertEqual(report["identified_data_resource_count"], 1)
+        self.assertEqual(report["measured_executable_bytes"], 100)
+        self.assertFalse(report["full_coverage_certified"])
+        self.assertIn("TRANSLATION", render(self.data, report))
+
+    def test_bad_translation_hash_fails_closed(self):
+        self.data["identified_data_resources"] = [{
+            "id": "TRANSLATION", "format": "tsilang_translation_data",
+            "path": "bin/locale.sib", "sha256": "bad", "size_bytes": 50,
+            "records_parsed": False,
+        }]
+        with self.assertRaisesRegex(CoverageError, "SHA256"):
+            validate(self.data, self.root)
+
     def test_repository_scope_is_consistent(self):
         root = pathlib.Path(__file__).resolve().parents[1]
         manifest = json.loads((root / "docs/coverage/scope.json").read_text(encoding="utf-8"))

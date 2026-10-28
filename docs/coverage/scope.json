@@ -130,7 +130,8 @@
     "Four driver filename references are not recovered driver binaries",
     "Only two candidate functions of the main PE have bounded structural decoding",
     "No global function or instruction coverage; no semantic equivalence established",
-    "Windows 7 SP1 x86/x64 dynamic validation is absent"
+    "Windows 7 SP1 x86/x64 dynamic validation is absent",
+    "TsiLang SIB translation records are not parsed beyond exact format header"
   ],
   "work_queue": [
     {
@@ -162,6 +163,19 @@
       "priority": "P1",
       "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/19",
       "goal": "Behavioral contracts and equivalence evidence"
+    }
+  ],
+  "identified_data_resources": [
+    {
+      "id": "TSILANG_STD_INSTALL",
+      "path": "Faronics_DFS/DFStd.exe::BINARY/STD_INSTALL_SIB/4105",
+      "format": "tsilang_translation_data",
+      "sha256": "791d980f9f329d37d1abab02e334208991c68c162b086b68bbe975d73e1c74f3",
+      "size_bytes": 152243,
+      "header": "SIB file: TsiLang binary translation data",
+      "records_parsed": false,
+      "semantic_role": "localization_data_candidate",
+      "evidence": "docs/coverage/REA015_RECURSIVE_DISCOVERY.md"
     }
   ]
 }

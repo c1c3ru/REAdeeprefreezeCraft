@@ -296,7 +296,7 @@
         "Separar binários confirmados de nomes/strings e fechar pendências de empacotamento"
       ],
       "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/17",
-      "next_action": "Analisar os dados SIB e o conteúdo UPX não expandido, validar módulos externos e reconciliar o manifesto; não fechar REA-015 antes de comprovar o inventário total."
+      "next_action": "Completar o esquema interno dos registros TsiLang, investigar código ainda compactado em UPX e localizar artefatos de drivers; não fechar o inventário antes disso."
     },
     {
       "id": "REA-016",

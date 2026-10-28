@@ -107,4 +107,5 @@ python -m tools.rea_progress --json
 - **28/10/2026:** REA-007 documentada: 9 desvios condicionais, 2 arestas retroativas, 2 instruções de retorno e mecanismo de enumeração limitada; fluxos executáveis ainda não comprovados.
 - **28/10/2026:** meta ampliada para cobertura integral mensurável, com baseline conservador, medidor CI e fila de novas frentes REA-015/016/017.
 - **28/10/2026:** REA-015-A: enumeradas 23 entradas ZIP (15 arquivos) e 190 folhas de recursos nos 3 diretórios PE visíveis; mapeadas duas regiões UPX e um container SIB sem semântica compreendida; a tarefa permanece aberta.
-- **Próximo checkpoint:** classificar SIB, investigar UPX sem executar, reconciliar arquivos e dependências de driver; REA-008/009 permanecem tarefas prontas em paralelo. Windows 7 SP1 x86/x64 segue não testado.
+- **28/10/2026:** REA-015-B: SIB identificado como dados de tradução TsiLang por assinatura completa e SHA-256; metadados UPX0/UPX1 confirmados em ambos os executáveis. Não houve recuperação do código comprimido.
+- **Próximo checkpoint:** concluir inventário/estrutura de formatos internos e localizar os drivers efetivos; REA-008/009 permanecem prontas em paralelo. Windows 7 SP1 x86/x64 segue não testado.
