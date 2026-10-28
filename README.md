@@ -9,6 +9,8 @@ Laboratório de **engenharia reversa auditável** para análise de componentes d
 - [Relatório REA 9.00.020.5760](docs/analyses/DeepFreeze_9.00.020.5760.md) — identificação do binário, hashes, componentes, limitações e riscos.
 - [Matriz de testes Windows 7](docs/WINDOWS7_LAB.md) — requisitos de laboratório e critérios de aceite.
 - [Roadmap](docs/ROADMAP.md) — fases de inventário, análise estrutural e validação semântica.
+- **[Cobertura integral de engenharia reversa](docs/coverage/STATUS.md)** e [manifesto de componentes](docs/coverage/scope.json): cobertura por byte de módulo medido, denominadores desconhecidos e gates de equivalência; sem percentual global inventado.
+- `tools/rea_coverage.py`: validador/gerador da cobertura integral, integrado ao CI.
 - **[Plano de ação, metas e portões](docs/PLANO_DE_ACAO.md)** e **[status atualizado/pendências](docs/STATUS_ATUAL.md)** — controle vivo de execução do REA.
 - [Diagnóstico do CI e histórico de falhas resolvidas](docs/CI_DIAGNOSTICO.md) — como distinguir erros antigos, testes negativos esperados e workflows atuais.
 - `tools/rea_progress.py` + [manifesto versionado](docs/progress/tasks.json) — verificação automática de evidências, dependências e estado no CI.
@@ -35,6 +37,8 @@ Requisito para inventário/loop: **Python 3.8+**, sem dependências Python de te
 python -m unittest discover -s tests -v
 python -m tools.rea_progress --check
 python -m tools.rea_progress --json
+python -m tools.rea_coverage --check
+python -m tools.rea_coverage --json
 python tools/rea_inventory.py /caminho/para/userfreezer.zip --output inventario.json
 python -m tools.rea_structural --archive /caminho/para/userfreezer.zip --json estrutura.json --markdown interfaces.md
 python -m tools.rea_loop --archive /caminho/para/userfreezer.zip --json rea_loop.json --markdown rea_loop.md

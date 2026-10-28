@@ -71,6 +71,14 @@ O backlog ativo, critérios de aceite e dependências passaram a ser mantidos em
 - [ ] REA-008/009: proveniência de dados e identificação de drivers.
 - [ ] REA-010/011/012/013: laboratório Windows 7 e certificação contratual.
 
+## Expansão para 100% de cobertura verificável
+
+- [x] REA-014 — manifesto e medidor conservador: [STATUS de cobertura](coverage/STATUS.md).
+- [ ] REA-015 — inventário recursivo e fechamento do escopo ([issue #17](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/17)).
+- [ ] REA-016 — regiões executáveis completas, funções, CFG, exceções e chamadas indiretas ([issue #18](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/18)).
+- [ ] REA-017 — semântica, contratos e equivalência com testes Windows 7 x86/x64 ([issue #19](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/19)).
+- [ ] Manter desconhecidos como desconhecidos até a evidência; 100% de dois trechos não é 100% do produto.
+
 ## Fases futuras
 
 1. **Inventário recursivo:** localizar PEs embutidos e drivers extraídos, obter metadados e assinaturas sem executar artefatos.

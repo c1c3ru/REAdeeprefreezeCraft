@@ -1,0 +1,167 @@
+{
+  "schema": "rea-full-scope-v1",
+  "as_of": "2026-10-28",
+  "product": "Deep Freeze Standard 9.00.020.5760",
+  "objective": "Reconstruir e verificar 100% dos componentes e comportamentos identificáveis do produto, com denominadores rastreáveis e sem confundir cobertura estrutural com equivalência.",
+  "discovery_closed": false,
+  "reconstruction_complete": false,
+  "semantic_equivalence_verified": false,
+  "windows7_sp1_x86_verified": false,
+  "windows7_sp1_x64_verified": false,
+  "source_archive": {
+    "name": "userfreezer.zip",
+    "sha256": "f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671"
+  },
+  "components": [
+    {
+      "id": "DFSTD_MAIN",
+      "kind": "observed_pe",
+      "origin": "archive_member",
+      "path": "Faronics_DFS/DFStd.exe",
+      "sha256": "2d7c171d4037660843a7e02c055679c5a26904af84d48fc8c557a67023f55c8b",
+      "size_bytes": 18356600,
+      "architecture": "x86",
+      "executable_sections": [
+        {
+          "name": ".text",
+          "start_rva": "0x1000",
+          "raw_size": 5246976
+        }
+      ],
+      "decoded_intervals": [
+        {
+          "start_rva": "0x38ac0",
+          "end_rva_exclusive": "0x38c41",
+          "method": "bounded_objdump_cfg",
+          "evidence": "docs/analyses/FUNCTION_CFG_2026-10-28.md"
+        }
+      ],
+      "semantics_status": "partial",
+      "behavior_verified": false
+    },
+    {
+      "id": "CLOUD_INSTALLER",
+      "kind": "observed_pe",
+      "origin": "embedded_resource",
+      "path": "Faronics_DFS/DFStd.exe::BINARY/CLOUD_INSTALLER/4105",
+      "sha256": "145c6b8461132fd077a42cee775aca318c2b697b5720283749e04fc6aa5b4772",
+      "size_bytes": 9821321,
+      "architecture": "x86_unverified",
+      "executable_sections": [],
+      "decoded_intervals": [],
+      "semantics_status": "unmeasured",
+      "behavior_verified": false,
+      "note": "UPX-marked PE resource; no whole-module disassembly or verified section denominator"
+    },
+    {
+      "id": "RSC_WU_CMD_LINE",
+      "kind": "observed_pe",
+      "origin": "embedded_resource",
+      "path": "Faronics_DFS/DFStd.exe::BINARY/RSC_WU_CMD_LINE/4105",
+      "sha256": "454a1a6a576cce0b69acbf320fbeebb4909891ee7592f20afd9df992db6a1351",
+      "size_bytes": 584056,
+      "architecture": "x86_unverified",
+      "executable_sections": [],
+      "decoded_intervals": [],
+      "semantics_status": "unmeasured",
+      "behavior_verified": false,
+      "note": "UPX-marked PE resource; full semantics and entry points unverified"
+    },
+    {
+      "id": "DEEPFRZ_X86",
+      "kind": "filename_reference",
+      "origin": "string_only",
+      "path": "DeepFrz.sys",
+      "sha256": null,
+      "size_bytes": null,
+      "architecture": "x86_candidate",
+      "executable_sections": [],
+      "decoded_intervals": [],
+      "semantics_status": "unmeasured",
+      "behavior_verified": false,
+      "note": "Filename string alone does not establish existence or loadability"
+    },
+    {
+      "id": "DEEPFRZ_X64",
+      "kind": "filename_reference",
+      "origin": "string_only",
+      "path": "DeepFrzx64.sys",
+      "sha256": null,
+      "size_bytes": null,
+      "architecture": "x64_candidate",
+      "executable_sections": [],
+      "decoded_intervals": [],
+      "semantics_status": "unmeasured",
+      "behavior_verified": false,
+      "note": "Filename string alone does not establish existence or loadability"
+    },
+    {
+      "id": "FARSPACE_X86",
+      "kind": "filename_reference",
+      "origin": "string_only",
+      "path": "FarSpace.sys",
+      "sha256": null,
+      "size_bytes": null,
+      "architecture": "x86_candidate",
+      "executable_sections": [],
+      "decoded_intervals": [],
+      "semantics_status": "unmeasured",
+      "behavior_verified": false,
+      "note": "Filename string alone does not establish existence or loadability"
+    },
+    {
+      "id": "FARSPACE_X64",
+      "kind": "filename_reference",
+      "origin": "string_only",
+      "path": "FarSpaceX64.sys",
+      "sha256": null,
+      "size_bytes": null,
+      "architecture": "x64_candidate",
+      "executable_sections": [],
+      "decoded_intervals": [],
+      "semantics_status": "unmeasured",
+      "behavior_verified": false,
+      "note": "Filename string alone does not establish existence or loadability"
+    }
+  ],
+  "unknowns": [
+    "Recursive resource/archive discovery is not closed",
+    "Unknown executable section sizes for two embedded PEs",
+    "Four driver filename references are not recovered driver binaries",
+    "Only two candidate functions of the main PE have bounded structural decoding",
+    "No global function or instruction coverage; no semantic equivalence established",
+    "Windows 7 SP1 x86/x64 dynamic validation is absent"
+  ],
+  "work_queue": [
+    {
+      "id": "REA-008",
+      "priority": "P0",
+      "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/10",
+      "goal": "Flow of handles, buffers and returns"
+    },
+    {
+      "id": "REA-009",
+      "priority": "P0",
+      "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/11",
+      "goal": "Driver artifact identification and signatures"
+    },
+    {
+      "id": "REA-015",
+      "priority": "P0",
+      "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/17",
+      "goal": "Recursive inventory and package denominator closure"
+    },
+    {
+      "id": "REA-016",
+      "priority": "P0",
+      "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/18",
+      "goal": "Executable byte and function/CFG classification"
+    },
+    {
+      "id": "REA-017",
+      "priority": "P1",
+      "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/19",
+      "goal": "Behavioral contracts and equivalence evidence"
+    }
+  ]
+}

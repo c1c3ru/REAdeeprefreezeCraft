@@ -7,17 +7,23 @@
 
 ## 1. Objetivo claro
 
-**Entregar uma especificação comportamental auditável de um subconjunto delimitado das funções analisadas do Deep Freeze Standard 9.00.020.5760, com proveniência por SHA-256/RVA, dependências entre chamadas, contratos verificáveis e uma matriz de validação separada para Windows 7 SP1 x86 e x64.**
+**Alcançar 100% de cobertura verificável dos componentes identificáveis do Deep Freeze Standard 9.00.020.5760: inventário recursivo, classificação de regiões executáveis, funções/CFG, parâmetros, interfaces, semântica e equivalência, incluindo Windows 7 SP1 x86 e x64.**
 
 Não há compromisso de recuperar integralmente código-fonte proprietário, afirmar equivalência a priori nem produzir ferramentas de desativação de proteção/licenciamento. O objetivo é engenharia reversa documentada, reprodutível e devidamente testada.
 
 **Definição de sucesso:** para cada comportamento que vier a ser declarado como compreendido, preservar (a) instruções e dados que fundamentam a hipótese, (b) entradas e saídas identificadas, (c) caminhos de sucesso/erro, (d) testes reproduzíveis e resultados, (e) incertezas remanescentes. A compatibilidade de drivers com Windows 7 só poderá ser declarada com evidências de laboratório independentes para cada arquitetura. Falta de evidência resulta em **não verificado**.
 
+## Metas de cobertura integral
+
+O compromisso é com **100% de evidências verificáveis**, não com um número de marketing. Antes de declarar 100% para uma dimensão, seus artefatos e denominadores devem estar fechados. Áreas sem acesso, drivers não recuperados e comportamentos não reproduzidos são **desconhecidos**, nunca tratados como concluídos.
+
+O painel primário dessa meta é [cobertura integral](coverage/STATUS.md) e sua [fonte de verdade](coverage/scope.json), com validador `python -m tools.rea_coverage --check`. A linha de base de duas funções é uma amostra estrutural, não uma certificação funcional. Novas questões são [REA-015](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/17), [REA-016](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/18) e [REA-017](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/19).
+
 ## 2. Estado inicial e linhas de base
 
 Em 28/10/2026, os ciclos 1–6 já estão versionados. A etapa 6 documenta uma cadeia `tabela de oito DWORDs → rotina chamadora → auxiliar → DeviceIoControl`, com importações `GetSystemDirectoryA`, `CreateFileA`, `DeviceIoControl` e `CloseHandle`. Os arquivos do produto não foram executados nesta pesquisa.
 
-A última execução de CI verificada, relativa ao PR #8, apresentou **44 testes aprovados** em Python 3.8 e 3.12. Esse total é uma **linha de base**, não uma meta estática; novas mudanças devem acrescentar testes. Os testes exercitam ferramentas e fixtures sintéticas, e não certificam drivers Windows.
+A última linha de base antes do novo medidor é de **66 testes aprovados** em Python 3.8 e 3.12 no ciclo REA-007/PR #15. Esse total é uma **linha de base**, não uma meta estática; novas mudanças devem acrescentar testes. Os testes exercitam ferramentas e fixtures sintéticas, e não certificam drivers Windows.
 
 A automação de governança implementada neste plano é uma entrega adicional. O contador de tarefas no quadro é um contador administrativo, **não um percentual de completude da engenharia reversa**.
 
@@ -31,6 +37,7 @@ A automação de governança implementada neste plano é uma entrega adicional. 
 | G3 — dados | Proveniência de handles, buffers e resultados | Contratos por argumento com testes sintéticos; **REA-008** |
 | G4 — componentes | Drivers reais, arquitetura, assinatura e cadeia de proveniência | Arquivos identificados, SHA-256 e assinatura verificada; **REA-009** |
 | G5 — laboratório | Windows 7 SP1 x86 e x64, com VMs isoladas | Evidência de instalação/boot/remoção e cenários seguros; **REA-010/011** |
+| G7 — escopo completo | Fechar todos os artefatos e denominadores; classificar regiões não-código, código e desconhecidas | **REA-014/015/016/017**, com painel `docs/coverage/STATUS.md` |
 | G6 — contratos | Comportamentos observáveis e equivalência limitada, quando comprovada | Testes por contrato, cobertura do escopo e incertezas; **REA-012/013** |
 
 A sequência de dependência é G0/G1 → (G2, G3, G4 em paralelo) → G5 + contratos → G6. Nenhuma fase bloqueada será marcada concluída por inferência.
@@ -98,4 +105,5 @@ python -m tools.rea_progress --json
 - **28/10/2026:** issues #9–#13 criadas com critérios de aceite.
 - **28/10/2026:** manifesto de tarefas e validação de progresso adicionados por PR; a conclusão desta entrega será confirmada pelo CI.
 - **28/10/2026:** REA-007 documentada: 9 desvios condicionais, 2 arestas retroativas, 2 instruções de retorno e mecanismo de enumeração limitada; fluxos executáveis ainda não comprovados.
-- **Próximo checkpoint:** REA-008 (proveniência de buffers e handles), com REA-009 (driver/assinaturas) disponível em paralelo. Windows 7 SP1 x86/x64 segue não testado.
+- **28/10/2026:** meta ampliada para cobertura integral mensurável, com baseline conservador, medidor CI e fila de novas frentes REA-015/016/017.
+- **Próximo checkpoint:** REA-015 inventário recursivo; REA-008/009 permanecem tarefas prontas em paralelo. Windows 7 SP1 x86/x64 segue não testado.

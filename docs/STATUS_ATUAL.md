@@ -4,16 +4,16 @@
 
 **Data de referência:** 2026-10-28
 
-**Objetivo:** Especificar e validar comportamentos observáveis dos componentes analisados do Deep Freeze, com contratos rastreáveis e validação independente em Windows 7 SP1 x86 e x64, sem redistribuir código proprietário.
+**Objetivo:** Reconstruir e validar 100% dos componentes e comportamentos identificáveis do Deep Freeze Standard 9.00.020.5760, com denominadores auditáveis para código, funções, CFG, interfaces, semântica e equivalência em Windows 7 SP1 x86/x64.
 
 ## Indicadores de entregas
 
-- Concluídas: **7/13**.
-- Prontas: **2**.
-- Aguardando dependências: **2**.
+- Concluídas: **8/17**.
+- Prontas: **3**.
+- Aguardando dependências: **4**.
 - Bloqueadas explicitamente: **2**.
 
-> Conclusões estáticas não comprovam semântica, operação de drivers, proteção de disco ou compatibilidade do produto. A contagem de tarefas concluídas não mede percentual de engenharia reversa completa.
+> Entregas concluídas são marcos do projeto, não percentuais de cobertura. O denominador global ainda não está fechado: ver docs/coverage/STATUS.md; somente uma dimensão integralmente comprovada poderá chegar a 100%.
 
 ## Backlog e estados
 
@@ -32,6 +32,10 @@
 | REA-011 | Validar Windows 7 SP1 x64 em VM isolada | blocked | P1 | REA-009 | [#12](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/12) |
 | REA-012 | Construir contratos e testes de equivalência observável | todo | P1 | REA-007, REA-008, REA-009 | [#13](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/13) |
 | REA-013 | Certificar o escopo validado e registrar limites Windows 7 | todo | P1 | REA-010, REA-011, REA-012 | [#13](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/13) |
+| REA-014 | Definir escopo completo e medidor auditável | done | P0 | REA-006 | — |
+| REA-015 | Fechar inventário recursivo e identificar todo componente executável | todo | P0 | REA-014 | [#17](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/17) |
+| REA-016 | Classificar todos os bytes executáveis e reconstruir funções/CFG | todo | P0 | REA-015 | [#18](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/18) |
+| REA-017 | Certificar contratos, interfaces e equivalência comportamental integral | todo | P1 | REA-008, REA-009, REA-016, REA-010, REA-011 | [#19](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/19) |
 
 ## Próximo loop: tarefas prontas
 
@@ -39,11 +43,14 @@ Priorize P0; cada tarefa avança em um PR, com testes e evidências.
 
 - **REA-008 (P0):** Investigar fluxos de EAX/EBX e origens dos argumentos [EBP+n]
 - **REA-009 (P0):** Catalogar recursos PE e verificar se os drivers podem ser obtidos sem execução
+- **REA-015 (P0):** Expandir descoberta offline de PE aninhado e recursos compactados
 
 ## Bloqueios e dependências abertas
 
 - **REA-012** aguarda: REA-008, REA-009.
 - **REA-013** aguarda: REA-010, REA-011, REA-012.
+- **REA-016** aguarda: REA-015.
+- **REA-017** aguarda: REA-008, REA-009, REA-016, REA-010, REA-011.
 - **REA-010** bloqueada: Faltam VM Windows 7 SP1 x86 autorizada, snapshots e artefatos/assinaturas verificados.
 - **REA-011** bloqueada: Faltam VM Windows 7 SP1 x64 autorizada, snapshots e artefatos/assinaturas verificados.
 
@@ -176,6 +183,43 @@ Evidências:
 
 - [ ] Exigir evidências independentes x86 e x64
 - [ ] Publicar aprovação/reprovação ou não verificado por contrato, com rastreabilidade
+
+### REA-014 — Definir escopo completo e medidor auditável
+
+**Status:** done · **Etapa:** Cobertura integral
+
+- [x] Classificar executáveis conhecidos e referências não recuperadas sem inventar binários
+- [x] Implementar métricas parciais com denominador explícito e bloqueio de falso 100%
+- [x] Adicionar verificação do manifesto e documento ao CI
+
+Evidências:
+- [tools/rea_coverage.py](../tools/rea_coverage.py)
+- [tests/test_rea_coverage.py](../tests/test_rea_coverage.py)
+- [docs/coverage/scope.json](../docs/coverage/scope.json)
+- [docs/coverage/STATUS.md](../docs/coverage/STATUS.md)
+
+### REA-015 — Fechar inventário recursivo e identificar todo componente executável
+
+**Status:** todo · **Etapa:** Cobertura integral
+
+- [ ] Inventariar todos os recursos executáveis e dependências com hashes e origem
+- [ ] Separar binários confirmados de nomes/strings e fechar pendências de empacotamento
+
+### REA-016 — Classificar todos os bytes executáveis e reconstruir funções/CFG
+
+**Status:** todo · **Etapa:** Cobertura integral
+
+- [ ] Fechar denominadores executáveis de cada PE e arquitetura
+- [ ] Classificar código/dados/desconhecidos e resolver funções, desvios e chamadas
+- [ ] Manter intervalos sem sobreposição e testes de regressão
+
+### REA-017 — Certificar contratos, interfaces e equivalência comportamental integral
+
+**Status:** todo · **Etapa:** Cobertura integral
+
+- [ ] Cada função/integração tem contrato e evidência ou pendência explícita
+- [ ] Comparar comportamento observável em ambos Windows 7 SP1 x86/x64
+- [ ] Nunca emitir 100% sem validação e denominador global completos
 
 ## Engenharia de loop: protocolo de conclusão
 

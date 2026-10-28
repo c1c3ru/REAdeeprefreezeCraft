@@ -27,6 +27,8 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Validate REA action plan, evidence and status synchronization
         run: python -m tools.rea_progress --check
+      - name: Validate full-scope coverage denominators and 100-percent gates
+        run: python -m tools.rea_coverage --check
       - name: Publish clear CI summary
         if: success()
         run: |
