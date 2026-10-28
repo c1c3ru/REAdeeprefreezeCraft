@@ -6,6 +6,16 @@
 - [x] Disponibilizar inventário estático reexecutável e testes com dados sintéticos.
 - [x] Definir matriz de laboratório com Windows 7 SP1 x86/x64.
 
+## Etapa 2 — entregas
+
+- [x] Varredura estática de importações e recursos PE, com testes sintéticos.
+- [x] Identificar dois executáveis PE embutidos no instalador principal.
+- [x] Catalogar evidências de serviços e interfaces Win32/dispositivo, separando hipóteses.
+- [x] Automatizar exportação JSON/Markdown; CI validará o código sem binários de terceiros.
+- [ ] Identificar binários de driver completos e respectivas assinaturas.
+- [ ] Reconstruir callers, parâmetros e possíveis contratos DeviceIoControl.
+- [ ] Verificar instalação, reboot e Frozen/Thawed em Windows 7 SP1 x86/x64.
+
 ## Fases futuras
 
 1. **Inventário recursivo:** localizar PEs embutidos e drivers extraídos, obter metadados e assinaturas sem executar artefatos.
