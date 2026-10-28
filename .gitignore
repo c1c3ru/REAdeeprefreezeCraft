@@ -15,3 +15,5 @@ rea_loop*.md
 
 cfg_local*.json
 cfg_local*.md
+
+cfg_function*.json
