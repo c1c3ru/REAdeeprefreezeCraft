@@ -210,6 +210,8 @@ Evidências:
 - [tests/test_rea_recursive_inventory.py](../tests/test_rea_recursive_inventory.py)
 - [docs/coverage/REA015_RECURSIVE_DISCOVERY.md](../docs/coverage/REA015_RECURSIVE_DISCOVERY.md)
 - [docs/coverage/rea015_checkpoint.json](../docs/coverage/rea015_checkpoint.json)
+- [tools/rea_embedded_pe_candidates.py](../tools/rea_embedded_pe_candidates.py)
+- [tests/test_rea_embedded_pe_candidates.py](../tests/test_rea_embedded_pe_candidates.py)
 
 ### REA-016 — Classificar todos os bytes executáveis e reconstruir funções/CFG
 
