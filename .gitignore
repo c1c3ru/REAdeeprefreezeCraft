@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+*.zip
+*.exe
+*.dll
+*.sys
+*.p7b
+inventario*.json
+.DS_Store
