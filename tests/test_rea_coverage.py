@@ -149,6 +149,46 @@ class CoverageTests(unittest.TestCase):
         with self.assertRaisesRegex(CoverageError, "SHA256"):
             validate(self.data, self.root)
 
+    def test_upx_raw_bytes_do_not_inflate_decoded_coverage(self):
+        self.data["components"][0]["decoded_intervals"] = []
+        self.data["components"][0]["executable_sections"] = []
+        self.data["components"][0]["semantics_status"] = "unmeasured"
+        self.data["components"][0]["packed_surface"] = {
+            "upx1_raw_bytes": 50,
+            "upx0_virtual_bytes": 150,
+            "upx1_raw_sha256": hashlib.sha256(b"stub").hexdigest(),
+            "unpacked_code_recovered": False,
+            "evidence": "docs/coverage/proof.md",
+        }
+        report = measure(self.data, self.root)
+        self.assertEqual(report["packed_on_disk_executable_bytes_not_decoded"], 50)
+        self.assertEqual(report["locally_decoded_bytes"], 0)
+        self.assertEqual(report["unknown_executable_denominators"], 1)
+        self.assertFalse(report["full_coverage_certified"])
+
+    def test_reject_upx_raw_claimed_as_unpacked(self):
+        comp = self.data["components"][0]
+        comp["executable_sections"] = []
+        comp["decoded_intervals"] = []
+        comp["semantics_status"] = "unmeasured"
+        comp["packed_surface"] = {
+            "upx1_raw_bytes": 100, "upx0_virtual_bytes": 150,
+            "upx1_raw_sha256": hashlib.sha256(b"stub").hexdigest(),
+            "unpacked_code_recovered": True, "evidence": "docs/coverage/proof.md",
+        }
+        with self.assertRaisesRegex(CoverageError, "not proof"):
+            measure(self.data, self.root)
+
+    def test_reject_packed_and_decoded_overlap_of_denominators(self):
+        comp = self.data["components"][0]
+        comp["packed_surface"] = {
+            "upx1_raw_bytes": 100, "upx0_virtual_bytes": 150,
+            "upx1_raw_sha256": hashlib.sha256(b"stub").hexdigest(),
+            "unpacked_code_recovered": False, "evidence": "docs/coverage/proof.md",
+        }
+        with self.assertRaisesRegex(CoverageError, "decoded intervals"):
+            measure(self.data, self.root)
+
     def test_repository_scope_is_consistent(self):
         root = pathlib.Path(__file__).resolve().parents[1]
         manifest = json.loads((root / "docs/coverage/scope.json").read_text(encoding="utf-8"))

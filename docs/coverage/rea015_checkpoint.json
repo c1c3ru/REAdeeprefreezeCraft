@@ -1,7 +1,7 @@
 {
   "schema": "rea-015-recursive-checkpoint-v1",
   "date": "2026-10-28",
-  "stage": "partial_subcycle_3",
+  "stage": "partial_subcycle_4",
   "source": {
     "archive": "userfreezer.zip",
     "sha256": "f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671"
@@ -114,5 +114,27 @@
     "validated_new_nonzero_embedded_pe_count": 0,
     "validation": "PE header and sections parsed, machine x86/x64; syntax-only",
     "caveat": "Does not reveal packed payloads or external modules"
+  },
+  "upx_surface": {
+    "evidence": "docs/coverage/UPX_SURFACE_2026-10-28.md",
+    "machine": "x86",
+    "mapped_entries": [
+      {
+        "id": "CLOUD_INSTALLER",
+        "entrypoint_rva": "0x73edd0",
+        "entrypoint_file_offset": "0x1de1d0",
+        "upx1_raw_sha256": "cc1a67e0060bb4fb13f8ef0b08c963c3cafd880a70b839b72cdd55eb6fbb5e1b",
+        "packed_on_disk_bytes": 1958400
+      },
+      {
+        "id": "RSC_WU_CMD_LINE",
+        "entrypoint_rva": "0xc41b0",
+        "entrypoint_file_offset": "0x215b0",
+        "upx1_raw_sha256": "2b346ea50e275436952384a345caee6baeea1b94ea223626fcdb3a730f887406",
+        "packed_on_disk_bytes": 136704
+      }
+    ],
+    "packed_on_disk_total_bytes": 2095104,
+    "original_code_unpacked": false
   }
 }

@@ -291,14 +291,18 @@
         "docs/coverage/REA015_RECURSIVE_DISCOVERY.md",
         "docs/coverage/rea015_checkpoint.json",
         "tools/rea_embedded_pe_candidates.py",
-        "tests/test_rea_embedded_pe_candidates.py"
+        "tests/test_rea_embedded_pe_candidates.py",
+        "tools/rea_upx_surface.py",
+        "tests/test_rea_upx_surface.py",
+        "docs/coverage/UPX_SURFACE_2026-10-28.md",
+        "docs/coverage/upx_surface_checkpoint.json"
       ],
       "acceptance": [
         "Inventariar todos os recursos executáveis e dependências com hashes e origem",
         "Separar binários confirmados de nomes/strings e fechar pendências de empacotamento"
       ],
       "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/17",
-      "next_action": "Completar o esquema interno dos registros TsiLang, investigar código ainda compactado em UPX e localizar artefatos de drivers; não fechar o inventário antes disso."
+      "next_action": "Obter de modo reproduzível os bytes descompactados dos dois módulos UPX e seus denominadores, sem executar drivers; confirmar binários de drivers e demais dependências."
     },
     {
       "id": "REA-016",

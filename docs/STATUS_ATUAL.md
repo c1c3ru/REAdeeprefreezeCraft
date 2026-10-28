@@ -43,7 +43,7 @@ Priorize P0; cada tarefa avança em um PR, com testes e evidências.
 
 - **REA-008 (P0):** Investigar fluxos de EAX/EBX e origens dos argumentos [EBP+n]
 - **REA-009 (P0):** Catalogar recursos PE e verificar se os drivers podem ser obtidos sem execução
-- **REA-015 (P0):** Completar o esquema interno dos registros TsiLang, investigar código ainda compactado em UPX e localizar artefatos de drivers; não fechar o inventário antes disso.
+- **REA-015 (P0):** Obter de modo reproduzível os bytes descompactados dos dois módulos UPX e seus denominadores, sem executar drivers; confirmar binários de drivers e demais dependências.
 
 ## Bloqueios e dependências abertas
 
@@ -212,6 +212,10 @@ Evidências:
 - [docs/coverage/rea015_checkpoint.json](../docs/coverage/rea015_checkpoint.json)
 - [tools/rea_embedded_pe_candidates.py](../tools/rea_embedded_pe_candidates.py)
 - [tests/test_rea_embedded_pe_candidates.py](../tests/test_rea_embedded_pe_candidates.py)
+- [tools/rea_upx_surface.py](../tools/rea_upx_surface.py)
+- [tests/test_rea_upx_surface.py](../tests/test_rea_upx_surface.py)
+- [docs/coverage/UPX_SURFACE_2026-10-28.md](../docs/coverage/UPX_SURFACE_2026-10-28.md)
+- [docs/coverage/upx_surface_checkpoint.json](../docs/coverage/upx_surface_checkpoint.json)
 
 ### REA-016 — Classificar todos os bytes executáveis e reconstruir funções/CFG
 

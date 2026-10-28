@@ -51,7 +51,14 @@
       "decoded_intervals": [],
       "semantics_status": "unmeasured",
       "behavior_verified": false,
-      "note": "PE32 x86 confirmed by PE header. UPX0/UPX1 compressed; 72 visible resource leaves, no executable-section denominator for unpacked code."
+      "note": "PE32 x86 confirmed by PE header. UPX0/UPX1 compressed; 72 visible resource leaves, no executable-section denominator for unpacked code.",
+      "packed_surface": {
+        "upx1_raw_bytes": 1958400,
+        "upx0_virtual_bytes": 5636096,
+        "upx1_raw_sha256": "cc1a67e0060bb4fb13f8ef0b08c963c3cafd880a70b839b72cdd55eb6fbb5e1b",
+        "unpacked_code_recovered": false,
+        "evidence": "docs/coverage/UPX_SURFACE_2026-10-28.md"
+      }
     },
     {
       "id": "RSC_WU_CMD_LINE",
@@ -65,7 +72,14 @@
       "decoded_intervals": [],
       "semantics_status": "unmeasured",
       "behavior_verified": false,
-      "note": "PE32 x86 confirmed by PE header. UPX0/UPX1 compressed; 12 visible resource leaves, no executable-section denominator for unpacked code."
+      "note": "PE32 x86 confirmed by PE header. UPX0/UPX1 compressed; 12 visible resource leaves, no executable-section denominator for unpacked code.",
+      "packed_surface": {
+        "upx1_raw_bytes": 136704,
+        "upx0_virtual_bytes": 663552,
+        "upx1_raw_sha256": "2b346ea50e275436952384a345caee6baeea1b94ea223626fcdb3a730f887406",
+        "unpacked_code_recovered": false,
+        "evidence": "docs/coverage/UPX_SURFACE_2026-10-28.md"
+      }
     },
     {
       "id": "DEEPFRZ_X86",

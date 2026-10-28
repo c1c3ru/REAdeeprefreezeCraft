@@ -109,4 +109,5 @@ python -m tools.rea_progress --json
 - **28/10/2026:** REA-015-A: enumeradas 23 entradas ZIP (15 arquivos) e 190 folhas de recursos nos 3 diretórios PE visíveis; mapeadas duas regiões UPX e um container SIB sem semântica compreendida; a tarefa permanece aberta.
 - **28/10/2026:** REA-015-B: SIB identificado como dados de tradução TsiLang por assinatura completa e SHA-256; metadados UPX0/UPX1 confirmados em ambos os executáveis. Não houve recuperação do código comprimido.
 - **28/10/2026:** REA-015-C: varredura de 167 marcadores não iniciais MZ nas 190 folhas visíveis; 0 novo PE validado por cabeçalho/seções. Esse resultado não descarta código comprimido ou dependências externas.
-- **Próximo checkpoint:** inventário do código empacotado, drivers e dependências; REA-008/009 permanecem prontas em paralelo. Windows 7 SP1 x86/x64 segue não testado.
+- **28/10/2026:** REA-015-D: entradas RVA/file de ambos os módulos UPX mapeadas; somados **2.095.104 bytes físicos compactados** (sem código original recuperado); hashes SHA-256 por seção documentados e validação por ferramenta própria. As métricas são separadas de instruções reconstruídas.
+- **Próximo checkpoint:** desempacotamento offline validado e classificação de código original (se ambiente autorizado disponível), além de drivers e contratos REA-008/009. Windows 7 SP1 x86/x64 segue não testado.

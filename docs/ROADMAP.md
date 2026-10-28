@@ -74,7 +74,7 @@ O backlog ativo, critérios de aceite e dependências passaram a ser mantidos em
 ## Expansão para 100% de cobertura verificável
 
 - [x] REA-014 — manifesto e medidor conservador: [STATUS de cobertura](coverage/STATUS.md).
-- [ ] REA-015 — **em execução:** 23 entradas ZIP, 190 folhas de recursos nos 3 PEs, dois PEs UPX e SIB identificado como recurso TsiLang (registros internos ainda não decodificados); inventário ainda não fechado ([checkpoint](coverage/REA015_RECURSIVE_DISCOVERY.md), [issue #17](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/17)).
+- [ ] REA-015 — **em execução:** 23 entradas ZIP, 190 folhas de recursos nos 3 PEs, dois PEs UPX com pontos de entrada em UPX1 e 2.095.104 bytes compactados medidos, mas ainda não descompactados; SIB identificado como dados TsiLang (registros ainda não decodificados); inventário ainda não fechado ([checkpoint](coverage/REA015_RECURSIVE_DISCOVERY.md), [issue #17](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/17)).
 - [ ] REA-016 — regiões executáveis completas, funções, CFG, exceções e chamadas indiretas ([issue #18](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/18)).
 - [ ] REA-017 — semântica, contratos e equivalência com testes Windows 7 x86/x64 ([issue #19](https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/19)).
 - [ ] Manter desconhecidos como desconhecidos até a evidência; 100% de dois trechos não é 100% do produto.

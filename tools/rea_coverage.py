@@ -108,6 +108,30 @@ def validate(manifest, root=None):
             raise CoverageError("Measured intervals cannot be marked unmeasured")
         if comp["semantics_status"] == "verified" and not comp["behavior_verified"]:
             raise CoverageError("Semantic verification requires behavioral evidence")
+        packed = comp.get("packed_surface")
+        if packed is not None:
+            if not isinstance(packed, dict) or comp["decoded_intervals"]:
+                raise CoverageError("Packed surface cannot claim decoded intervals")
+            if comp["executable_sections"]:
+                raise CoverageError("Packed bytes cannot be double-counted with executable sections")
+            raw_bytes = packed.get("upx1_raw_bytes")
+            virtual_bytes = packed.get("upx0_virtual_bytes")
+            if (type(raw_bytes) is not int or type(virtual_bytes) is not int
+                    or raw_bytes <= 0 or raw_bytes > comp["size_bytes"] or virtual_bytes <= 0):
+                raise CoverageError("Packed physical/virtual byte counts invalid")
+            if not re.fullmatch(r"[0-9a-f]{64}", str(packed.get("upx1_raw_sha256", ""))):
+                raise CoverageError("Packed section must have raw SHA-256")
+            if packed.get("unpacked_code_recovered") is not False:
+                raise CoverageError("Packed raw bytes are not proof of unpacked code")
+            evidence = packed.get("evidence")
+            if not isinstance(evidence, str) or not evidence.startswith("docs/"):
+                raise CoverageError("Packed evidence path missing")
+            if root is not None:
+                base = pathlib.Path(root).resolve()
+                file = (base / evidence).resolve()
+                if base not in file.parents or not file.is_file():
+                    raise CoverageError("Packed evidence missing or unsafe: " + evidence)
+
     # Identified data cannot silently become executable code coverage.
     identified = manifest.get("identified_data_resources", [])
     if not isinstance(identified, list):
@@ -137,11 +161,15 @@ def measure(manifest, root=None):
     validate(manifest, root)
     details = []
     known, decoded, missing_denominator, driver_refs = 0, 0, 0, 0
+    packed_bytes, packed_modules = 0, 0
     fully_measured_and_verified = True
     for item in manifest["components"]:
         if item["kind"] == "filename_reference":
             driver_refs += 1
             continue
+        if item.get("packed_surface"):
+            packed_modules += 1
+            packed_bytes += item["packed_surface"]["upx1_raw_bytes"]
         if not item["executable_sections"]:
             missing_denominator += 1
             fully_measured_and_verified = False
@@ -175,6 +203,8 @@ def measure(manifest, root=None):
         "unrecovered_driver_name_references": driver_refs,
         "unknown_executable_denominators": missing_denominator,
         "measured_executable_bytes": known,
+        "packed_on_disk_executable_bytes_not_decoded": packed_bytes,
+        "packed_modules_without_unpacked_code": packed_modules,
         "locally_decoded_bytes": decoded,
         "measured_modules_local_percent": round(100.0 * decoded / known, 8) if known else None,
         "global_executable_denominator_closed": bool(
@@ -202,6 +232,10 @@ def render(manifest, report):
         "- PEs com denominador executivo desconhecido: **%d**." %
         report["unknown_executable_denominators"],
         "- Bytes executáveis medidos: **%d**." % report["measured_executable_bytes"],
+        "- Bytes físicos UPX1 (compactados, NÃO decodificados): **%d**." %
+        report["packed_on_disk_executable_bytes_not_decoded"],
+        "- Módulos UPX com código original não recuperado: **%d**." %
+        report["packed_modules_without_unpacked_code"],
         "- Bytes de janelas estruturalmente desmontadas: **%d**." %
         report["locally_decoded_bytes"],
         "- Fração das janelas sobre o denominador conhecido: **%s**." %
