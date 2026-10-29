@@ -1,7 +1,7 @@
 {
   "schema": "rea-015-recursive-checkpoint-v1",
-  "date": "2026-10-28",
-  "stage": "partial_subcycle_5_driver_inventory",
+  "date": "2026-10-29",
+  "stage": "partial_subcycle_6_overlay_framing",
   "source": {
     "archive": "userfreezer.zip",
     "sha256": "f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671"
@@ -76,7 +76,8 @@
     "Driver binaries not verified",
     "Potential runtime-installed/dependent components not enumerated",
     "TsiLang SIB internal records not fully parsed; format itself identified by header",
-    "CLOUD_INSTALLER large appended overlay not classified"
+    "CLOUD_INSTALLER large appended overlay not classified",
+    "Opaque CLOUD_INSTALLER body algorithm/format and any encapsulated modules are still unknown"
   ],
   "identified_data_resources": [
     {
@@ -148,5 +149,26 @@
       "format": "unclassified",
       "evidence": "docs/coverage/REA009_DRIVER_PROVENANCE.md"
     }
-  ]
+  ],
+  "overlay_frame_analysis": {
+    "evidence": "docs/coverage/REA015_OVERLAY_FRAME_2026-10-29.md",
+    "metadata": "docs/coverage/rea015_overlay_checkpoint.json",
+    "offset_in_cloud_pe": "0x1e4800",
+    "size_bytes": 7836809,
+    "length_dword_at": "0x24",
+    "length_field_matches": true,
+    "marker_69abcd69_offsets": [
+      "0xc",
+      "0x779481"
+    ],
+    "provisional_header_bytes": 96,
+    "provisional_body_bytes": 7836705,
+    "provisional_trailer_bytes": 8,
+    "mz_marker_count": 116,
+    "validated_pe_count": 0,
+    "known_strong_archive_signature_hits": 0,
+    "body_format": "not_identified",
+    "driver_presence": "unknown",
+    "is_complete": false
+  }
 }

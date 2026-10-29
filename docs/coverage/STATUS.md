@@ -1,6 +1,6 @@
 # REA — cobertura integral verificável
 
-**Referência:** 2026-10-28
+**Referência:** 2026-10-29
 **Produto:** Deep Freeze Standard 9.00.020.5760
 
 **Objetivo:** Reconstruir e verificar 100% dos componentes e comportamentos identificáveis do produto, com denominadores rastreáveis e sem confundir cobertura estrutural com equivalência.
@@ -46,7 +46,7 @@ A fração local não é cobertura do produto completo; portanto o percentual gl
 - No global function or instruction coverage; no semantic equivalence established
 - Windows 7 SP1 x86/x64 dynamic validation is absent
 - TsiLang SIB translation records are not parsed beyond exact format header
-- CLOUD_INSTALLER appended 7,836,809-byte overlay remains unclassified; no driver binaries verified from it
+- CLOUD_INSTALLER overlay has length/magic framing hypothesis but its 7,836,705-byte body and embedded modules remain unclassified
 
 ## Engenharia de loop — próximos alvos
 

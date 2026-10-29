@@ -2,7 +2,7 @@
 
 > Documento gerado. Fonte de verdade: [tasks.json](progress/tasks.json). Para editar, altere o manifesto e rode python -m tools.rea_progress --write.
 
-**Data de referência:** 2026-10-28
+**Data de referência:** 2026-10-29
 
 **Objetivo:** Reconstruir e validar 100% dos componentes e comportamentos identificáveis do Deep Freeze Standard 9.00.020.5760, com denominadores auditáveis para código, funções, CFG, interfaces, semântica e equivalência em Windows 7 SP1 x86/x64.
 
@@ -41,7 +41,7 @@
 
 Priorize P0; cada tarefa avança em um PR, com testes e evidências.
 
-- **REA-015 (P0):** Obter de modo reproduzível os bytes descompactados dos dois módulos UPX e seus denominadores, sem executar drivers; confirmar binários de drivers e demais dependências.
+- **REA-015 (P0):** Analisar a transformação/formato do corpo do overlay CLOUD_INSTALLER (7.836.705 bytes), reconciliar eventuais módulos; manter código UPX e drivers como pendências até prova de recuperação.
 
 ## Bloqueios e dependências abertas
 
@@ -227,6 +227,10 @@ Evidências:
 - [tests/test_rea_upx_surface.py](../tests/test_rea_upx_surface.py)
 - [docs/coverage/UPX_SURFACE_2026-10-28.md](../docs/coverage/UPX_SURFACE_2026-10-28.md)
 - [docs/coverage/upx_surface_checkpoint.json](../docs/coverage/upx_surface_checkpoint.json)
+- [tools/rea_overlay_inventory.py](../tools/rea_overlay_inventory.py)
+- [tests/test_rea_overlay_inventory.py](../tests/test_rea_overlay_inventory.py)
+- [docs/coverage/REA015_OVERLAY_FRAME_2026-10-29.md](../docs/coverage/REA015_OVERLAY_FRAME_2026-10-29.md)
+- [docs/coverage/rea015_overlay_checkpoint.json](../docs/coverage/rea015_overlay_checkpoint.json)
 
 ### REA-016 — Classificar todos os bytes executáveis e reconstruir funções/CFG
 
