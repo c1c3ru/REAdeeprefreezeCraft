@@ -1,0 +1,71 @@
+{
+  "schema": "rea-015-m-path-indirect-scope-v1",
+  "date": "2026-10-29",
+  "source_zip_sha256": "f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671",
+  "source_pe_sha256": "2d7c171d4037660843a7e02c055679c5a26904af84d48fc8c557a67023f55c8b",
+  "verified_instruction_anchors": 39,
+  "verified_call_edges": 10,
+  "win32_imports": [
+    "KERNEL32.DLL!GetFileAttributesA",
+    "KERNEL32.DLL!SetFileAttributesA",
+    "KERNEL32.DLL!CreateFileA",
+    "KERNEL32.DLL!ReadFile"
+  ],
+  "path_flows": [
+    {
+      "site": "0x00467CC0",
+      "observation": "caller [EBP+0x0C] forwarded to 0x00467CF8"
+    },
+    {
+      "site": "0x00467D06",
+      "observation": "load same pathname into EDI"
+    },
+    {
+      "site": "0x00467D0F",
+      "observation": "call GetFileAttributesA with that pathname"
+    },
+    {
+      "site": "0x00467D21",
+      "observation": "if attributes valid, SetFileAttributesA(pathname, 0x80)"
+    },
+    {
+      "site": "0x00467D45",
+      "observation": "pass same pathname and null key to 0x00750F1C"
+    },
+    {
+      "site": "0x00750B9A",
+      "observation": "copy pathname into [owner+0xDC]"
+    },
+    {
+      "site": "0x00750BB8",
+      "observation": "hand off pathname and context to open wrapper"
+    },
+    {
+      "site": "0x0075258A",
+      "observation": "nonempty path forwarded to open helper"
+    },
+    {
+      "site": "0x007522CC",
+      "observation": "passed as CreateFileA lpFileName"
+    },
+    {
+      "site": "0x00437241",
+      "observation": "another callsite obtains path from [object+0x2C] via 0x00407334"
+    }
+  ],
+  "path_pointer_helper": {
+    "function": "0x00407334",
+    "if_pointer_null": "empty C-string at VA 0x0090E06A",
+    "literal_empty_confirmed": true,
+    "actual_path_value_observed": false
+  },
+  "targeted_byte_windows": 8,
+  "total_window_bytes": 471,
+  "indirect_ff_call_jmp_candidates_in_windows": 0,
+  "ff_candidate_scope": "only bounded reviewed instruction windows; opcode-pair search not exhaustive x86",
+  "unexplored": "indirect/computed/virtual callers elsewhere, module entry and runtime pathname",
+  "runtime_file_hash_proven": false,
+  "cloud_installer_overlay_binding_proven": false,
+  "win7_original_equivalence_proven": false,
+  "full_certification": false
+}

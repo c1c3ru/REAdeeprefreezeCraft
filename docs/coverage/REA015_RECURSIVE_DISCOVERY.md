@@ -95,6 +95,10 @@ O [checkpoint REA-015/K](REA015_KEY_INPUT_2026-10-29.md) apresenta uma cadeia es
 
 O [relatório REA-015/L](REA015_DIRECT_CALLERS_2026-10-29.md) documenta a varredura **somente de CALL E8-rel32 na seção executável**: **11** referências diretas a `0x750F1C`, todas com string principal imediatamente passada como `NULL`; **7** referências a `0x750C60`; **4** a `0x74F804`; e **2** a `0x74F914`. Duas referências adicionais a `0x74F804` derivam ponteiros de variáveis locais e **não têm vínculo comprovado com o leitor do overlay**. Foi também confirmada a constante C de **32 bytes** em `0x009D71B4`, usada na formatação temporal, sem conhecer o valor efetivo em execução. Chamadas indiretas e processamento real do CLOUD_INSTALLER continuam desconhecidos.
 
+## Subciclo M — proveniência do pathname e amostra delimitada de indireções (29/10/2026)
+
+O [relatório REA-015/M](REA015_PATH_INDIRECT_2026-10-29.md) confirma, por **39 âncoras de instrução e 10 chamadas diretas**, que o pathname recebido por `0x467CF8` é encaminhado a `GetFileAttributesA`, condicionalmente `SetFileAttributesA`, e então ao construtor que alcança `CreateFileA`. Uma rota alternativa obtém o ponteiro de uma estrutura via `0x407334`, podendo devolver string vazia. Oito janelas estáticas somando **471 bytes** não contêm padrões `FF /2` ou `FF /4` candidatos a chamadas/saltos indiretos. **Essa medida não fecha todas as chamadas indiretas da aplicação nem identifica o pathname concreto em execução.** Falta ligar o handle ao overlay CLOUD_INSTALLER com observações de VM e hashes de bytes lidos.
+
 ## O que permanece para concluir REA-015
 
 1. A classificação do cabeçalho SIB como TsiLang foi concluída; **resta documentar o esquema interno dos registros** para fechar a cobertura de dados. Não inferir que as traduções tenham sido completamente decodificadas.
