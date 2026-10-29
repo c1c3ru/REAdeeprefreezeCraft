@@ -73,6 +73,12 @@ O próximo loop REA-015 deverá investigar a estrutura do overlay, identificar c
 
 O [relatório REA-015/F](REA015_OVERLAY_FRAME_2026-10-29.md) registra a hipótese de estrutura de comprimento/sentinelas no overlay de **7.836.809 bytes** do CLOUD_INSTALLER: `0x69ABCD69` nos offsets relativos `0x0C` e `0x779481`, DWORD no `+0x24` igual ao comprimento total, e divisão provisória em 96 / 7.836.705 / 8 bytes. A busca encontrou **116 ocorrências MZ, nenhuma validada como PE**; não foram detectadas assinaturas fortes dos arquivos ZIP/7z/CAB/RAR/XZ/ELF pesquisados. A alta entropia não identifica compressão nem cifragem. **O corpo permanece opaco e pode conter componentes não recuperados.** O CI testa somente fixtures sintéticas.
 
+## Subciclos G/H — candidatos de codec e rotinas x86 do cabeçalho (29/10/2026)
+
+Uma sondagem limitada de zlib/gzip no corpo opaco testou **3.544** cabeçalhos zlib plausíveis e **1** prefixo gzip, sem confirmar fluxos decodificáveis nesses limites. Isso não identifica a transformação.
+
+O [novo relatório da REA-015/H](REA015_READER_TRACE_2026-10-29.md) registra **21 âncoras estáticas de instruções** verificadas no `DFStd.exe`: uma sequência lê 96 bytes para `[ebx+0x10]`, outra valida o marcador `0x69ABCD69` em `[ebx+0x1C]`, e a inicialização grava `0x60`, `0x301` e o marcador nas posições que correspondem aos deslocamentos +0x00, +0x08 e +0x0C do overlay. Há também validação do marcador após uma leitura de 8 bytes. O formato da estrutura **parece ser comum**, mas o uso dessa rotina especificamente para o overlay do CLOUD_INSTALLER **não está comprovado em execução** e o corpo ainda não foi decodificado.
+
 ## O que permanece para concluir REA-015
 
 1. A classificação do cabeçalho SIB como TsiLang foi concluída; **resta documentar o esquema interno dos registros** para fechar a cobertura de dados. Não inferir que as traduções tenham sido completamente decodificadas.

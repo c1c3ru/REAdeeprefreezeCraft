@@ -1,0 +1,68 @@
+{
+  "schema": "rea-015-header-reader-static-v1",
+  "date": "2026-10-29",
+  "source": {
+    "archive_sha256": "f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671",
+    "root_executable_sha256": "2d7c171d4037660843a7e02c055679c5a26904af84d48fc8c557a67023f55c8b",
+    "cloud_embedded_sha256": "145c6b8461132fd077a42cee775aca318c2b697b5720283749e04fc6aa5b4772",
+    "overlay_sha256": "9453669c5ae280cb8718761159895da425168ccbba1e4e56d376b5165554b9e2"
+  },
+  "static_anchored_instruction_count": 21,
+  "verified_instruction_vas": [
+    "0x0074FB45",
+    "0x0074FB49",
+    "0x0074FB50",
+    "0x0074FB59",
+    "0x0075019E",
+    "0x007501A5",
+    "0x0074FC7F",
+    "0x0074FC84",
+    "0x0074FC8A",
+    "0x007502D6",
+    "0x007502DE",
+    "0x007502FD",
+    "0x00750300",
+    "0x00750307",
+    "0x00750317",
+    "0x00750591",
+    "0x007505A5",
+    "0x007505AC",
+    "0x00750607",
+    "0x00750610",
+    "0x00750613"
+  ],
+  "observations": {
+    "reader_header_buffer": "[EBX+0x10]",
+    "header_read_length": 96,
+    "header_read_call_va": "0x0074FB50",
+    "header_validator_call_va": "0x0074FB59",
+    "header_magic_cmp_va": "0x0075019E",
+    "writer_header_len_va": "0x00750591",
+    "writer_version_va": "0x007505A5",
+    "writer_magic_va": "0x007505AC",
+    "writer_duplicate_length_va": "0x00750607",
+    "writer_twin_fields_va": [
+      "0x00750610",
+      "0x00750613"
+    ],
+    "trailer_span_bytes": 8,
+    "trailer_read_call_va": "0x00750307",
+    "trailer_magic_cmp_va": "0x00750317",
+    "observed_matching_header_bytes": {
+      "offset_0x00": 96,
+      "offset_0x08": 769,
+      "offset_0x0c": 1772866921,
+      "offset_0x44": 96
+    }
+  },
+  "confidence": "High for exact instruction-byte and header-field matches; candidate relation to this particular embedded resource, not confirmed runtime origin.",
+  "unknowns": [
+    "Actual runtime call chain that opens CLOUD_INSTALLER overlay",
+    "Exact role and meaning of fields +0x24/+0x48/+0x4C",
+    "Decoder or transformation of 7,836,705 opaque body bytes",
+    "Hidden installer components, drivers and Windows 7 behavioral equivalence"
+  ],
+  "code_recovered": false,
+  "original_software_equivalence_verified": false,
+  "scope_closed": false
+}

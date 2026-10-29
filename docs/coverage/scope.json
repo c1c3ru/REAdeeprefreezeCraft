@@ -214,5 +214,26 @@
     "format_identified": false,
     "driver_presence_verified": false,
     "code_recovered": false
+  },
+  "overlay_frame_reader_candidate": {
+    "evidence": "docs/coverage/REA015_READER_TRACE_2026-10-29.md",
+    "instruction_anchors_verified": 21,
+    "root_binary_sha256": "2d7c171d4037660843a7e02c055679c5a26904af84d48fc8c557a67023f55c8b",
+    "reader_96byte_candidate": "0x0074FB20",
+    "header_validation_candidate": "0x0075018C",
+    "trailer_validation_candidate": "0x007502AC",
+    "writer_initializer_candidate": "0x00750498",
+    "header_magic": "0x69ABCD69",
+    "matched_header_fields": [
+      "0x00",
+      "0x08",
+      "0x0C",
+      "0x44",
+      "0x48",
+      "0x4C"
+    ],
+    "reader_ownership_confirmed": false,
+    "body_transformation_identified": false,
+    "direct_cloud_resource_runtime_read_proven": false
   }
 }
