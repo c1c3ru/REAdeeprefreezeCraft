@@ -287,5 +287,23 @@
     "fallback_four_words_from_time_derived_value": true,
     "runtime_clock_value_observed": false,
     "actual_cloud_resource_link_verified": false
+  },
+  "direct_constructor_xrefs": {
+    "checkpoint": "docs/coverage/rea015_direct_callers_checkpoint.json",
+    "report": "docs/coverage/REA015_DIRECT_CALLERS_2026-10-29.md",
+    "constructor_target": "0x00750F1C",
+    "direct_callers_found": 11,
+    "constructor_primary_string_null_immediate_count": 11,
+    "time_fallback_target": "0x00750C60",
+    "direct_callers_found_to_time_fallback": 7,
+    "four_word_hash_target": "0x0074F804",
+    "direct_callers_found_to_four_word_hash": 4,
+    "base_initializer_target": "0x0074F914",
+    "direct_callers_found_to_base_initializer": 2,
+    "time_template_format_va": "0x009D71B4",
+    "time_template_sha256": "e3705d782a9125c2d2a14f06bb997c0a763d7f35fc24acd0c671b95b5d000755",
+    "indirect_callers_inventoried": false,
+    "actual_path_verified": false,
+    "runtime_cloud_resource_binding_verified": false
   }
 }

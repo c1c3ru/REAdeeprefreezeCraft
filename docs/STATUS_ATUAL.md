@@ -41,7 +41,7 @@
 
 Priorize P0; cada tarefa avança em um PR, com testes e evidências.
 
-- **REA-015 (P0):** Inventariar todas as chamadoras e os caminhos reais, identificar a string/clock-format efetivamente usadas, comparar contratos com o original em laboratório Windows 7 e provar o vínculo ao overlay CLOUD_INSTALLER.
+- **REA-015 (P0):** Rastrear chamadas indiretas e a origem concreta do pathname, verificar se o arquivo aberto corresponde ao overlay CLOUD_INSTALLER e obter vetores originais de equivalência em laboratório Windows 7; não confundir 11 chamadas diretas com todos os fluxos.
 
 ## Bloqueios e dependências abertas
 
@@ -256,6 +256,10 @@ Evidências:
 - [tests/test_rea_key_input_provenance.py](../tests/test_rea_key_input_provenance.py)
 - [docs/coverage/REA015_KEY_INPUT_2026-10-29.md](../docs/coverage/REA015_KEY_INPUT_2026-10-29.md)
 - [docs/coverage/rea015_key_input_checkpoint.json](../docs/coverage/rea015_key_input_checkpoint.json)
+- [tools/rea_constructor_xrefs.py](../tools/rea_constructor_xrefs.py)
+- [tests/test_rea_constructor_xrefs.py](../tests/test_rea_constructor_xrefs.py)
+- [docs/coverage/REA015_DIRECT_CALLERS_2026-10-29.md](../docs/coverage/REA015_DIRECT_CALLERS_2026-10-29.md)
+- [docs/coverage/rea015_direct_callers_checkpoint.json](../docs/coverage/rea015_direct_callers_checkpoint.json)
 
 ### REA-016 — Classificar todos os bytes executáveis e reconstruir funções/CFG
 

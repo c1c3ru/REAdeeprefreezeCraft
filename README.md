@@ -14,6 +14,7 @@ Laboratório de **engenharia reversa auditável** para análise de componentes d
 - `tools/rea_coverage.py`: validador/gerador da cobertura integral, integrado ao CI.
 - `tools/rea_driver_evidence.py` — REA-009: identifica arquivos .sys **reais** versus strings, registra tabelas Authenticode e overlays não classificados sem validar criptograficamente a assinatura; [checkpoint](docs/coverage/REA009_DRIVER_PROVENANCE.md).
 - `tools/rea_ioctl_contract.py` — REA-008: contrato estático das oito posições de `DeviceIoControl`, `CreateFileA`, buffers e status de retorno; [análise](docs/analyses/REA008_ARGUMENT_PROVENANCE.md).
+- `tools/rea_constructor_xrefs.py` — REA-015/L: 11 chamadas diretas a construtor com parâmetro NULL, 7 fallback de tempo, duas referências adicionais ao gerador de DWORDs e constante temporal por RVA; [checkpoint](docs/coverage/REA015_DIRECT_CALLERS_2026-10-29.md).
 - `tools/rea_key_input_provenance.py` — REA-015/K: confirma chamadas do inicializador, string principal nula e fallback derivado de `GetLocalTime` sem alegar a identidade do overlay; [relatório](docs/coverage/REA015_KEY_INPUT_2026-10-29.md).
 - `tools/rea_transform_state.py` — REA-015/J: valida 74 instruções de flag, estado e byte XOR na amostra fixada por SHA-256, com simulações somente sintéticas; [relatório](docs/coverage/REA015_TRANSFORM_STATE_2026-10-29.md).
 - `tools/rea_overlay_handle_flow.py` — REA-015/I: valida origem estática de handle (CreateFileA → contexto → ReadFile), leitura de buffer e caminho XOR condicional, com [checkpoint](docs/coverage/REA015_HANDLE_FLOW_2026-10-29.md).
@@ -51,6 +52,7 @@ python -m tools.rea_progress --check
 python -m tools.rea_progress --json
 python -m tools.rea_coverage --check
 python -m tools.rea_coverage --json
+python -m tools.rea_constructor_xrefs --archive /caminho/para/userfreezer.zip --json rea015_callers_local.json
 python -m tools.rea_key_input_provenance --archive /caminho/para/userfreezer.zip --json rea015_key_inputs.json
 python -m tools.rea_transform_state --archive /caminho/para/userfreezer.zip --json rea015_transform_state.json
 python -m tools.rea_overlay_handle_flow --archive /caminho/para/userfreezer.zip --json rea015_handle_flow.json

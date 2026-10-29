@@ -1,0 +1,71 @@
+{
+  "schema": "rea-015-l-direct-caller-inventory-v1",
+  "date": "2026-10-29",
+  "source_zip_sha256": "f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671",
+  "source_pe_sha256": "2d7c171d4037660843a7e02c055679c5a26904af84d48fc8c557a67023f55c8b",
+  "scope": "x86 PE .text only; direct CALL E8-rel32 patterns corroborated at instruction boundaries; indirect calls excluded",
+  "direct_xrefs": {
+    "constructor_0x00750f1c": [
+      "0x004170ce",
+      "0x0041734f",
+      "0x00437241",
+      "0x00465c0a",
+      "0x00465eab",
+      "0x00467d45",
+      "0x00467ec1",
+      "0x00468029",
+      "0x0046821b",
+      "0x004683df",
+      "0x0046854f"
+    ],
+    "time_fallback_0x00750c60": [
+      "0x00467d83",
+      "0x00467dfb",
+      "0x00468256",
+      "0x004682d8",
+      "0x0046858a",
+      "0x0046860c",
+      "0x0046de60"
+    ],
+    "four_word_hash_0x0074f804": [
+      "0x0047b77b",
+      "0x0047b827",
+      "0x00750b43",
+      "0x00750c84"
+    ],
+    "base_initializer_0x0074f914": [
+      "0x0046dd67",
+      "0x00750f41"
+    ]
+  },
+  "constructor_primary_key_immediate_zero_count": 11,
+  "constructor_arg_classification": {
+    "caller_argument": 10,
+    "converted_pointer": 1,
+    "known_literal_path": 0
+  },
+  "additional_hash_callers": {
+    "sites": [
+      "0x0047b77b",
+      "0x0047b827"
+    ],
+    "argument": "stack-pointer [ebp-0x28]",
+    "destination": "stack four DWORDs [ebp-0x38]",
+    "same_loader_proven": false
+  },
+  "time_format_literal": {
+    "data_va": "0x009d71b4",
+    "format_template": "%.3s %.3s%3d %.2d:%.2d:%.2d %d%s",
+    "bytes": 32,
+    "sha256": "e3705d782a9125c2d2a14f06bb997c0a763d7f35fc24acd0c671b95b5d000755",
+    "load_instruction_va": "0x0076ae5a",
+    "formatter_call_va": "0x0076ae9d",
+    "runtime_string_observed": false
+  },
+  "tests_synthetic_count": 13,
+  "expected_opcode_anchors": 45,
+  "indirect_callers_inventoried": false,
+  "caller_path_actual_value_known": false,
+  "payload_resource_identity_proven": false,
+  "full_reconstruction_certified": false
+}
