@@ -1,0 +1,81 @@
+{
+  "schema": "rea-015-handle-transform-flow-v1",
+  "as_of": "2026-10-29",
+  "sample": {
+    "archive_sha256": "f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671",
+    "exe": "Faronics_DFS/DFStd.exe",
+    "exe_sha256": "2d7c171d4037660843a7e02c055679c5a26904af84d48fc8c557a67023f55c8b"
+  },
+  "evidence": {
+    "pinned_code_instruction_anchors": 41,
+    "direct_call_edges_checked": 13,
+    "imports": [
+      {
+        "dll": "KERNEL32.DLL",
+        "name": "CreateFileA",
+        "iat_va": "0x00A1675C",
+        "thunk_va": "0x00900D44",
+        "call_va": "0x007522CC"
+      },
+      {
+        "dll": "KERNEL32.DLL",
+        "name": "ReadFile",
+        "iat_va": "0x00A16998",
+        "thunk_va": "0x009010C2",
+        "call_va": "0x007526AE"
+      }
+    ],
+    "static_cross_function_chain": [
+      "0x00750B9A: caller pathname forwarded into owner+0xDC buffer helper",
+      "0x00750BB4: owner+0x0C context pointer",
+      "0x00750BB8: invoke 0x0075256C",
+      "0x0075258A: invoke open helper 0x00752234",
+      "0x007522CC: call CreateFileA import",
+      "0x007522D1: store handle in context+0x04",
+      "0x0074FB4C: owner+0x0C context passed to read wrapper",
+      "0x007526AA: load context+0x04 into ReadFile hFile slot",
+      "0x007526AE: call ReadFile import"
+    ],
+    "post_header_chain": [
+      "0x0074FE61: header reader 0x0074FB20",
+      "0x0074FE91: block reader 0x0074FD34",
+      "0x0074FD58: length comes from owner+0x58",
+      "0x0074FD5C: destination comes from owner+0x80",
+      "0x0074FD67: same ReadFile wrapper 0x00752670",
+      "0x0074FD71: test byte owner+0x60 & 1",
+      "0x0074FD9B: conditional call 0x007500F8"
+    ],
+    "conditional_transform_chain": [
+      "0x007500F8 -> 0x0074F7AC: test four key words",
+      "0x007500F8 -> 0x0074F728: state processor when permitted",
+      "0x0074F728 -> 0x0074F87C: XOR worker on permitted state",
+      "0x0074F87C -> 0x0074F8AC: calculated byte",
+      "0x0074F89B: XOR calculated AL into [ESI] in place",
+      "0x0074F89E: increment data pointer"
+    ]
+  },
+  "sample_manual_confirmation": {
+    "method": "GNU objdump and raw bytes in PE .text, 2026-10-29",
+    "manual_opcode_checks": 41,
+    "mismatches": 0,
+    "caveat": "41 anchors include additional filename-provenance instructions whose regression verification is automated by pinned-PE script",
+    "manual_direct_rel32_edge_checks": 13
+  },
+  "conclusions": {
+    "handle_storage_confirmed": true,
+    "file_open_api_import_confirmed": true,
+    "file_read_api_import_confirmed": true,
+    "block_buffer_source_confirmed": true,
+    "conditional_in_place_xor_instruction_confirmed": true,
+    "specific_cloud_overlay_runtime_file_identity_confirmed": false,
+    "full_overlay_transformation_confirmed": false,
+    "driver_binary_recovered": false,
+    "full_reverse_engineering_certified": false
+  },
+  "next_actions": [
+    "Confirm upstream pathname resolved at CreateFileA and binding to embedded CLOUD_INSTALLER resource",
+    "Trace owner+0x60 flag and four key state DWORDs into the transform decision",
+    "Analyze key-byte calculation at 0x0074F8AC and compare only bounded, authorized test vectors",
+    "Do not assert all opaque bytes decoded, missing drivers found, or 100% equivalence"
+  ]
+}

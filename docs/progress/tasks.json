@@ -316,14 +316,18 @@
         "tools/rea_overlay_reader_trace.py",
         "tests/test_rea_overlay_reader_trace.py",
         "docs/coverage/REA015_READER_TRACE_2026-10-29.md",
-        "docs/coverage/rea015_reader_checkpoint.json"
+        "docs/coverage/rea015_reader_checkpoint.json",
+        "tools/rea_overlay_handle_flow.py",
+        "tests/test_rea_overlay_handle_flow.py",
+        "docs/coverage/REA015_HANDLE_FLOW_2026-10-29.md",
+        "docs/coverage/rea015_handle_flow_checkpoint.json"
       ],
       "acceptance": [
         "Inventariar todos os recursos executáveis e dependências com hashes e origem",
         "Separar binários confirmados de nomes/strings e fechar pendências de empacotamento"
       ],
       "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/17",
-      "next_action": "Rastrear a origem do handle e a cadeia de chamadas das rotinas x86 leitoras do cabeçalho; localizar transformação do corpo opaco e reconciliação dos drivers/UPX sem afirmar equivalência não medida."
+      "next_action": "Identificar a origem da string de caminho usada por CreateFileA, determinar as condições/estado do XOR in-place e comprovar se o fluxo é aplicado ao overlay CLOUD_INSTALLER; drivers e código UPX seguem pendentes."
     },
     {
       "id": "REA-016",

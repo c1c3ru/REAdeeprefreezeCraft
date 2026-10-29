@@ -41,7 +41,7 @@
 
 Priorize P0; cada tarefa avança em um PR, com testes e evidências.
 
-- **REA-015 (P0):** Rastrear a origem do handle e a cadeia de chamadas das rotinas x86 leitoras do cabeçalho; localizar transformação do corpo opaco e reconciliação dos drivers/UPX sem afirmar equivalência não medida.
+- **REA-015 (P0):** Identificar a origem da string de caminho usada por CreateFileA, determinar as condições/estado do XOR in-place e comprovar se o fluxo é aplicado ao overlay CLOUD_INSTALLER; drivers e código UPX seguem pendentes.
 
 ## Bloqueios e dependências abertas
 
@@ -237,6 +237,10 @@ Evidências:
 - [tests/test_rea_overlay_reader_trace.py](../tests/test_rea_overlay_reader_trace.py)
 - [docs/coverage/REA015_READER_TRACE_2026-10-29.md](../docs/coverage/REA015_READER_TRACE_2026-10-29.md)
 - [docs/coverage/rea015_reader_checkpoint.json](../docs/coverage/rea015_reader_checkpoint.json)
+- [tools/rea_overlay_handle_flow.py](../tools/rea_overlay_handle_flow.py)
+- [tests/test_rea_overlay_handle_flow.py](../tests/test_rea_overlay_handle_flow.py)
+- [docs/coverage/REA015_HANDLE_FLOW_2026-10-29.md](../docs/coverage/REA015_HANDLE_FLOW_2026-10-29.md)
+- [docs/coverage/rea015_handle_flow_checkpoint.json](../docs/coverage/rea015_handle_flow_checkpoint.json)
 
 ### REA-016 — Classificar todos os bytes executáveis e reconstruir funções/CFG
 
