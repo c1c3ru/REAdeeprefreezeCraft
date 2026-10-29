@@ -41,7 +41,7 @@
 
 Priorize P0; cada tarefa avança em um PR, com testes e evidências.
 
-- **REA-015 (P0):** Instrumentar em VM autorizada os eventos CreateFileA/ReadFile com pathname, handle, offsets e hashes; correlacionar ao CLOUD_INSTALLER e investigar chamadas indiretas fora das oito janelas estáticas analisadas.
+- **REA-015 (P0):** Capturar em VM Windows 7 isolada e autorizada os eventos reais CreateFileA/ReadFile (PID, handle, SHA-256 do arquivo e dos buffers, offsets), correlacionar com CLOUD_INSTALLER, assinar evidências e depois validar semântica; ainda sem observação dinâmica.
 
 ## Bloqueios e dependências abertas
 
@@ -264,6 +264,10 @@ Evidências:
 - [tests/test_rea_path_indirect_scope.py](../tests/test_rea_path_indirect_scope.py)
 - [docs/coverage/REA015_PATH_INDIRECT_2026-10-29.md](../docs/coverage/REA015_PATH_INDIRECT_2026-10-29.md)
 - [docs/coverage/rea015_path_indirect_checkpoint.json](../docs/coverage/rea015_path_indirect_checkpoint.json)
+- [tools/rea_runtime_file_correlation.py](../tools/rea_runtime_file_correlation.py)
+- [tests/test_rea_runtime_file_correlation.py](../tests/test_rea_runtime_file_correlation.py)
+- [docs/coverage/REA015_RUNTIME_CAPTURE_PLAN_2026-10-29.md](../docs/coverage/REA015_RUNTIME_CAPTURE_PLAN_2026-10-29.md)
+- [docs/coverage/rea015_runtime_capture_checkpoint.json](../docs/coverage/rea015_runtime_capture_checkpoint.json)
 
 ### REA-016 — Classificar todos os bytes executáveis e reconstruir funções/CFG
 
