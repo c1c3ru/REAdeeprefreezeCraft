@@ -195,6 +195,13 @@ Evidências:
 - [ ] Exigir evidências independentes x86 e x64
 - [ ] Publicar aprovação/reprovação ou não verificado por contrato, com rastreabilidade
 
+Evidências:
+- [tools/rea_certification.py](../tools/rea_certification.py)
+- [tests/test_rea_certification.py](../tests/test_rea_certification.py)
+- [docs/certification/claims.json](../docs/certification/claims.json)
+- [docs/certification/STATUS.md](../docs/certification/STATUS.md)
+- [docs/certification/CERTIFICATION_POLICY.md](../docs/certification/CERTIFICATION_POLICY.md)
+
 ### REA-014 — Definir escopo completo e medidor auditável
 
 **Status:** done · **Etapa:** Cobertura integral

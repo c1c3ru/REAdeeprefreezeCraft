@@ -92,3 +92,7 @@ O backlog ativo, critérios de aceite e dependências passaram a ser mantidos em
 ## Política de evidências
 
 Todo achado deverá incluir: ID, arquivo/hash, ferramenta/versão, observação, interpretação, nível de confiança, limitação e próximo teste. Guardar somente dados com permissão de redistribuição.
+
+## Certificação formal do escopo delimitado
+
+Os portões independentes de evidência estão descritos em [CERTIFICATION_POLICY.md](certification/CERTIFICATION_POLICY.md). A certificação interna exige recibos assinados, hashes e chaves públicas confiáveis fora do Git, além do fechamento dos denominadores e da execução real Windows 7. O CI de documentação informa **NÃO CERTIFICADO** enquanto os requisitos não forem satisfeitos.
