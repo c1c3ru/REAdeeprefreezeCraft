@@ -1,0 +1,73 @@
+{
+  "schema": "rea-certification-v1",
+  "as_of": "2026-10-29",
+  "source": "docs/coverage/scope.json",
+  "task_source": "docs/progress/tasks.json",
+  "classification": "Internal auditable research attestation; independent accreditation not implied.",
+  "claims": [
+    {
+      "id": "inventory",
+      "status": "pending",
+      "receipt": null,
+      "receipt_sha256": null,
+      "signature": null,
+      "signer": null
+    },
+    {
+      "id": "structural",
+      "status": "pending",
+      "receipt": null,
+      "receipt_sha256": null,
+      "signature": null,
+      "signer": null
+    },
+    {
+      "id": "semantics",
+      "status": "pending",
+      "receipt": null,
+      "receipt_sha256": null,
+      "signature": null,
+      "signer": null
+    },
+    {
+      "id": "equivalence",
+      "status": "pending",
+      "receipt": null,
+      "receipt_sha256": null,
+      "signature": null,
+      "signer": null
+    },
+    {
+      "id": "drivers",
+      "status": "pending",
+      "receipt": null,
+      "receipt_sha256": null,
+      "signature": null,
+      "signer": null
+    },
+    {
+      "id": "windows7_x86",
+      "status": "pending",
+      "receipt": null,
+      "receipt_sha256": null,
+      "signature": null,
+      "signer": null
+    },
+    {
+      "id": "windows7_x64",
+      "status": "pending",
+      "receipt": null,
+      "receipt_sha256": null,
+      "signature": null,
+      "signer": null
+    },
+    {
+      "id": "independent_review",
+      "status": "pending",
+      "receipt": null,
+      "receipt_sha256": null,
+      "signature": null,
+      "signer": null
+    }
+  ]
+}

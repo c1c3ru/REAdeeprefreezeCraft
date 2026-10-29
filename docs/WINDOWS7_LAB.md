@@ -31,3 +31,7 @@
 - [ ] Estados Frozen/Thawed observados
 - [ ] Integridade após reinicialização validada
 - [ ] Desinstalação sem falhas validada
+
+## Evidência para certificação interna
+
+Para cada arquitetura, gerar logs e snapshots sanitizados com hashes, os casos testados e a versão exata da VM. Os recibos precisam vincular a amostra e o manifesto de cobertura ao resultado, com assinatura de revisor/operador autorizado (ver [política de certificação](certification/CERTIFICATION_POLICY.md)). Não é permitido reutilizar o mesmo conjunto de evidências para x86 e x64. Sem as duas arquiteturas e revisão independente, o gate de certificado deve falhar.

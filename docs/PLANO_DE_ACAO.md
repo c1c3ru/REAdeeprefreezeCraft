@@ -118,3 +118,11 @@ python -m tools.rea_progress --json
 - **29/10/2026:** REA-015/I: 41 instruções x86 do PE original verificadas e 13 arestas CALL relatadas; `CreateFileA` (IAT `0x00A1675C`) grava handle em `[contexto+0x04]`, encaminhado a `ReadFile` (IAT `0x00A16998`). Após o cabeçalho, o buffer `[owner+0x80]` sofre transformação condicional com `xor byte [esi],al` na rotina `0x74F87C`; não comprovado processamento integral do overlay nem origem definitiva do arquivo.
 - **29/10/2026:** REA-015/J: 74 âncoras de bytes reais da amostra e 7 chamadas diretas; origem da flag em `[owner+0xA4]`, valor padrão 9, setters de bits e seleção de duas fontes de quatro DWORDs confirmados; calculadora de byte `0x74F8AC/0x74F8D4` modelada com vetores sintéticos. Sem chaves reais ou comprovação de processamento do overlay original.
 - **Próximo checkpoint:** rastrear valores reais da configuração e das strings geradoras, verificar modelo contra comportamento original em laboratório autorizado e comprovar identidade do arquivo CLOUD_INSTALLER. Drivers, UPX e Win7 continuam pendentes.
+
+## Portão independente de certificação — 29/10/2026
+
+- REA-013/017: criado gate de **oito recibos assinados** (inventário, estrutura, semântica, equivalência, drivers, Win7 x86, Win7 x64 e auditor independente), com hashes, assinaturas OpenSSL e chaves públicas de confiança **externas ao repositório**.
+- `python -m tools.rea_certification --check` valida a consistência do status **NÃO CERTIFICADO** no CI, além de `rea_coverage --check` e `rea_progress --check`. Não transforma CI verde em certificado.
+- `python -m tools.rea_certification --require-certified --trusted-keys /outside/trusted` é o portão deliberado de emissão: recusa ausência de cobertura integral, tarefas pendentes, recibos incompletos, assinaturas inválidas, artefatos adulterados e auditor sem independência.
+- Política e checklist: [CERTIFICATION_POLICY.md](certification/CERTIFICATION_POLICY.md). Estado vivo: [certification/STATUS.md](certification/STATUS.md).
+- **Conclusão atual: NÃO CERTIFICADO**. O próximo trabalho do produto permanece REA-015 (origem do pathname/flags/chaves e vínculo ao CLOUD_INSTALLER) e recuperação de drivers/UPX; depois testes Win7 x86/x64 e equivalência.

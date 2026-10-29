@@ -9,6 +9,7 @@ Laboratório de **engenharia reversa auditável** para análise de componentes d
 - [Relatório REA 9.00.020.5760](docs/analyses/DeepFreeze_9.00.020.5760.md) — identificação do binário, hashes, componentes, limitações e riscos.
 - [Matriz de testes Windows 7](docs/WINDOWS7_LAB.md) — requisitos de laboratório e critérios de aceite.
 - [Roadmap](docs/ROADMAP.md) — fases de inventário, análise estrutural e validação semântica.
+- **[Certificação auditável](docs/certification/STATUS.md)**: oito portões de evidência assinada e [política para atingir 100% do escopo verificado](docs/certification/CERTIFICATION_POLICY.md). O CI apenas verifica consistência; assinatura de revisores e VMs Windows 7 são exigidas separadamente.
 - **[Cobertura integral de engenharia reversa](docs/coverage/STATUS.md)** e [manifesto de componentes](docs/coverage/scope.json): cobertura por byte de módulo medido, denominadores desconhecidos e gates de equivalência; sem percentual global inventado.
 - `tools/rea_coverage.py`: validador/gerador da cobertura integral, integrado ao CI.
 - `tools/rea_driver_evidence.py` — REA-009: identifica arquivos .sys **reais** versus strings, registra tabelas Authenticode e overlays não classificados sem validar criptograficamente a assinatura; [checkpoint](docs/coverage/REA009_DRIVER_PROVENANCE.md).

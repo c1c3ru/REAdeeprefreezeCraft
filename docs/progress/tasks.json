@@ -257,13 +257,19 @@
         "REA-011",
         "REA-012"
       ],
-      "evidence": [],
+      "evidence": [
+        "tools/rea_certification.py",
+        "tests/test_rea_certification.py",
+        "docs/certification/claims.json",
+        "docs/certification/STATUS.md",
+        "docs/certification/CERTIFICATION_POLICY.md"
+      ],
       "acceptance": [
         "Exigir evidências independentes x86 e x64",
         "Publicar aprovação/reprovação ou não verificado por contrato, com rastreabilidade"
       ],
       "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/13",
-      "next_action": "Não iniciar antes de validação experimental e contratos do escopo"
+      "next_action": "Gate independente implementado e validado; aguardar entregas REA-010/011/012, recibos assinados com chaves confiáveis externas e revisão independente antes de certificar."
     },
     {
       "id": "REA-014",

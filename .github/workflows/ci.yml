@@ -29,10 +29,13 @@ jobs:
         run: python -m tools.rea_progress --check
       - name: Validate full-scope coverage denominators and 100-percent gates
         run: python -m tools.rea_coverage --check
+      - name: Verify independent certification gates and signed-proof ledger
+        run: python -m tools.rea_certification --check
       - name: Publish clear CI summary
         if: success()
         run: |
           echo "### REA CI — Python ${{ matrix.python-version }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Unit tests: passed" >> "$GITHUB_STEP_SUMMARY"
           echo "- Documentation/evidence checks: passed" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Internal certification: NOT YET ISSUED (separate signed gate)" >> "$GITHUB_STEP_SUMMARY"
           echo "- Windows 7 driver validation: not executed" >> "$GITHUB_STEP_SUMMARY"
