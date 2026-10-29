@@ -41,7 +41,7 @@
 
 Priorize P0; cada tarefa avança em um PR, com testes e evidências.
 
-- **REA-015 (P0):** Identificar a origem da string de caminho usada por CreateFileA, determinar as condições/estado do XOR in-place e comprovar se o fluxo é aplicado ao overlay CLOUD_INSTALLER; drivers e código UPX seguem pendentes.
+- **REA-015 (P0):** Confirmar em execução a origem das strings que alimentam os dois conjuntos de quatro DWORDs, comparar modelo sintético de byte XOR com comportamento original e provar identidade do recurso CLOUD_INSTALLER sem alegar descompactação global.
 
 ## Bloqueios e dependências abertas
 
@@ -241,6 +241,10 @@ Evidências:
 - [tests/test_rea_overlay_handle_flow.py](../tests/test_rea_overlay_handle_flow.py)
 - [docs/coverage/REA015_HANDLE_FLOW_2026-10-29.md](../docs/coverage/REA015_HANDLE_FLOW_2026-10-29.md)
 - [docs/coverage/rea015_handle_flow_checkpoint.json](../docs/coverage/rea015_handle_flow_checkpoint.json)
+- [tools/rea_transform_state.py](../tools/rea_transform_state.py)
+- [tests/test_rea_transform_state.py](../tests/test_rea_transform_state.py)
+- [docs/coverage/REA015_TRANSFORM_STATE_2026-10-29.md](../docs/coverage/REA015_TRANSFORM_STATE_2026-10-29.md)
+- [docs/coverage/rea015_transform_state_checkpoint.json](../docs/coverage/rea015_transform_state_checkpoint.json)
 
 ### REA-016 — Classificar todos os bytes executáveis e reconstruir funções/CFG
 

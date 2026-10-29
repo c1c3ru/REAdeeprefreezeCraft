@@ -254,5 +254,24 @@
     "specific_cloud_payload_link_verified": false,
     "full_body_decoding_verified": false,
     "windows7_runtime_verified": false
+  },
+  "overlay_transform_state_candidate": {
+    "evidence": "docs/coverage/REA015_TRANSFORM_STATE_2026-10-29.md",
+    "checkpoint": "docs/coverage/rea015_transform_state_checkpoint.json",
+    "verified_original_pe_opcode_anchors": 74,
+    "verified_rel32_call_edges": 7,
+    "flag_initial_value": 9,
+    "owner_flag_source_offset": "0xA4",
+    "owner_transform_flag_offset": "0x60",
+    "key_parameter_source_offsets": [
+      "0xAC..0xB8",
+      "0xBC..0xC8"
+    ],
+    "selected_key_destination_offset": "0xCC..0xD8",
+    "key_byte_arithmetic_candidate": "IDIV by 177, LEA remainder x171, multiplication x32767, xor low/high byte",
+    "real_key_material_observed": false,
+    "runtime_link_to_cloud_resource_proven": false,
+    "model_matches_original_at_runtime": false,
+    "original_overlay_decoded": false
   }
 }
