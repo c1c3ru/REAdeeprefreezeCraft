@@ -1,7 +1,7 @@
 {
   "schema": "rea-015-recursive-checkpoint-v1",
   "date": "2026-10-29",
-  "stage": "partial_subcycle_12_direct_caller_xrefs_and_time_format",
+  "stage": "partial_subcycle_13_path_pointer_and_indirect_call_scope",
   "source": {
     "archive": "userfreezer.zip",
     "sha256": "f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671"
@@ -82,7 +82,8 @@
     "Actual filename/handle origin beyond constructor argument and whether conditional XOR processes the CLOUD_INSTALLER overlay remain unverified",
     "Actual runtime key strings, caller options and correspondence to CLOUD_INSTALLER remain unknown",
     "Exact caller-supplied pathname and time-derived string/key values at runtime remain unverified",
-    "Direct constructor caller list does not cover indirect/computed calls; actual filename and time-derived runtime parameters still unknown"
+    "Direct constructor caller list does not cover indirect/computed calls; actual filename and time-derived runtime parameters still unknown",
+    "True runtime pathname and all indirect/virtual callsite provenance cannot be closed by current static x86 windows"
   ],
   "identified_data_resources": [
     {
@@ -270,5 +271,18 @@
     "indirect_calls_outside_scope": true,
     "all_constructor_callers_confirmed": false,
     "actual_payload_runtime_identity_confirmed": false
+  },
+  "path_and_indirect_flow": {
+    "evidence": "docs/coverage/REA015_PATH_INDIRECT_2026-10-29.md",
+    "checkpoint": "docs/coverage/rea015_path_indirect_checkpoint.json",
+    "opcode_anchors": 39,
+    "direct_rel32_edges": 10,
+    "win32_api_path_flow": "GetFileAttributesA → optionally SetFileAttributesA → CreateFileA same caller pathname pointer",
+    "alternative_path_pointer": "0x00407334 via [object+0x2C] or empty string",
+    "bounded_indirect_windows": 8,
+    "ff_call_jmp_patterns_in_bounded_windows": 0,
+    "all_indirect_callers_verified": false,
+    "runtime_pathname_known": false,
+    "cloud_resource_identity_confirmed": false
   }
 }

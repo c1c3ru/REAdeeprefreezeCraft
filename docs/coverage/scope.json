@@ -305,5 +305,23 @@
     "indirect_callers_inventoried": false,
     "actual_path_verified": false,
     "runtime_cloud_resource_binding_verified": false
+  },
+  "path_indirect_scope_static": {
+    "evidence": "docs/coverage/REA015_PATH_INDIRECT_2026-10-29.md",
+    "checkpoint": "docs/coverage/rea015_path_indirect_checkpoint.json",
+    "verified_opcode_anchors": 39,
+    "verified_direct_calls": 10,
+    "win32_file_apis": [
+      "GetFileAttributesA",
+      "SetFileAttributesA",
+      "CreateFileA",
+      "ReadFile"
+    ],
+    "indirect_ff_windows_count": 8,
+    "indirect_ff_window_bytes": 471,
+    "indirect_ff_candidates_in_windows": 0,
+    "all_indirect_calls_recovered": false,
+    "runtime_pathname_verified": false,
+    "cloud_resource_binding_verified": false
   }
 }
