@@ -20,7 +20,7 @@ from tools.rea_overlay_inventory import ROOT_SHA
 
 
 def fixture():
-    overlay = b"H" * 96 + b"ABCDEFGH12345678" + b"T" * 8
+    overlay = b"H" * 96 + b"ABCDEFGH" + b"T" * 8
     child = b"P" * 128 + overlay
     trace = {
         "schema": "rea-015-file-io-observation-v1",
@@ -87,7 +87,7 @@ class RuntimeFileCorrelationTests(unittest.TestCase):
         self.assertEqual([x["overlay_region"] for x in r["read_event_checks"]],
                          ["header", "body", "trailer"])
         self.assertEqual(r["matched_body_unique_bytes"], 8)
-        self.assertEqual(r["opaque_body_total_bytes"], 16)
+        self.assertEqual(r["opaque_body_total_bytes"], 8)
         self.assertFalse(r["file_handle_to_cloud_resource_proven"])
         self.assertFalse(r["certification_receipt_created"])
         self.assertFalse(r["original_executable_run_verified"])
