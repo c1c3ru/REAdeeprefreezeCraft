@@ -130,3 +130,11 @@ python -m tools.rea_progress --json
 - `python -m tools.rea_certification --require-certified --trusted-keys /outside/trusted` é o portão deliberado de emissão: recusa ausência de cobertura integral, tarefas pendentes, recibos incompletos, assinaturas inválidas, artefatos adulterados e auditor sem independência.
 - Política e checklist: [CERTIFICATION_POLICY.md](certification/CERTIFICATION_POLICY.md). Estado vivo: [certification/STATUS.md](certification/STATUS.md).
 - **Conclusão atual: NÃO CERTIFICADO**. O próximo trabalho do produto permanece REA-015 (origem do pathname/flags/chaves e vínculo ao CLOUD_INSTALLER) e recuperação de drivers/UPX; depois testes Win7 x86/x64 e equivalência.
+
+## Aceleração com frentes paralelas — 29/10/2026
+
+- Executor local de **12 analisadores estáticos permitidos**, padrão 3 jobs, máximo 4, com checkpoint por job e cache SHA-256: `python -m tools.rea_parallel_batch --archive /caminho/privado/userfreezer.zip --output-dir /caminho/privado/rea-batches/ciclo-o --jobs 3`.
+- Resultados e checkpoints ficam **fora do Git**. Reutilizar só JSON cujo SHA-256 e versão de fontes ainda sejam válidos; erros de um job não interrompem outros, mas impedem sucesso do lote.
+- Trilhas P0 em paralelo: **REA-015** (arquivo/overlay e UPX) e **REA-009** (drivers reais/assinaturas de instalação legítima). A primeira desbloqueia REA-016, a segunda desbloqueia REA-010/011 e REA-012.
+- Dependência indispensável para concluir: **VM Win7 autorizada**, PID/handle, pathname, SHA-256 do arquivo e de buffers ReadFile, offsets e drivers reais. Sem execução autorizada, continua **NÃO CERTIFICADO**.
+- Plano e passos: [engenharia de loop paralela](acceleration/ENGINEERING_LOOP_PARALLEL_2026-10-29.md). **9/17 entregas; 0/8 recibos.**

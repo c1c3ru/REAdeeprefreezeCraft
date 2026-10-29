@@ -23,6 +23,8 @@ jobs:
         run: command -v objdump && objdump --version | head -1
       - name: Compile source
         run: python -m compileall -q tools tests
+      - name: Validate offline batch CLI without original sample
+        run: python -m tools.rea_parallel_batch --help > /dev/null
       - name: Execute unit tests
         run: python -m unittest discover -s tests -v
       - name: Validate REA action plan, evidence and status synchronization

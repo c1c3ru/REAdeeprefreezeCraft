@@ -41,3 +41,7 @@ python -m tools.rea_loop --archive userfreezer.zip --json loop.json --markdown l
 ```
 
 O CI só processa fixtures sintéticas. Adicionar versões de ferramentas e hashes às evidências antes de elevar o nível de confiança.
+
+## Análise paralela com checkpoints (REA-015/O)
+
+Os 12 módulos estáticos permitidos podem executar em subprocessos isolados via `python -m tools.rea_parallel_batch`, com resultados locais fora do Git, SHA-256 e checkpoint por tarefa. A integração revisada atualiza o manifesto central, sem concorrência de PRs no mesmo documento. CI e testes sintéticos não são equivalência de execução. [Plano detalhado](acceleration/ENGINEERING_LOOP_PARALLEL_2026-10-29.md).
