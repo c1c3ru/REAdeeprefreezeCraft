@@ -1,0 +1,67 @@
+{
+  "schema": "rea-015-overlay-structure-v1",
+  "date": "2026-10-29",
+  "zip_sha256": "f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671",
+  "root_pe_sha256": "2d7c171d4037660843a7e02c055679c5a26904af84d48fc8c557a67023f55c8b",
+  "embedded_pe_sha256": "145c6b8461132fd077a42cee775aca318c2b697b5720283749e04fc6aa5b4772",
+  "embedded_resource": "BINARY/CLOUD_INSTALLER/4105",
+  "overlay_file_offset": "0x1e4800",
+  "overlay_bytes": 7836809,
+  "overlay_sha256": "9453669c5ae280cb8718761159895da425168ccbba1e4e56d376b5165554b9e2",
+  "leading_words": {
+    "offset_0x00": 96,
+    "offset_0x04": 86,
+    "offset_0x08": 769,
+    "offset_0x24": 7836809
+  },
+  "magic_69abcd69_offsets": [
+    "0xc",
+    "0x779481"
+  ],
+  "frame_hypothesis_consistent": true,
+  "candidate_header_length": 96,
+  "candidate_header_sha256": "c5d1764ad06d1a58a856093556328bac6277420abd702d44608a656e17f1dd43",
+  "candidate_body_bytes": 7836705,
+  "candidate_body_sha256": "0debdf907e9b12b3c10012b473c97ebcd5022542d2584e29e8120f51c8ec7e28",
+  "last_eight_bytes_sha256": "a1f7b045c4cda0f59e5c2c5c4c38a86d6dd8c33a48dbfa75e5ea6bd650edb6f8",
+  "last_four_bytes_hex": "776b88ff",
+  "strong_archive_magic_counts": {
+    "cabinet": 0,
+    "elf": 0,
+    "rar": 0,
+    "seven_zip": 0,
+    "xz": 0,
+    "zip_end_directory": 0,
+    "zip_local_header": 0
+  },
+  "mz_marker_count": 116,
+  "validated_embedded_pe_at_mz_offsets": 0,
+  "validated_embedded_pe_offsets": [],
+  "entropy_windows": [
+    {
+      "bytes": 65536,
+      "offset_from_body": 0,
+      "region": "start",
+      "shannon_bits_per_byte": 7.99686
+    },
+    {
+      "bytes": 65536,
+      "offset_from_body": 3885584,
+      "region": "middle",
+      "shannon_bits_per_byte": 7.99717
+    },
+    {
+      "bytes": 65536,
+      "offset_from_body": 7771169,
+      "region": "end",
+      "shannon_bits_per_byte": 7.64961
+    }
+  ],
+  "format_identified": false,
+  "compression_or_encryption_identified": false,
+  "driver_found": false,
+  "driver_absence_proven": false,
+  "code_recovered": false,
+  "scope_closed": false,
+  "limitations": "Frame fields and high entropy are observations only; no decompression, executable interpretation, driver recovery, or evidence of absence behind opaque data."
+}

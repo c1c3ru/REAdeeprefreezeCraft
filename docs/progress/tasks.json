@@ -1,6 +1,6 @@
 {
   "schema": "rea-progress-v1",
-  "as_of": "2026-10-28",
+  "as_of": "2026-10-29",
   "project": "c1c3ru/REAdeeprefreezeCraft",
   "objective": "Reconstruir e validar 100% dos componentes e comportamentos identificáveis do Deep Freeze Standard 9.00.020.5760, com denominadores auditáveis para código, funções, CFG, interfaces, semântica e equivalência em Windows 7 SP1 x86/x64.",
   "scope_note": "Entregas concluídas são marcos do projeto, não percentuais de cobertura. O denominador global ainda não está fechado: ver docs/coverage/STATUS.md; somente uma dimensão integralmente comprovada poderá chegar a 100%.",
@@ -306,14 +306,18 @@
         "tools/rea_upx_surface.py",
         "tests/test_rea_upx_surface.py",
         "docs/coverage/UPX_SURFACE_2026-10-28.md",
-        "docs/coverage/upx_surface_checkpoint.json"
+        "docs/coverage/upx_surface_checkpoint.json",
+        "tools/rea_overlay_inventory.py",
+        "tests/test_rea_overlay_inventory.py",
+        "docs/coverage/REA015_OVERLAY_FRAME_2026-10-29.md",
+        "docs/coverage/rea015_overlay_checkpoint.json"
       ],
       "acceptance": [
         "Inventariar todos os recursos executáveis e dependências com hashes e origem",
         "Separar binários confirmados de nomes/strings e fechar pendências de empacotamento"
       ],
       "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/17",
-      "next_action": "Obter de modo reproduzível os bytes descompactados dos dois módulos UPX e seus denominadores, sem executar drivers; confirmar binários de drivers e demais dependências."
+      "next_action": "Analisar a transformação/formato do corpo do overlay CLOUD_INSTALLER (7.836.705 bytes), reconciliar eventuais módulos; manter código UPX e drivers como pendências até prova de recuperação."
     },
     {
       "id": "REA-016",

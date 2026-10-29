@@ -1,6 +1,6 @@
 # Plano de ação REA — objetivo, ciclos e critérios de conclusão
 
-**Revisão:** 2026-10-28  
+**Revisão:** 2026-10-29  
 **Repositório:** [c1c3ru/REAdeeprefreezeCraft](https://github.com/c1c3ru/REAdeeprefreezeCraft)  
 **Fonte operacional do backlog:** [tasks.json](progress/tasks.json)  
 **Quadro gerado:** [STATUS_ATUAL.md](STATUS_ATUAL.md)
@@ -112,4 +112,5 @@ python -m tools.rea_progress --json
 - **28/10/2026:** REA-015-D: entradas RVA/file de ambos os módulos UPX mapeadas; somados **2.095.104 bytes físicos compactados** (sem código original recuperado); hashes SHA-256 por seção documentados e validação por ferramenta própria. As métricas são separadas de instruções reconstruídas.
 - **28/10/2026:** REA-008: rastreamento estático dos argumentos de `GetSystemDirectoryA`, `CreateFileA`, `DeviceIoControl` (oito posições) e `CloseHandle`; buffer de saída de quatro bytes e dois caminhos de abertura, com quinze testes sintéticos. O protocolo e os efeitos reais do driver não foram testados.
 - **28/10/2026:** REA-009: varredura estática de origem, tabelas Authenticode e sobreposição de seções; zero `.sys` efetivos no ZIP visível; duas tabelas PKCS#7 presentes nos PEs mas assinaturas não verificadas; `CLOUD_INSTALLER` possui overlay não classificado de 7.836.809 bytes. REA-009 bloqueada sem drivers reais e VMs autorizadas.
-- **Próximo checkpoint:** REA-015 investigar o overlay e os dados empacotados para fechar a descoberta; REA-009 aguardará `.sys`/catálogos verificáveis. Windows 7 SP1 x86/x64 permanece não testado.
+- **29/10/2026:** REA-015/F: overlay do CLOUD_INSTALLER investigado por bytes reais, sem execução: hipótese consistente de enquadramento com comprimento e marcadores; 116 assinaturas MZ isoladas e nenhum novo PE comprovado; três hashes de intervalos e entropia documentados, com 11 testes sintéticos locais. Formato, drivers ocultos e código compactado ainda desconhecidos.
+- **Próximo checkpoint:** pesquisar de forma verificável a estrutura/transformação do corpo opaco (7.836.705 bytes), sem inferir algoritmo; reavaliar inventário de drivers caso novos artefatos sejam identificados. Windows 7 SP1 x86/x64 continua sem validação.

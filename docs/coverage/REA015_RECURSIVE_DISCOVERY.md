@@ -69,6 +69,10 @@ A inspeção de três PEs revelou uma região adicional no `CLOUD_INSTALLER`, ap
 
 O próximo loop REA-015 deverá investigar a estrutura do overlay, identificar componentes que ele eventualmente contenha e conferir dependências externas. **Não fechar a descoberta com base somente no inventário visível.**
 
+## Subciclo 6 — overlay com enquadramento observável (29/10/2026)
+
+O [relatório REA-015/F](REA015_OVERLAY_FRAME_2026-10-29.md) registra a hipótese de estrutura de comprimento/sentinelas no overlay de **7.836.809 bytes** do CLOUD_INSTALLER: `0x69ABCD69` nos offsets relativos `0x0C` e `0x779481`, DWORD no `+0x24` igual ao comprimento total, e divisão provisória em 96 / 7.836.705 / 8 bytes. A busca encontrou **116 ocorrências MZ, nenhuma validada como PE**; não foram detectadas assinaturas fortes dos arquivos ZIP/7z/CAB/RAR/XZ/ELF pesquisados. A alta entropia não identifica compressão nem cifragem. **O corpo permanece opaco e pode conter componentes não recuperados.** O CI testa somente fixtures sintéticas.
+
 ## O que permanece para concluir REA-015
 
 1. A classificação do cabeçalho SIB como TsiLang foi concluída; **resta documentar o esquema interno dos registros** para fechar a cobertura de dados. Não inferir que as traduções tenham sido completamente decodificadas.
