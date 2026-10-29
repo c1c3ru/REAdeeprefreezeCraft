@@ -60,6 +60,10 @@ python -m tools.rea_coverage --check
 
 A saída local de referência, sem bytes proprietários, está em [rea015_overlay_checkpoint.json](rea015_overlay_checkpoint.json). O CI utiliza somente dados sintéticos.
 
+## Nova evidência da leitura do cabeçalho — subciclo H
+
+Foram identificadas no código x86 do DFStd.exe rotinas com leitura de 96 bytes, verificação de `0x69ABCD69` e inicialização dos campos correspondentes a este cabeçalho, em 21 instruções âncora (ver [análise estática REA-015/H](REA015_READER_TRACE_2026-10-29.md)). Ainda falta demonstrar a cadeia de uso do recurso CLOUD_INSTALLER e a transformação efetiva do corpo.
+
 ## Pendências para a meta 100%
 
 **REA-015 permanece aberta**. Ainda é necessário determinar o formato/transformação do corpo do overlay, identificar componentes eventualmente encapsulados, comprovar o inventário dos módulos descompactados dos dois PEs UPX, identificar drivers completos e verificar dependências externas. Isso bloqueia os denominadores globais da engenharia reversa. Os testes de equivalência e Windows 7 SP1 x86/x64 não foram realizados.

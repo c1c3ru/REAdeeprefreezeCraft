@@ -41,7 +41,7 @@
 
 Priorize P0; cada tarefa avança em um PR, com testes e evidências.
 
-- **REA-015 (P0):** Analisar a transformação/formato do corpo do overlay CLOUD_INSTALLER (7.836.705 bytes), reconciliar eventuais módulos; manter código UPX e drivers como pendências até prova de recuperação.
+- **REA-015 (P0):** Rastrear a origem do handle e a cadeia de chamadas das rotinas x86 leitoras do cabeçalho; localizar transformação do corpo opaco e reconciliação dos drivers/UPX sem afirmar equivalência não medida.
 
 ## Bloqueios e dependências abertas
 
@@ -231,6 +231,12 @@ Evidências:
 - [tests/test_rea_overlay_inventory.py](../tests/test_rea_overlay_inventory.py)
 - [docs/coverage/REA015_OVERLAY_FRAME_2026-10-29.md](../docs/coverage/REA015_OVERLAY_FRAME_2026-10-29.md)
 - [docs/coverage/rea015_overlay_checkpoint.json](../docs/coverage/rea015_overlay_checkpoint.json)
+- [tools/rea_overlay_codec_probe.py](../tools/rea_overlay_codec_probe.py)
+- [tests/test_rea_overlay_codec_probe.py](../tests/test_rea_overlay_codec_probe.py)
+- [tools/rea_overlay_reader_trace.py](../tools/rea_overlay_reader_trace.py)
+- [tests/test_rea_overlay_reader_trace.py](../tests/test_rea_overlay_reader_trace.py)
+- [docs/coverage/REA015_READER_TRACE_2026-10-29.md](../docs/coverage/REA015_READER_TRACE_2026-10-29.md)
+- [docs/coverage/rea015_reader_checkpoint.json](../docs/coverage/rea015_reader_checkpoint.json)
 
 ### REA-016 — Classificar todos os bytes executáveis e reconstruir funções/CFG
 
