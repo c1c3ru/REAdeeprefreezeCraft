@@ -1,7 +1,7 @@
 {
   "schema": "rea-015-recursive-checkpoint-v1",
   "date": "2026-10-29",
-  "stage": "partial_subcycle_8_static_reader_correlations",
+  "stage": "partial_subcycle_9_handle_transform_static_provenance",
   "source": {
     "archive": "userfreezer.zip",
     "sha256": "f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671"
@@ -78,7 +78,8 @@
     "TsiLang SIB internal records not fully parsed; format itself identified by header",
     "CLOUD_INSTALLER large appended overlay not classified",
     "Opaque CLOUD_INSTALLER body algorithm/format and any encapsulated modules are still unknown",
-    "CLOUD_INSTALLER body decoder and specific runtime handle-to-resource provenance remain unknown"
+    "CLOUD_INSTALLER body decoder and specific runtime handle-to-resource provenance remain unknown",
+    "Actual filename/handle origin beyond constructor argument and whether conditional XOR processes the CLOUD_INSTALLER overlay remain unverified"
   ],
   "identified_data_resources": [
     {
@@ -208,5 +209,23 @@
       "iat_va": "0x00A16998",
       "thunk_va": "0x009010C2"
     }
+  },
+  "handle_buffer_transform": {
+    "evidence": "docs/coverage/REA015_HANDLE_FLOW_2026-10-29.md",
+    "checkpoint": "docs/coverage/rea015_handle_flow_checkpoint.json",
+    "opcodes_verified": 41,
+    "call_edges_verified": 13,
+    "source_path": "caller_supplied_unverified",
+    "handle_context_offset": "0x04",
+    "filename_buffer_owner_offset": "0xDC",
+    "file_creation_api": "KERNEL32.DLL!CreateFileA",
+    "file_read_api": "KERNEL32.DLL!ReadFile",
+    "block_buffer_owner_offset": "0x80",
+    "block_length_owner_offset": "0x58",
+    "conditional_flag": "[owner+0x60] & 1",
+    "xor_worker": "0x0074F87C",
+    "xor_byte_instruction": "0x0074F89B",
+    "cloud_overlay_runtime_identity_confirmed": false,
+    "full_body_transformation_confirmed": false
   }
 }

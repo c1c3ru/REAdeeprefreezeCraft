@@ -79,6 +79,10 @@ Uma sondagem limitada de zlib/gzip no corpo opaco testou **3.544** cabeçalhos z
 
 O [novo relatório da REA-015/H](REA015_READER_TRACE_2026-10-29.md) registra **25 âncoras estáticas de instruções** verificadas no `DFStd.exe`: uma sequência lê 96 bytes para `[ebx+0x10]`, outra valida o marcador `0x69ABCD69` em `[ebx+0x1C]`, e a inicialização grava `0x60`, `0x301` e o marcador nas posições que correspondem aos deslocamentos +0x00, +0x08 e +0x0C do overlay. Há também validação do marcador após uma leitura de 8 bytes, e o helper de leitura chega a `KERNEL32.DLL!ReadFile` (IAT `0x00A16998`) por um thunk x86 comprovado. O formato da estrutura **parece ser comum**, mas o uso dessa rotina especificamente para o overlay do CLOUD_INSTALLER **não está comprovado em execução** e o corpo ainda não foi decodificado.
 
+## Subciclo I — handle, buffer e XOR condicional (29/10/2026)
+
+O [rastreamento REA-015/I](REA015_HANDLE_FLOW_2026-10-29.md) verificou **41 instruções x86 e 13 chamadas diretas** no DFStd original: arquivo aberto por `CreateFileA` tem handle em `[contexto+0x04]`, reutilizado por `ReadFile`. Depois do cabeçalho, a rotina `0x74FD34` lê do mesmo contexto para o buffer `[owner+0x80]`, com tamanho de `[owner+0x58]`. Quando `[owner+0x60]&1` está ativo, a execução pode alcançar `0x74F87C`, que contém `xor byte [esi],al` em `0x74F89B`. A origem anterior do caminho, as condições completas da transformação e o vínculo com os **7.836.705 bytes** do corpo CLOUD_INSTALLER ainda não foram validados.
+
 ## O que permanece para concluir REA-015
 
 1. A classificação do cabeçalho SIB como TsiLang foi concluída; **resta documentar o esquema interno dos registros** para fechar a cobertura de dados. Não inferir que as traduções tenham sido completamente decodificadas.

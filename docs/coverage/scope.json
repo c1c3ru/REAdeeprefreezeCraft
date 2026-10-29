@@ -237,5 +237,22 @@
     "direct_cloud_resource_runtime_read_proven": false,
     "reader_win32_api_static": "KERNEL32.DLL!ReadFile",
     "reader_win32_iat_va": "0x00A16998"
+  },
+  "overlay_handle_transform_provenance": {
+    "source": "docs/coverage/REA015_HANDLE_FLOW_2026-10-29.md",
+    "checkpoint": "docs/coverage/rea015_handle_flow_checkpoint.json",
+    "pinned_opcode_anchors": 41,
+    "verified_rel32_call_edges": 13,
+    "createfile_iat_va": "0x00A1675C",
+    "readfile_iat_va": "0x00A16998",
+    "handle_context_offset": "0x04",
+    "owner_context_offset": "0x0C",
+    "post_header_block_length_offset": "0x58",
+    "post_header_buffer_offset": "0x80",
+    "conditional_transform_flag_offset": "0x60",
+    "xor_instruction_va": "0x0074F89B",
+    "specific_cloud_payload_link_verified": false,
+    "full_body_decoding_verified": false,
+    "windows7_runtime_verified": false
   }
 }
