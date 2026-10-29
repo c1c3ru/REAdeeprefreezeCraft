@@ -41,7 +41,7 @@
 
 Priorize P0; cada tarefa avança em um PR, com testes e evidências.
 
-- **REA-015 (P0):** Confirmar em execução a origem das strings que alimentam os dois conjuntos de quatro DWORDs, comparar modelo sintético de byte XOR com comportamento original e provar identidade do recurso CLOUD_INSTALLER sem alegar descompactação global.
+- **REA-015 (P0):** Inventariar todas as chamadoras e os caminhos reais, identificar a string/clock-format efetivamente usadas, comparar contratos com o original em laboratório Windows 7 e provar o vínculo ao overlay CLOUD_INSTALLER.
 
 ## Bloqueios e dependências abertas
 
@@ -252,6 +252,10 @@ Evidências:
 - [tests/test_rea_transform_state.py](../tests/test_rea_transform_state.py)
 - [docs/coverage/REA015_TRANSFORM_STATE_2026-10-29.md](../docs/coverage/REA015_TRANSFORM_STATE_2026-10-29.md)
 - [docs/coverage/rea015_transform_state_checkpoint.json](../docs/coverage/rea015_transform_state_checkpoint.json)
+- [tools/rea_key_input_provenance.py](../tools/rea_key_input_provenance.py)
+- [tests/test_rea_key_input_provenance.py](../tests/test_rea_key_input_provenance.py)
+- [docs/coverage/REA015_KEY_INPUT_2026-10-29.md](../docs/coverage/REA015_KEY_INPUT_2026-10-29.md)
+- [docs/coverage/rea015_key_input_checkpoint.json](../docs/coverage/rea015_key_input_checkpoint.json)
 
 ### REA-016 — Classificar todos os bytes executáveis e reconstruir funções/CFG
 
