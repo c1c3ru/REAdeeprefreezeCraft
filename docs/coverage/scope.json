@@ -323,5 +323,18 @@
     "all_indirect_calls_recovered": false,
     "runtime_pathname_verified": false,
     "cloud_resource_binding_verified": false
+  },
+  "runtime_file_observation_prepared": {
+    "report": "docs/coverage/REA015_RUNTIME_CAPTURE_PLAN_2026-10-29.md",
+    "checkpoint": "docs/coverage/rea015_runtime_capture_checkpoint.json",
+    "offline_correlator": "tools/rea_runtime_file_correlation.py",
+    "synthetic_tests": 18,
+    "observed_win7_trace_count": 0,
+    "source_archive_sha256": "f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671",
+    "embedded_cloud_resource_sha256": "145c6b8461132fd077a42cee775aca318c2b697b5720283749e04fc6aa5b4772",
+    "overlay_sha256": "9453669c5ae280cb8718761159895da425168ccbba1e4e56d376b5165554b9e2",
+    "read_file_capture_authentication_verified": false,
+    "real_handle_to_cloud_resource_verified": false,
+    "complete_overlay_body_decoded": false
   }
 }

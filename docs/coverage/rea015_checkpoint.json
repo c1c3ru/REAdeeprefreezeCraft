@@ -1,7 +1,7 @@
 {
   "schema": "rea-015-recursive-checkpoint-v1",
   "date": "2026-10-29",
-  "stage": "partial_subcycle_13_path_pointer_and_indirect_call_scope",
+  "stage": "partial_subcycle_14_runtime_observation_contract_without_vm",
   "source": {
     "archive": "userfreezer.zip",
     "sha256": "f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671"
@@ -83,7 +83,8 @@
     "Actual runtime key strings, caller options and correspondence to CLOUD_INSTALLER remain unknown",
     "Exact caller-supplied pathname and time-derived string/key values at runtime remain unverified",
     "Direct constructor caller list does not cover indirect/computed calls; actual filename and time-derived runtime parameters still unknown",
-    "True runtime pathname and all indirect/virtual callsite provenance cannot be closed by current static x86 windows"
+    "True runtime pathname and all indirect/virtual callsite provenance cannot be closed by current static x86 windows",
+    "Runtime Win7 event capture absent: actual CreateFileA pathname, handle, post-ReadFile SHA256 buffers and independently authenticated provenance needed"
   ],
   "identified_data_resources": [
     {
@@ -284,5 +285,21 @@
     "all_indirect_callers_verified": false,
     "runtime_pathname_known": false,
     "cloud_resource_identity_confirmed": false
+  },
+  "runtime_observation_contract": {
+    "report": "docs/coverage/REA015_RUNTIME_CAPTURE_PLAN_2026-10-29.md",
+    "checkpoint": "docs/coverage/rea015_runtime_capture_checkpoint.json",
+    "tool": "tools/rea_runtime_file_correlation.py",
+    "synthetic_tests": 18,
+    "original_source_validation": "ZIP/ROOT/CLOUD_INSTALLER/OVERLAY SHA256 pinned",
+    "source_file_possibilities": [
+      "embedded_child_pe",
+      "standalone_overlay"
+    ],
+    "exact_read_sha256_comparison_by_absolute_offset": true,
+    "deduplicated_body_byte_coverage": true,
+    "real_vm_observations": 0,
+    "authentic_capture_proven": false,
+    "cloud_installer_runtime_link_proven": false
   }
 }

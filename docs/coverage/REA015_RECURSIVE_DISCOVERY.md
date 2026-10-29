@@ -99,6 +99,10 @@ O [relatório REA-015/L](REA015_DIRECT_CALLERS_2026-10-29.md) documenta a varred
 
 O [relatório REA-015/M](REA015_PATH_INDIRECT_2026-10-29.md) confirma, por **39 âncoras de instrução e 10 chamadas diretas**, que o pathname recebido por `0x467CF8` é encaminhado a `GetFileAttributesA`, condicionalmente `SetFileAttributesA`, e então ao construtor que alcança `CreateFileA`. Uma rota alternativa obtém o ponteiro de uma estrutura via `0x407334`, podendo devolver string vazia. Oito janelas estáticas somando **471 bytes** não contêm padrões `FF /2` ou `FF /4` candidatos a chamadas/saltos indiretos. **Essa medida não fecha todas as chamadas indiretas da aplicação nem identifica o pathname concreto em execução.** Falta ligar o handle ao overlay CLOUD_INSTALLER com observações de VM e hashes de bytes lidos.
 
+## Subciclo N — correlator offline para evidência real de arquivo (29/10/2026)
+
+O [plano REA-015/N](REA015_RUNTIME_CAPTURE_PLAN_2026-10-29.md) introduz `tools/rea_runtime_file_correlation.py`, que **não executa o instalador**: recebe um registro local sanitizado de eventos `CreateFileA`/`ReadFile`, valida PID/handle/ordem/offset/limites e confronta SHA-256 do arquivo e dos buffers retornados com os bytes do PE `CLOUD_INSTALLER` ou do overlay, extraídos somente em memória e fixados por hashes originais. **18 testes sintéticos** exercitam correspondências e negativas; leituras sobrepostas não inflam cobertura. **Nenhum registro Win7 real foi obtido**; o resultado é explicitamente classificado como consistência local de hashes, não evidência autenticada de execução nem decodificação do corpo. REA-015 permanece aberta; recibos de certificação 0/8.
+
 ## O que permanece para concluir REA-015
 
 1. A classificação do cabeçalho SIB como TsiLang foi concluída; **resta documentar o esquema interno dos registros** para fechar a cobertura de dados. Não inferir que as traduções tenham sido completamente decodificadas.

@@ -1,0 +1,50 @@
+{
+  "schema": "rea-015-n-runtime-correlation-preparation-v1",
+  "as_of": "2026-10-29",
+  "source_archive_sha256": "f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671",
+  "embedded_cloud_resource_sha256": "145c6b8461132fd077a42cee775aca318c2b697b5720283749e04fc6aa5b4772",
+  "overlay_sha256": "9453669c5ae280cb8718761159895da425168ccbba1e4e56d376b5165554b9e2",
+  "overlay_file_offset_in_resource_bytes": 1984512,
+  "overlay_length_bytes": 7836809,
+  "opaque_body_length_bytes": 7836705,
+  "new_artifacts": [
+    "tools/rea_runtime_file_correlation.py",
+    "tests/test_rea_runtime_file_correlation.py",
+    "docs/coverage/REA015_RUNTIME_CAPTURE_PLAN_2026-10-29.md",
+    "docs/coverage/rea015_runtime_capture_checkpoint.json"
+  ],
+  "synthetic_tests_added": 18,
+  "observed_win7_trace_count": 0,
+  "observed_file_handle_count": 0,
+  "verified_real_read_events": 0,
+  "runtime_resource_identity_proven": false,
+  "source_file_matching_model": {
+    "possible_reference_kinds": [
+      "full_embedded_cloud_pe",
+      "standalone_overlay"
+    ],
+    "requires": [
+      "original_executable_SHA256",
+      "observed_full_file_SHA256",
+      "matching_PID_handle",
+      "absolute_read_offset",
+      "returned_byte_count",
+      "hash_of_returned_buffer"
+    ],
+    "comparison": "SHA-256 of exact original resource slice by observed offset, before in-place XOR",
+    "max_trace_events": 512,
+    "max_read_bytes": 1048576,
+    "trace_size_limit_bytes": 2097152,
+    "overlapping_body_reads_counted_once": true,
+    "untrusted_capture_remains_unverified": true,
+    "signed_receipt_generated": false
+  },
+  "critical_limitations": [
+    "No Windows 7 SP1 VM is accessible in this session, so no live observation is claimed",
+    "Matching self-reported hashes cannot authenticate execution or origin from CLOUD_INSTALLER",
+    "Procmon logs by themselves may omit byte-level read buffer hashes and handle identity",
+    "Other unpacked modules, drivers and indirect callers not resolved",
+    "REA-015 stays open and 100% certification is not supported"
+  ],
+  "recommended_next_work": "Collect authorized VM trace (CreateFileA and ReadFile, PID/handle, file offsets, bounded post-ReadFile buffer hashes), verify with offline correlator, independently review and sign provenance before claiming runtime link."
+}
