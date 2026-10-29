@@ -4,7 +4,7 @@
 
 ## Avanço confirmado
 
-A inspeção com GNU objdump do `DFStd.exe` (SHA-256 `2d7c171d4037660843a7e02c055679c5a26904af84d48fc8c557a67023f55c8b`) identificou **21 âncoras de instruções** no intervalo `0x0074FB45..0x00750613`, verificadas por endereço virtual e bytes reais do arquivo, exclusivamente na seção `.text`. Três âncoras manipulam explicitamente o DWORD `0x69ABCD69` que também aparece no cabeçalho e no final do overlay do CLOUD_INSTALLER (SHA-256 `9453669c5ae280cb8718761159895da425168ccbba1e4e56d376b5165554b9e2`).
+A inspeção com GNU objdump do `DFStd.exe` (SHA-256 `2d7c171d4037660843a7e02c055679c5a26904af84d48fc8c557a67023f55c8b`) identificou **25 âncoras de instruções** no intervalo `0x0074FB45..0x00750613`, verificadas por endereço virtual e bytes reais do arquivo, exclusivamente na seção `.text`. Três âncoras manipulam explicitamente o DWORD `0x69ABCD69` que também aparece no cabeçalho e no final do overlay do CLOUD_INSTALLER (SHA-256 `9453669c5ae280cb8718761159895da425168ccbba1e4e56d376b5165554b9e2`).
 
 ### Leitura, validação e inicialização
 
@@ -24,6 +24,12 @@ A inspeção com GNU objdump do `DFStd.exe` (SHA-256 `2d7c171d4037660843a7e02c05
 
 A base aparente do cabeçalho é **`EBX+0x10`**. Isso faz os campos `[ebx+0x18]`, `[ebx+0x1c]`, `[ebx+0x54]`, `[ebx+0x58]` e `[ebx+0x5c]` corresponderem aos deslocamentos **+0x08, +0x0C, +0x44, +0x48 e +0x4C**, exatamente onde foram observados, no overlay, o valor 769, o marcador `0x69ABCD69`, o comprimento repetido 96 e dois campos iguais a 8.928.
 
+### Chegada à API Win32 ReadFile
+
+A chamada de leitura no helper `0x00752670` usa `0x007526A9` (`push edi`, buffer), `0x007526AD` (`push ecx`, handle) e `0x007526AE` (`call 0x009010C2`). O thunk em `0x009010C2` contém `jmp dword [0x00A16998]`. A tabela de importações PE32 mapeia **`0x00A16998` para `KERNEL32.DLL!ReadFile`**. Esses quatro pontos também são verificados por bytes exatos no novo analisador.
+
+Isso confirma que o helper faz uma chamada a **ReadFile**; não identifica qual arquivo ou recurso é aberto em execução, nem o transformador dos bytes após a leitura.
+
 ### O que essa evidência demonstra
 
 A sequência `0x0074FB45 → 0x0074FB50 → 0x0074FB59 → 0x0075019E` fornece **um candidato estático forte a leitor e validador de cabeçalho de 96 bytes**. A sequência `0x00750591..0x00750613` inicializa uma estrutura com valores que coincidem com o cabeçalho; `0x00750307 → 0x00750317` verifica o mesmo marcador após uma solicitação de leitura de oito bytes.
@@ -32,7 +38,7 @@ A sequência `0x0074FB45 → 0x0074FB50 → 0x0074FB59 → 0x0075019E` fornece *
 
 ## Verificação automatizada e segurança
 
-`tools/rea_overlay_reader_trace.py` verifica SHA-256 do ZIP, PE principal, CLOUD_INSTALLER e overlay; mapeia 21 endereços virtuais para offsets físicos pelo cabeçalho PE, compara os bytes de instruções e confirma sua presença na seção `.text`. Em seguida confronta campos e marcador final do overlay. O script **não executa o produto nem publica qualquer código binário proprietário**.
+`tools/rea_overlay_reader_trace.py` verifica SHA-256 do ZIP, PE principal, CLOUD_INSTALLER e overlay; mapeia 25 endereços virtuais para offsets físicos pelo cabeçalho PE, compara os bytes de instruções e confirma sua presença na seção `.text`. Em seguida confronta campos e marcador final do overlay. O script **não executa o produto nem publica qualquer código binário proprietário**.
 
 `tests/test_rea_overlay_reader_trace.py` exercita as validações com PEs e overlays sintéticos, corrupção de marcadores, offsets e comprimentos, erros de checksum e determinismo.
 

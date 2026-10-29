@@ -185,7 +185,7 @@
   },
   "overlay_reader_static": {
     "evidence": "docs/coverage/REA015_READER_TRACE_2026-10-29.md",
-    "verified_instruction_anchors": 21,
+    "verified_instruction_anchors": 25,
     "reader_code_window": "0x0074FB20..0x00750334",
     "writer_code_window": "0x00750498..0x00750670",
     "header_read_count": 96,
@@ -201,6 +201,12 @@
     ],
     "format_relation": "candidate_by_structural_correspondence",
     "runtime_link_to_cloud_installer_proven": false,
-    "body_decoder_identified": false
+    "body_decoder_identified": false,
+    "reader_readfile_import": {
+      "dll": "KERNEL32.DLL",
+      "name": "ReadFile",
+      "iat_va": "0x00A16998",
+      "thunk_va": "0x009010C2"
+    }
   }
 }

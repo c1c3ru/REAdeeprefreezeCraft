@@ -77,7 +77,7 @@ O [relatório REA-015/F](REA015_OVERLAY_FRAME_2026-10-29.md) registra a hipótes
 
 Uma sondagem limitada de zlib/gzip no corpo opaco testou **3.544** cabeçalhos zlib plausíveis e **1** prefixo gzip, sem confirmar fluxos decodificáveis nesses limites. Isso não identifica a transformação.
 
-O [novo relatório da REA-015/H](REA015_READER_TRACE_2026-10-29.md) registra **21 âncoras estáticas de instruções** verificadas no `DFStd.exe`: uma sequência lê 96 bytes para `[ebx+0x10]`, outra valida o marcador `0x69ABCD69` em `[ebx+0x1C]`, e a inicialização grava `0x60`, `0x301` e o marcador nas posições que correspondem aos deslocamentos +0x00, +0x08 e +0x0C do overlay. Há também validação do marcador após uma leitura de 8 bytes. O formato da estrutura **parece ser comum**, mas o uso dessa rotina especificamente para o overlay do CLOUD_INSTALLER **não está comprovado em execução** e o corpo ainda não foi decodificado.
+O [novo relatório da REA-015/H](REA015_READER_TRACE_2026-10-29.md) registra **25 âncoras estáticas de instruções** verificadas no `DFStd.exe`: uma sequência lê 96 bytes para `[ebx+0x10]`, outra valida o marcador `0x69ABCD69` em `[ebx+0x1C]`, e a inicialização grava `0x60`, `0x301` e o marcador nas posições que correspondem aos deslocamentos +0x00, +0x08 e +0x0C do overlay. Há também validação do marcador após uma leitura de 8 bytes, e o helper de leitura chega a `KERNEL32.DLL!ReadFile` (IAT `0x00A16998`) por um thunk x86 comprovado. O formato da estrutura **parece ser comum**, mas o uso dessa rotina especificamente para o overlay do CLOUD_INSTALLER **não está comprovado em execução** e o corpo ainda não foi decodificado.
 
 ## O que permanece para concluir REA-015
 

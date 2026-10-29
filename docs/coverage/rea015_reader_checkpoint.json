@@ -7,7 +7,7 @@
     "cloud_embedded_sha256": "145c6b8461132fd077a42cee775aca318c2b697b5720283749e04fc6aa5b4772",
     "overlay_sha256": "9453669c5ae280cb8718761159895da425168ccbba1e4e56d376b5165554b9e2"
   },
-  "static_anchored_instruction_count": 21,
+  "static_anchored_instruction_count": 25,
   "verified_instruction_vas": [
     "0x0074FB45",
     "0x0074FB49",
@@ -29,7 +29,11 @@
     "0x007505AC",
     "0x00750607",
     "0x00750610",
-    "0x00750613"
+    "0x00750613",
+    "0x007526A9",
+    "0x007526AD",
+    "0x007526AE",
+    "0x009010C2"
   ],
   "observations": {
     "reader_header_buffer": "[EBX+0x10]",
@@ -53,6 +57,15 @@
       "offset_0x08": 769,
       "offset_0x0c": 1772866921,
       "offset_0x44": 96
+    },
+    "win32_readfile_chain": {
+      "wrapper_call_va": "0x007526AE",
+      "import_thunk_va": "0x009010C2",
+      "iat_va": "0x00A16998",
+      "resolved_module": "KERNEL32.DLL",
+      "resolved_symbol": "ReadFile",
+      "source": "PE32 import table and verified x86 call/jump bytes",
+      "input_handle_origin": "unknown_runtime_resource"
     }
   },
   "confidence": "High for exact instruction-byte and header-field matches; candidate relation to this particular embedded resource, not confirmed runtime origin.",

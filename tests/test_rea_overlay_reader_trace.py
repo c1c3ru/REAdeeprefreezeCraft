@@ -9,7 +9,7 @@ import zipfile
 
 from tools.rea_overlay_reader_trace import (
     ReaderEvidenceError, inspect_anchors, frame_correlations,
-    analyze_archive, ANCHORS,
+    analyze_archive, ANCHORS, resolve_iat_symbol,
 )
 from tests.test_rea_structural import fixture_pe
 
@@ -108,6 +108,18 @@ class FrameReaderTraceTests(unittest.TestCase):
                          hashlib.sha256(bytes.fromhex("6a60")).hexdigest())
         json.dumps(a)
 
+    def test_import_resolution_of_synthetic_iat_slot(self):
+        data = bytes(imagebase_fixture())
+        symbol = resolve_iat_symbol(data, 0x402050)
+        self.assertEqual(symbol["dll"], "KERNEL32.DLL")
+        self.assertEqual(symbol["symbol"], "DeviceIoControl")
+        self.assertEqual(symbol["iat_va"], "0x00402050")
+
+    def test_unknown_iat_slot_fails_closed(self):
+        data = bytes(imagebase_fixture())
+        with self.assertRaises(ReaderEvidenceError):
+            resolve_iat_symbol(data, 0x402044)
+
     def test_pinned_evidence_contains_both_checks_and_writer(self):
         names = [item[0] for item in ANCHORS]
         self.assertIn("header_magic_compare", names)
@@ -115,6 +127,8 @@ class FrameReaderTraceTests(unittest.TestCase):
         self.assertIn("header_magic_init", names)
         self.assertIn("header_read_call", names)
         self.assertIn("trailer_read_call", names)
+        self.assertIn("readfile_import_call", names)
+        self.assertIn("readfile_import_jump", names)
 
 
 if __name__ == "__main__":

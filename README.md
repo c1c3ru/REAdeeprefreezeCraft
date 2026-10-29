@@ -13,7 +13,7 @@ Laboratório de **engenharia reversa auditável** para análise de componentes d
 - `tools/rea_coverage.py`: validador/gerador da cobertura integral, integrado ao CI.
 - `tools/rea_driver_evidence.py` — REA-009: identifica arquivos .sys **reais** versus strings, registra tabelas Authenticode e overlays não classificados sem validar criptograficamente a assinatura; [checkpoint](docs/coverage/REA009_DRIVER_PROVENANCE.md).
 - `tools/rea_ioctl_contract.py` — REA-008: contrato estático das oito posições de `DeviceIoControl`, `CreateFileA`, buffers e status de retorno; [análise](docs/analyses/REA008_ARGUMENT_PROVENANCE.md).
-- `tools/rea_overlay_reader_trace.py` — REA-015/H: confere 21 instruções x86 pinadas por SHA-256 e correlaciona leitura/validação do cabeçalho com os campos do overlay sem supor decoder; [evidência](docs/coverage/REA015_READER_TRACE_2026-10-29.md).
+- `tools/rea_overlay_reader_trace.py` — REA-015/H: confere 25 instruções x86 e um thunk para `KERNEL32.DLL!ReadFile` pinadas por SHA-256 e correlaciona leitura/validação do cabeçalho com os campos do overlay sem supor decoder; [evidência](docs/coverage/REA015_READER_TRACE_2026-10-29.md).
 - `tools/rea_overlay_codec_probe.py` — REA-015/G: testa candidatos zlib/gzip com limites de entrada e saída, sem comprovar algoritmo ou cifragem.
 - `tools/rea_overlay_inventory.py` — REA-015: valida offline o enquadramento do overlay (7,84 MB), hashes, marcadores e possíveis PEs sem executar/descompactar; [relatório](docs/coverage/REA015_OVERLAY_FRAME_2026-10-29.md).
 - `tools/rea_upx_surface.py` — REA-015: valida entradas PE, hashes das seções UPX0/UPX1 e bytes compactados, sem supor código reconstruído; [relatório](docs/coverage/UPX_SURFACE_2026-10-28.md).

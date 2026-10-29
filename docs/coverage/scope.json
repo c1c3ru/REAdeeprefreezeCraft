@@ -217,7 +217,7 @@
   },
   "overlay_frame_reader_candidate": {
     "evidence": "docs/coverage/REA015_READER_TRACE_2026-10-29.md",
-    "instruction_anchors_verified": 21,
+    "instruction_anchors_verified": 25,
     "root_binary_sha256": "2d7c171d4037660843a7e02c055679c5a26904af84d48fc8c557a67023f55c8b",
     "reader_96byte_candidate": "0x0074FB20",
     "header_validation_candidate": "0x0075018C",
@@ -234,6 +234,8 @@
     ],
     "reader_ownership_confirmed": false,
     "body_transformation_identified": false,
-    "direct_cloud_resource_runtime_read_proven": false
+    "direct_cloud_resource_runtime_read_proven": false,
+    "reader_win32_api_static": "KERNEL32.DLL!ReadFile",
+    "reader_win32_iat_va": "0x00A16998"
   }
 }

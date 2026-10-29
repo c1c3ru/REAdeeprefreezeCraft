@@ -45,6 +45,10 @@ ANCHORS = (
     ("duplicate_header_size_init", 0x750607, "c7435460000000", "mov [ebx+0x54],0x60"),
     ("paired_field_first_init", 0x750610, "894358", "mov [ebx+0x58],eax"),
     ("paired_field_second_init", 0x750613, "89435c", "mov [ebx+0x5c],eax"),
+    ("readfile_buffer_push", 0x7526a9, "57", "push edi"),
+    ("readfile_handle_push", 0x7526ad, "51", "push ecx"),
+    ("readfile_import_call", 0x7526ae, "e80fea1a00", "call 0x9010c2"),
+    ("readfile_import_jump", 0x9010c2, "ff259869a100", "jmp dword [0xa16998]"),
 )
 
 
@@ -89,6 +93,41 @@ def inspect_anchors(raw, specs=ANCHORS):
     for hit in hits:
         del hit["va_integer"]
     return hits
+
+
+
+def resolve_iat_symbol(raw, iat_va):
+    """Resolve a DWORD PE32 IAT slot to its DLL/import symbol, without loading it."""
+    view = PEView(raw)
+    if view.pe64 or view.machine != 0x14c:
+        raise ReaderEvidenceError("Expected PE32 x86 imports")
+    pe = view.u32(0x3c)
+    base = view.u32(pe + 24 + 28)
+    target_rva = iat_va - base
+    directory, size = view.directory(1)
+    if not directory or not size or target_rva < 0:
+        raise ReaderEvidenceError("Import directory unavailable")
+    for i in range(min(256, size // 20)):
+        d = view.rva_offset(directory + i*20, 20)
+        oft, stamp, forward, dll_rva, first_thunk = struct.unpack_from("<IIIII", raw, d)
+        if not any((oft, stamp, forward, dll_rva, first_thunk)):
+            break
+        name = view.asciiz(view.rva_offset(dll_rva))
+        for index in range(4096):
+            thunk = view.u32(view.rva_offset((oft or first_thunk) + index*4))
+            if thunk == 0:
+                break
+            if first_thunk + index*4 == target_rva:
+                if thunk & 0x80000000:
+                    return {"dll": name, "symbol": "#"+str(thunk&0xffff),
+                            "iat_va": "0x%08x" % iat_va}
+                symbol = view.asciiz(view.rva_offset(thunk + 2))
+                return {"dll": name, "symbol": symbol,
+                        "iat_va": "0x%08x" % iat_va}
+        else:
+            raise ReaderEvidenceError("Too many import thunks")
+    raise ReaderEvidenceError("IAT entry not resolved")
+
 
 
 def frame_correlations(overlay):
@@ -137,6 +176,9 @@ def analyze_archive(path):
         if len(main) != matches[0].file_size or sha(main) != ROOT_SHA:
             raise ReaderEvidenceError("Root PE source hash/size mismatch")
     anchors = inspect_anchors(main)
+    readfile = resolve_iat_symbol(main, 0x00a16998)
+    if readfile["dll"].upper() != "KERNEL32.DLL" or readfile["symbol"] != "ReadFile":
+        raise ReaderEvidenceError("Expected pinned ReadFile IAT resolution")
     children = [x for x in PEView(main).resources(depth=1)
                 if "/".join(x["path"]) == CHILD_RESOURCE]
     if len(children) != 1:
@@ -160,6 +202,10 @@ def analyze_archive(path):
         "source_zip_sha256": h.hexdigest(), "source_pe_sha256": sha(main),
         "cloud_pe_sha256": sha(child), "overlay_sha256": sha(overlay),
         "reader_candidate_anchors": anchors,
+        "reader_to_win32_readfile": {
+            "wrapper_call_va": "0x007526AE", "import_thunk_va": "0x009010C2",
+            "iat": readfile, "relation": "static_call_to_imported_ReadFile",
+        },
         "candidate_reader_window": "0x0074FB20..0x00750334",
         "candidate_writer_window": "0x00750498..0x00750670",
         "header_and_trailer": frame_correlations(overlay),
