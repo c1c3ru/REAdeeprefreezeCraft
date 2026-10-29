@@ -336,5 +336,19 @@
     "read_file_capture_authentication_verified": false,
     "real_handle_to_cloud_resource_verified": false,
     "complete_overlay_body_decoded": false
+  },
+  "static_parallel_acceleration": {
+    "report": "docs/acceleration/ENGINEERING_LOOP_PARALLEL_2026-10-29.md",
+    "tool": "tools/rea_parallel_batch.py",
+    "local_allowed_analyzers": 12,
+    "max_workers": 4,
+    "default_workers": 3,
+    "synthetic_tests": 16,
+    "trusted_archive_sha256": "f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671",
+    "local_source_hash_checked": true,
+    "full_static_batch_original_completed": false,
+    "windows7_runtime_capture_verified": false,
+    "full_coverage_certified": false,
+    "note": "Local offline orchestration only; not executable equivalence or recovered drivers"
   }
 }

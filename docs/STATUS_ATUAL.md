@@ -41,7 +41,7 @@
 
 Priorize P0; cada tarefa avança em um PR, com testes e evidências.
 
-- **REA-015 (P0):** Capturar em VM Windows 7 isolada e autorizada os eventos reais CreateFileA/ReadFile (PID, handle, SHA-256 do arquivo e dos buffers, offsets), correlacionar com CLOUD_INSTALLER, assinar evidências e depois validar semântica; ainda sem observação dinâmica.
+- **REA-015 (P0):** Rodar batch offline paralelo da amostra com cache e checkpoint local, corrigir falhas e priorizar captura real Win7 de CreateFileA/ReadFile e recuperação UPX; sem confundir análises estáticas com equivalência.
 
 ## Bloqueios e dependências abertas
 
@@ -166,6 +166,7 @@ Evidências:
 - [tests/test_rea_driver_evidence.py](../tests/test_rea_driver_evidence.py)
 - [docs/coverage/REA009_DRIVER_PROVENANCE.md](../docs/coverage/REA009_DRIVER_PROVENANCE.md)
 - [docs/coverage/rea009_checkpoint.json](../docs/coverage/rea009_checkpoint.json)
+- [docs/acceleration/ENGINEERING_LOOP_PARALLEL_2026-10-29.md](../docs/acceleration/ENGINEERING_LOOP_PARALLEL_2026-10-29.md)
 
 ### REA-010 — Validar Windows 7 SP1 x86 em VM isolada
 
@@ -268,6 +269,9 @@ Evidências:
 - [tests/test_rea_runtime_file_correlation.py](../tests/test_rea_runtime_file_correlation.py)
 - [docs/coverage/REA015_RUNTIME_CAPTURE_PLAN_2026-10-29.md](../docs/coverage/REA015_RUNTIME_CAPTURE_PLAN_2026-10-29.md)
 - [docs/coverage/rea015_runtime_capture_checkpoint.json](../docs/coverage/rea015_runtime_capture_checkpoint.json)
+- [tools/rea_parallel_batch.py](../tools/rea_parallel_batch.py)
+- [tests/test_rea_parallel_batch.py](../tests/test_rea_parallel_batch.py)
+- [docs/acceleration/ENGINEERING_LOOP_PARALLEL_2026-10-29.md](../docs/acceleration/ENGINEERING_LOOP_PARALLEL_2026-10-29.md)
 
 ### REA-016 — Classificar todos os bytes executáveis e reconstruir funções/CFG
 

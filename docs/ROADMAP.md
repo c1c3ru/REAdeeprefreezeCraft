@@ -96,3 +96,7 @@ Todo achado deverá incluir: ID, arquivo/hash, ferramenta/versão, observação,
 ## Certificação formal do escopo delimitado
 
 Os portões independentes de evidência estão descritos em [CERTIFICATION_POLICY.md](certification/CERTIFICATION_POLICY.md). A certificação interna exige recibos assinados, hashes e chaves públicas confiáveis fora do Git, além do fechamento dos denominadores e da execução real Windows 7. O CI de documentação informa **NÃO CERTIFICADO** enquanto os requisitos não forem satisfeitos.
+
+## Engenharia de loop paralela
+
+O [plano de aceleração](acceleration/ENGINEERING_LOOP_PARALLEL_2026-10-29.md) descreve execução de análises estáticas locais, concorrência limitada, checkpoints recuperáveis e cache SHA-256. REA-009 (drivers em laboratório) e REA-015 (recurso/handle e código ainda oculto) são prioridades simultâneas. Um lote concluído não substitui evidência Windows 7 nem emite certificado.

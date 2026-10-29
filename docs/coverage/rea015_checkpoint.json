@@ -301,5 +301,15 @@
     "real_vm_observations": 0,
     "authentic_capture_proven": false,
     "cloud_installer_runtime_link_proven": false
+  },
+  "acceleration_parallel_engineering": {
+    "report": "docs/acceleration/ENGINEERING_LOOP_PARALLEL_2026-10-29.md",
+    "tool": "tools/rea_parallel_batch.py",
+    "synthetic_regression_tests": 16,
+    "offline_source_sha256_confirmed": "f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671",
+    "full_analyzer_batch_original_completed": false,
+    "live_win7_trace_count": 0,
+    "drivers_recovered": 0,
+    "global_equivalence_confirmed": false
   }
 }
