@@ -87,6 +87,10 @@ O [rastreamento REA-015/I](REA015_HANDLE_FLOW_2026-10-29.md) verificou **41 inst
 
 O [relatório REA-015/J](REA015_TRANSFORM_STATE_2026-10-29.md) registra **74 instruções com opcodes conferidos na amostra** e **7 chamadas diretas** da família de rotinas que prepara a flag, escolhe quatro DWORDs e calcula bytes para o XOR. O valor inicial de `[owner+0xA4]` é **9**; `0x75061C` apaga o bit 3 e `[owner+0x60]` preserva o bit 0. Os parâmetros são derivados de strings por `0x74F804` e selecionados entre dois vetores, com fallback quando o secundário é todo zero. Um modelo **apenas sintético** interpreta `0x74F8AC/0x74F8D4` como cálculo com `IDIV 177`, mistura `171`, multiplicação por `32767` e XOR dos bytes alto/baixo; **sem decodificação do recurso original**.
 
+## Subciclo K — caminho da string e fallback de relógio (29/10/2026)
+
+O [checkpoint REA-015/K](REA015_KEY_INPUT_2026-10-29.md) apresenta uma cadeia estática de **39 instruções e 11 chamadas diretas**: um chamador em `0x00467D45` fornece nome de arquivo por argumento e passa **string principal NULL** ao construtor; a rotina `0x0074F804` deixa o conjunto principal de quatro DWORDs zerado. Em `0x00467D83`, a rotina de fallback percorre `0x00750C60` / `0x0076B6C4` e alcança `KERNEL32.DLL!GetLocalTime`; uma conversão posterior alimenta a mesma função de quatro DWORDs. O vetor alternativo pode, portanto, depender da hora local. **Não se conhece a string temporal formatada nem o pathname efetivo, e não está comprovado que esse fluxo processe o corpo do CLOUD_INSTALLER.**
+
 ## O que permanece para concluir REA-015
 
 1. A classificação do cabeçalho SIB como TsiLang foi concluída; **resta documentar o esquema interno dos registros** para fechar a cobertura de dados. Não inferir que as traduções tenham sido completamente decodificadas.

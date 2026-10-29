@@ -1,7 +1,7 @@
 {
   "schema": "rea-015-recursive-checkpoint-v1",
   "date": "2026-10-29",
-  "stage": "partial_subcycle_10_flag_and_key_arithmetic",
+  "stage": "partial_subcycle_11_time_dependent_input_provenance",
   "source": {
     "archive": "userfreezer.zip",
     "sha256": "f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671"
@@ -80,7 +80,8 @@
     "Opaque CLOUD_INSTALLER body algorithm/format and any encapsulated modules are still unknown",
     "CLOUD_INSTALLER body decoder and specific runtime handle-to-resource provenance remain unknown",
     "Actual filename/handle origin beyond constructor argument and whether conditional XOR processes the CLOUD_INSTALLER overlay remain unverified",
-    "Actual runtime key strings, caller options and correspondence to CLOUD_INSTALLER remain unknown"
+    "Actual runtime key strings, caller options and correspondence to CLOUD_INSTALLER remain unknown",
+    "Exact caller-supplied pathname and time-derived string/key values at runtime remain unverified"
   ],
   "identified_data_resources": [
     {
@@ -240,5 +241,17 @@
     "byte_key_formula_candidate_verified_by_static_instructions": true,
     "synthetic_model_only": true,
     "full_overlay_transformation_verified": false
+  },
+  "key_input_provenance": {
+    "evidence": "docs/coverage/REA015_KEY_INPUT_2026-10-29.md",
+    "checkpoint": "docs/coverage/rea015_key_input_checkpoint.json",
+    "opcode_anchors": 39,
+    "direct_calls": 11,
+    "file_path": "caller_supplied_unknown_value",
+    "key_at_one_callsite": "NULL",
+    "fallback_source": "GetLocalTime via 0x0076B6C4 / 0x00750C60",
+    "four_dword_selection": "fallback when primary all zero",
+    "dynamic_input_or_equivalence_verified": false,
+    "cloud_overlay_identity_confirmed": false
   }
 }

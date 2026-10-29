@@ -1,0 +1,43 @@
+{
+  "schema": "rea-015-k-time-and-caller-inputs-v1",
+  "date": "2026-10-29",
+  "source": {
+    "archive_sha256": "f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671",
+    "main_pe_sha256": "2d7c171d4037660843a7e02c055679c5a26904af84d48fc8c557a67023f55c8b"
+  },
+  "static_x86_anchors": 39,
+  "relative_call_edges": 11,
+  "observed_pointers": {
+    "path_arg_callsite": "0x00467D06 (mov edi,[ebp+0xc])",
+    "null_secondary_key_callsite": "0x00467D3E (push 0)",
+    "constructor_callsite": "0x00467D45 -> 0x00750F1C",
+    "forwarded_initializer": "0x00750F41 -> 0x0074F914 -> 0x00750AE8",
+    "key_hash_call": "0x00750B43 -> 0x0074F804",
+    "zero_param_skip": "0x0074F81C/0x0074F820",
+    "clock_fallback_trigger": "0x00467D83 -> 0x00750C60",
+    "systemtime_call": "0x00750C6C -> 0x0076B6C4 -> 0x00900EA0",
+    "systemtime_import": "KERNEL32.DLL!GetLocalTime at IAT 0x00A16844",
+    "time_conversion": "0x00750C76 -> 0x0076AEE4",
+    "fallback_key_hash": "0x00750C84 -> 0x0074F804",
+    "fallback_key_array": "[owner+0xAC..0xB8]",
+    "primary_key_array": "[owner+0xBC..0xC8]",
+    "key_select": "0x00750504..0x00750551",
+    "config_from_caller": "0x00467D71..0x00467D7A -> 0x00750C24"
+  },
+  "observations": [
+    "One pinned callsite forwards caller filename argument and NULL as primary string",
+    "Hash function zeros all four DWORDs before branch for null input",
+    "That callsite may prepare clock-derived alternate words after invoking GetLocalTime",
+    "Four-word selection uses alternate words when primary vector is all zero",
+    "Caller arguments also drive two boolean option flags"
+  ],
+  "not_proven": [
+    "Actual path contents and whether a file corresponds to embedded CLOUD_INSTALLER",
+    "Clock formatting details and actual runtime key values",
+    "Any dynamic equivalence against original Windows 7 behavior",
+    "Decryption/unpacking of the actual CLOUD_INSTALLER body, UPX modules or real drivers"
+  ],
+  "runtime_equivalence_verified": false,
+  "discovery_closed": false,
+  "certification_claims_newly_verified": 0
+}

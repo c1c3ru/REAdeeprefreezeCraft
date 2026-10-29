@@ -273,5 +273,19 @@
     "runtime_link_to_cloud_resource_proven": false,
     "model_matches_original_at_runtime": false,
     "original_overlay_decoded": false
+  },
+  "clock_key_input_provenance": {
+    "evidence": "docs/coverage/REA015_KEY_INPUT_2026-10-29.md",
+    "checkpoint": "docs/coverage/rea015_key_input_checkpoint.json",
+    "opcode_anchors": 39,
+    "direct_rel32_edges": 11,
+    "specific_caller_va": "0x00467D45",
+    "caller_filename_from_argument": true,
+    "caller_primary_key_string_null": true,
+    "clock_api": "KERNEL32.DLL!GetLocalTime",
+    "clock_api_iat_va": "0x00A16844",
+    "fallback_four_words_from_time_derived_value": true,
+    "runtime_clock_value_observed": false,
+    "actual_cloud_resource_link_verified": false
   }
 }
