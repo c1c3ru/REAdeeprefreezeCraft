@@ -52,10 +52,10 @@ class HandleFlowTests(unittest.TestCase):
         self.assertGreaterEqual(len(edges), 12)
         pairs = {(item["instruction_va"], item["destination_va"])
                  for item in edges}
-        self.assertIn(("0x007522CC", "0x00900D44"), pairs)
-        self.assertIn(("0x007526AE", "0x009010C2"), pairs)
-        self.assertIn(("0x0074FD9B", "0x007500F8"), pairs)
-        self.assertIn(("0x0074F78B", "0x0074F87C"), pairs)
+        self.assertIn(("0x007522cc", "0x00900d44"), pairs)
+        self.assertIn(("0x007526ae", "0x009010c2"), pairs)
+        self.assertIn(("0x0074fd9b", "0x007500f8"), pairs)
+        self.assertIn(("0x0074f78b", "0x0074f87c"), pairs)
 
     def test_callgraph_rejects_modified_destination(self):
         modified = list(ANCHORS)
