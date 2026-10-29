@@ -91,6 +91,10 @@ O [relatório REA-015/J](REA015_TRANSFORM_STATE_2026-10-29.md) registra **74 ins
 
 O [checkpoint REA-015/K](REA015_KEY_INPUT_2026-10-29.md) apresenta uma cadeia estática de **39 instruções e 11 chamadas diretas**: um chamador em `0x00467D45` fornece nome de arquivo por argumento e passa **string principal NULL** ao construtor; a rotina `0x0074F804` deixa o conjunto principal de quatro DWORDs zerado. Em `0x00467D83`, a rotina de fallback percorre `0x00750C60` / `0x0076B6C4` e alcança `KERNEL32.DLL!GetLocalTime`; uma conversão posterior alimenta a mesma função de quatro DWORDs. O vetor alternativo pode, portanto, depender da hora local. **Não se conhece a string temporal formatada nem o pathname efetivo, e não está comprovado que esse fluxo processe o corpo do CLOUD_INSTALLER.**
 
+## Subciclo L — chamadas diretas e constante de tempo (29/10/2026)
+
+O [relatório REA-015/L](REA015_DIRECT_CALLERS_2026-10-29.md) documenta a varredura **somente de CALL E8-rel32 na seção executável**: **11** referências diretas a `0x750F1C`, todas com string principal imediatamente passada como `NULL`; **7** referências a `0x750C60`; **4** a `0x74F804`; e **2** a `0x74F914`. Duas referências adicionais a `0x74F804` derivam ponteiros de variáveis locais e **não têm vínculo comprovado com o leitor do overlay**. Foi também confirmada a constante C de **32 bytes** em `0x009D71B4`, usada na formatação temporal, sem conhecer o valor efetivo em execução. Chamadas indiretas e processamento real do CLOUD_INSTALLER continuam desconhecidos.
+
 ## O que permanece para concluir REA-015
 
 1. A classificação do cabeçalho SIB como TsiLang foi concluída; **resta documentar o esquema interno dos registros** para fechar a cobertura de dados. Não inferir que as traduções tenham sido completamente decodificadas.

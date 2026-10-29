@@ -1,7 +1,7 @@
 {
   "schema": "rea-015-recursive-checkpoint-v1",
   "date": "2026-10-29",
-  "stage": "partial_subcycle_11_time_dependent_input_provenance",
+  "stage": "partial_subcycle_12_direct_caller_xrefs_and_time_format",
   "source": {
     "archive": "userfreezer.zip",
     "sha256": "f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671"
@@ -81,7 +81,8 @@
     "CLOUD_INSTALLER body decoder and specific runtime handle-to-resource provenance remain unknown",
     "Actual filename/handle origin beyond constructor argument and whether conditional XOR processes the CLOUD_INSTALLER overlay remain unverified",
     "Actual runtime key strings, caller options and correspondence to CLOUD_INSTALLER remain unknown",
-    "Exact caller-supplied pathname and time-derived string/key values at runtime remain unverified"
+    "Exact caller-supplied pathname and time-derived string/key values at runtime remain unverified",
+    "Direct constructor caller list does not cover indirect/computed calls; actual filename and time-derived runtime parameters still unknown"
   ],
   "identified_data_resources": [
     {
@@ -253,5 +254,21 @@
     "four_dword_selection": "fallback when primary all zero",
     "dynamic_input_or_equivalence_verified": false,
     "cloud_overlay_identity_confirmed": false
+  },
+  "direct_caller_inventory": {
+    "checkpoint": "docs/coverage/rea015_direct_callers_checkpoint.json",
+    "report": "docs/coverage/REA015_DIRECT_CALLERS_2026-10-29.md",
+    "original_pe_static_direct_call_count": {
+      "constructor": 11,
+      "time_fallback": 7,
+      "four_word_hash": 4,
+      "base_initializer": 2
+    },
+    "null_key_among_direct_constructor_calls": 11,
+    "time_format_literal_va": "0x009D71B4",
+    "time_format_literal_length_bytes": 32,
+    "indirect_calls_outside_scope": true,
+    "all_constructor_callers_confirmed": false,
+    "actual_payload_runtime_identity_confirmed": false
   }
 }

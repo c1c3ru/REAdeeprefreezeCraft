@@ -334,14 +334,18 @@
         "tools/rea_key_input_provenance.py",
         "tests/test_rea_key_input_provenance.py",
         "docs/coverage/REA015_KEY_INPUT_2026-10-29.md",
-        "docs/coverage/rea015_key_input_checkpoint.json"
+        "docs/coverage/rea015_key_input_checkpoint.json",
+        "tools/rea_constructor_xrefs.py",
+        "tests/test_rea_constructor_xrefs.py",
+        "docs/coverage/REA015_DIRECT_CALLERS_2026-10-29.md",
+        "docs/coverage/rea015_direct_callers_checkpoint.json"
       ],
       "acceptance": [
         "Inventariar todos os recursos executáveis e dependências com hashes e origem",
         "Separar binários confirmados de nomes/strings e fechar pendências de empacotamento"
       ],
       "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/17",
-      "next_action": "Inventariar todas as chamadoras e os caminhos reais, identificar a string/clock-format efetivamente usadas, comparar contratos com o original em laboratório Windows 7 e provar o vínculo ao overlay CLOUD_INSTALLER."
+      "next_action": "Rastrear chamadas indiretas e a origem concreta do pathname, verificar se o arquivo aberto corresponde ao overlay CLOUD_INSTALLER e obter vetores originais de equivalência em laboratório Windows 7; não confundir 11 chamadas diretas com todos os fluxos."
     },
     {
       "id": "REA-016",
