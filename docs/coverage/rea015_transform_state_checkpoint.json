@@ -1,0 +1,78 @@
+{
+  "schema": "rea-015-transform-state-checkpoint-v1",
+  "date": "2026-10-29",
+  "source_archive_sha256": "f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671",
+  "source_pe_sha256": "2d7c171d4037660843a7e02c055679c5a26904af84d48fc8c557a67023f55c8b",
+  "manual_original_pe_byte_matches": 74,
+  "manual_original_pe_byte_mismatches": 0,
+  "validated_relative_call_targets": 7,
+  "flag": {
+    "default_owner_a4_value": 9,
+    "default_writer_va": "0x00750B1A",
+    "direct_setter_va": "0x00750C19",
+    "boolean_setter_uses_bits": [
+      3,
+      0
+    ],
+    "boolean_setter_va": "0x00750C24",
+    "copy_source_va": "0x00750616",
+    "clear_bit3_va": "0x0075061C",
+    "store_to_owner_60_va": "0x0075061F",
+    "transform_test_va": "0x0074FD71",
+    "property": "Only bit 3 is cleared; bit 0 is preserved. The default 9 becomes 1.",
+    "upstream_runtime_configuration": "not_observed"
+  },
+  "key_arrays": {
+    "caller_string_arg_va": "0x00750B38",
+    "caller_string_hash_call_va": "0x00750B43",
+    "caller_derived_source": "owner+0xBC..0xC8",
+    "fallback_string_hash_call_va": "0x00750C84",
+    "fallback_source": "owner+0xAC..0xB8",
+    "selected_key_destination": "owner+0xCC..0xD8",
+    "selection_rule": "if all secondary DWORDs zero -> copy primary/fallback; else copy secondary",
+    "copy_verification_vas": [
+      "0x0075053A",
+      "0x00750551"
+    ],
+    "actual_key_words": "not_observed"
+  },
+  "key_byte_model": {
+    "source_vas": [
+      "0x0074F728",
+      "0x0074F87C",
+      "0x0074F8AC",
+      "0x0074F8D4"
+    ],
+    "four_dword_xor_seed_fold": "state_dword = XOR4(words) XOR (signed32(XOR4(words)) >> 16)",
+    "position": "signed16((seed_low16 + index_low16) mod 65536)",
+    "division": "x86 IDIV by 177: q truncates towards zero, remainder r keeps dividend sign",
+    "arithmetic": "u32((171*r - 2*q) * 32767) ; use low16",
+    "key_byte": "low8(result) XOR high8(result)",
+    "synthetic_vector": {
+      "seed": "0x00000000",
+      "positions": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "keys_hex": [
+        "00",
+        "2a",
+        "54",
+        "82"
+      ]
+    },
+    "runtime_semantic_equivalence_verified": false,
+    "complete_decoding_of_embedded_body_performed": false
+  },
+  "unknowns": [
+    "Runtime value of owner+0xA4 when CLOUD_INSTALLER is loaded",
+    "Origin and actual content of the two strings feeding 0x74F804",
+    "Evidence tying this reader and transform to this specific CLOUD_INSTALLER resource",
+    "Original body, drivers and UPX executables remain unrecovered",
+    "Unverified behavior in Windows 7 SP1 x86/x64"
+  ],
+  "denominators_closed": false,
+  "full_product_coverage_certified": false
+}

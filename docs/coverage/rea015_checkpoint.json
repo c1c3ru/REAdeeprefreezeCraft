@@ -1,7 +1,7 @@
 {
   "schema": "rea-015-recursive-checkpoint-v1",
   "date": "2026-10-29",
-  "stage": "partial_subcycle_9_handle_transform_static_provenance",
+  "stage": "partial_subcycle_10_flag_and_key_arithmetic",
   "source": {
     "archive": "userfreezer.zip",
     "sha256": "f2e1a70e3becff235c886c6092d3d8a5928404bbe43f9c0c6360e428daa64671"
@@ -79,7 +79,8 @@
     "CLOUD_INSTALLER large appended overlay not classified",
     "Opaque CLOUD_INSTALLER body algorithm/format and any encapsulated modules are still unknown",
     "CLOUD_INSTALLER body decoder and specific runtime handle-to-resource provenance remain unknown",
-    "Actual filename/handle origin beyond constructor argument and whether conditional XOR processes the CLOUD_INSTALLER overlay remain unverified"
+    "Actual filename/handle origin beyond constructor argument and whether conditional XOR processes the CLOUD_INSTALLER overlay remain unverified",
+    "Actual runtime key strings, caller options and correspondence to CLOUD_INSTALLER remain unknown"
   ],
   "identified_data_resources": [
     {
@@ -227,5 +228,17 @@
     "xor_byte_instruction": "0x0074F89B",
     "cloud_overlay_runtime_identity_confirmed": false,
     "full_body_transformation_confirmed": false
+  },
+  "transform_state_analysis": {
+    "report": "docs/coverage/REA015_TRANSFORM_STATE_2026-10-29.md",
+    "checkpoint": "docs/coverage/rea015_transform_state_checkpoint.json",
+    "original_pe_byte_matches": 74,
+    "verified_direct_calls": 7,
+    "flag_owner_a4_default": 9,
+    "flag_low_bit_transferred_to_owner_60": true,
+    "primary_and_secondary_word_selection_identified": true,
+    "byte_key_formula_candidate_verified_by_static_instructions": true,
+    "synthetic_model_only": true,
+    "full_overlay_transformation_verified": false
   }
 }

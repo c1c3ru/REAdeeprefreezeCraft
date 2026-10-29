@@ -83,6 +83,10 @@ O [novo relatório da REA-015/H](REA015_READER_TRACE_2026-10-29.md) registra **2
 
 O [rastreamento REA-015/I](REA015_HANDLE_FLOW_2026-10-29.md) verificou **41 instruções x86 e 13 chamadas diretas** no DFStd original: arquivo aberto por `CreateFileA` tem handle em `[contexto+0x04]`, reutilizado por `ReadFile`. Depois do cabeçalho, a rotina `0x74FD34` lê do mesmo contexto para o buffer `[owner+0x80]`, com tamanho de `[owner+0x58]`. Quando `[owner+0x60]&1` está ativo, a execução pode alcançar `0x74F87C`, que contém `xor byte [esi],al` em `0x74F89B`. A origem anterior do caminho, as condições completas da transformação e o vínculo com os **7.836.705 bytes** do corpo CLOUD_INSTALLER ainda não foram validados.
 
+## Subciclo J — flag e estado de transformação (29/10/2026)
+
+O [relatório REA-015/J](REA015_TRANSFORM_STATE_2026-10-29.md) registra **74 instruções com opcodes conferidos na amostra** e **7 chamadas diretas** da família de rotinas que prepara a flag, escolhe quatro DWORDs e calcula bytes para o XOR. O valor inicial de `[owner+0xA4]` é **9**; `0x75061C` apaga o bit 3 e `[owner+0x60]` preserva o bit 0. Os parâmetros são derivados de strings por `0x74F804` e selecionados entre dois vetores, com fallback quando o secundário é todo zero. Um modelo **apenas sintético** interpreta `0x74F8AC/0x74F8D4` como cálculo com `IDIV 177`, mistura `171`, multiplicação por `32767` e XOR dos bytes alto/baixo; **sem decodificação do recurso original**.
+
 ## O que permanece para concluir REA-015
 
 1. A classificação do cabeçalho SIB como TsiLang foi concluída; **resta documentar o esquema interno dos registros** para fechar a cobertura de dados. Não inferir que as traduções tenham sido completamente decodificadas.
