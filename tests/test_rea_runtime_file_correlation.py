@@ -133,6 +133,44 @@ class RuntimeFileCorrelationTests(unittest.TestCase):
         self.assertEqual(out["reads_matching_expected_bytes"], 4)
         self.assertEqual(out["matched_body_unique_bytes"], 8)
 
+    def test_cross_region_read_counts_only_body_intersection(self):
+        t, r = fixture()
+        # One successful read covers the entire overlay, including header
+        # and trailer; the unique body coverage must still be eight bytes.
+        t["events"] = [
+            t["events"][0],
+            {"seq": 2, "kind": "read", "api": "ReadFile",
+             "pid": 123, "handle": "0x30", "result": "success",
+             "file_offset": 128, "bytes_returned": len(r["overlay"]),
+             "buffer_sha256": digest(r["overlay"])},
+            {"seq": 3, "kind": "close", "api": "CloseHandle",
+             "pid": 123, "handle": "0x30"},
+        ]
+        out = self.correlation(t, r)
+        self.assertEqual(out["read_event_checks"][0]["overlay_region"],
+                         "crosses_regions")
+        self.assertEqual(out["matched_body_unique_bytes"], 8)
+        self.assertEqual(out["opaque_body_total_bytes"], 8)
+        self.assertFalse(out["transformation_applied_to_body_proven"])
+
+    def test_cross_region_overlap_and_mismatched_digest_not_counted(self):
+        t, r = fixture()
+        t["events"].insert(3, {
+            "seq": 4, "kind": "read", "api": "ReadFile", "pid": 123,
+            "handle": "0x30", "result": "success", "file_offset": 128 + 92,
+            "bytes_returned": 16,
+            "buffer_sha256": digest(r["overlay"][92:108]),
+        })
+        for item in t["events"][4:]:
+            item["seq"] += 1
+        out = self.correlation(t, r)
+        self.assertEqual(out["matched_body_unique_bytes"], 8)
+        # A forged digest must never increase coverage.
+        t["events"][2]["buffer_sha256"] = "f" * 64
+        t["events"][3]["buffer_sha256"] = "f" * 64
+        out = self.correlation(t, r)
+        self.assertEqual(out["matched_body_unique_bytes"], 0)
+
     def test_open_orphan_read_rejected(self):
         t, r = fixture()
         t["events"].pop(0)
