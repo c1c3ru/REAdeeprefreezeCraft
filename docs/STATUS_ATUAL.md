@@ -2,7 +2,7 @@
 
 > Documento gerado. Fonte de verdade: [tasks.json](progress/tasks.json). Para editar, altere o manifesto e rode python -m tools.rea_progress --write.
 
-**Data de referência:** 2026-10-30
+**Data de referência:** 2026-10-29
 
 **Objetivo:** Reconstruir e validar 100% dos componentes e comportamentos identificáveis do Deep Freeze Standard 9.00.020.5760, com denominadores auditáveis para código, funções, CFG, interfaces, semântica e equivalência em Windows 7 SP1 x86/x64.
 
