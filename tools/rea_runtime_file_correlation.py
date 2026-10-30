@@ -210,8 +210,14 @@ def correlate(trace, resources):
             matches += 1
         pos = event["file_offset"]-overlay_base if overlay_base is not None else -1
         label = region(pos, event["bytes_returned"], len(overlay))
-        if match and label == "body":
-            matched_body_ranges.append((pos, pos+event["bytes_returned"]))
+        # A matching read may cross header/body/trailer boundaries.
+        # Count only its intersection with the opaque body; never count
+        # repeated bytes twice and never infer runtime authenticity.
+        if match:
+            body_lo = max(pos, 96)
+            body_hi = min(pos + event["bytes_returned"], len(overlay) - 8)
+            if body_hi > body_lo:
+                matched_body_ranges.append((body_lo, body_hi))
         result.append({
             "seq": event["seq"], "pid": event["pid"], "kind": kind,
             "read_offset": event["file_offset"],
