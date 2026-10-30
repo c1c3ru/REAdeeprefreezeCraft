@@ -203,18 +203,18 @@ class XorDifferentialTests(unittest.TestCase):
     def test_output_header_magic_is_only_a_candidate(self):
         self.assertEqual(output_header_hint(b"MZ"),
                          "mz_prefix_only_unverified")
-        self.assertEqual(output_header_hint(b"PK\\x03\\x04" + b"\\x00" * 26),
+        self.assertEqual(output_header_hint(b"PK\x03\x04" + b"\x00" * 26),
                          "zip_local_header_magic_only_unverified")
-        self.assertEqual(output_header_hint(b"\\x1f\\x8b\\x08" + b"x"),
+        self.assertEqual(output_header_hint(b"\x1f\x8b\x08" + b"x"),
                          "gzip_magic_only_unverified")
-        self.assertEqual(output_header_hint(b"7z\\xbc\\xaf\\x27\\x1c"),
+        self.assertEqual(output_header_hint(b"7z\xbc\xaf\x27\x1c"),
                          "7z_magic_only_unverified")
         self.assertEqual(output_header_hint(b"opaque"),
                          "unclassified")
         header = bytearray(128)
         header[:2] = b"MZ"
         header[0x3c:0x40] = (64).to_bytes(4, "little")
-        header[64:68] = b"PE\\x00\\x00"
+        header[64:68] = b"PE\x00\x00"
         header[68:70] = (0x14c).to_bytes(2, "little")
         header[88:90] = (0x10b).to_bytes(2, "little")
         self.assertEqual(output_header_hint(bytes(header)),
