@@ -41,7 +41,7 @@
 
 Priorize P0; cada tarefa avança em um PR, com testes e evidências.
 
-- **REA-015 (P0):** Obter capturas Win7 x86/x64 isoladas de CreateFileA/ReadFile e pares pré/pós-XOR, verificar integridade do bundle, classificar a saída observada e recuperar UPX/drivers sem confundir triagem e certificação.
+- **REA-015 (P0):** Capturar em laboratório autorizado Win7 SP1 o arquivo realmente aberto e buffers ReadFile; converter dumps privados com rea_private_capture_export, verificar hashes e correlator, obter pares pré/pós-XOR e avançar somente com evidência autenticada. UPX, drivers e equivalência continuam pendentes.
 
 ## Bloqueios e dependências abertas
 
@@ -283,6 +283,9 @@ Evidências:
 - [tools/rea_output_structure.py](../tools/rea_output_structure.py)
 - [tests/test_rea_output_structure.py](../tests/test_rea_output_structure.py)
 - [docs/coverage/REA015_RUNTIME_OUTPUT_EVIDENCE_2026-10-30.md](../docs/coverage/REA015_RUNTIME_OUTPUT_EVIDENCE_2026-10-30.md)
+- [tools/rea_private_capture_export.py](../tools/rea_private_capture_export.py)
+- [tests/test_rea_private_capture_export.py](../tests/test_rea_private_capture_export.py)
+- [docs/coverage/REA015_FIRST_REAL_CAPTURE_EXPORT_2026-10-30.md](../docs/coverage/REA015_FIRST_REAL_CAPTURE_EXPORT_2026-10-30.md)
 
 ### REA-016 — Classificar todos os bytes executáveis e reconstruir funções/CFG
 
