@@ -66,6 +66,7 @@ def verify_bundle(manifest, evidence_dir):
     if not root.is_dir():
         raise EvidenceIntakeError("Evidence root is not a directory")
     roles = set()
+    relative_paths = set()
     result = []
     for item in items:
         if not isinstance(item, dict):
@@ -77,6 +78,9 @@ def verify_bundle(manifest, evidence_dir):
         rel = item.get("relative_path")
         if not isinstance(rel, str) or not rel or "\x00" in rel:
             raise EvidenceIntakeError("Invalid private artifact path")
+        if rel in relative_paths:
+            raise EvidenceIntakeError("Same private artifact reused under several roles")
+        relative_paths.add(rel)
         local = pathlib.Path(rel)
         if local.is_absolute() or ".." in local.parts:
             raise EvidenceIntakeError("Artifact must stay below evidence root")
@@ -98,6 +102,30 @@ def verify_bundle(manifest, evidence_dir):
                 digest.update(data)
         if digest.hexdigest() != expected:
             raise EvidenceIntakeError("Artifact SHA-256 differs from manifest")
+        # Compare capture labels across independent capture files.
+        # This is consistency checking, NOT authentication of the observer.
+        if role in ("file_io_trace", "xor_pairs"):
+            if expected_size > 2 * 1024 * 1024:
+                raise EvidenceIntakeError("Capture JSON exceeds parser limit")
+            try:
+                parsed = json.loads(path.read_text(encoding="utf-8"))
+            except (ValueError, UnicodeError) as exc:
+                raise EvidenceIntakeError("Invalid capture JSON") from exc
+            if not isinstance(parsed, dict):
+                raise EvidenceIntakeError("Invalid capture JSON structure")
+            if role == "file_io_trace":
+                if parsed.get("schema") != "rea-015-file-io-observation-v1":
+                    raise EvidenceIntakeError("Wrong file I/O trace schema")
+                recorded = parsed.get("capture")
+                if (not isinstance(recorded, dict) or
+                        recorded.get("capture_id") != capture or
+                        recorded.get("platform") != platform or
+                        recorded.get("original_pe_sha256") != ROOT_SHA):
+                    raise EvidenceIntakeError("File I/O capture identity mismatch")
+            else:
+                if (parsed.get("schema") != "rea-015-xor-paired-observation-v1"
+                        or parsed.get("capture_id") != capture):
+                    raise EvidenceIntakeError("Paired-buffer capture identity mismatch")
         result.append({"role": role, "size_bytes": expected_size,
                        "sha256": expected, "local_integrity_match": True})
     if not REQUIRED_ROLES.issubset(roles):
