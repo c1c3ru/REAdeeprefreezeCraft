@@ -53,6 +53,27 @@ def parse_hex(value, name):
     return bytes.fromhex(value)
 
 
+
+def output_header_hint(data):
+    """Bounded signature triage only: never validates or extracts an archive/PE."""
+    if len(data) >= 64 and data[:2] == b"MZ":
+        peoff = int.from_bytes(data[0x3c:0x40], "little")
+        if 64 <= peoff <= len(data) - 26 and data[peoff:peoff + 4] == b"PE\\x00\\x00":
+            machine = int.from_bytes(data[peoff + 4:peoff + 6], "little")
+            optional = int.from_bytes(data[peoff + 24:peoff + 26], "little")
+            if machine in (0x014c, 0x8664) and optional in (0x10b, 0x20b):
+                return "partial_pe_header_candidate_not_validated"
+    if data.startswith(b"MZ"):
+        return "mz_prefix_only_unverified"
+    if data.startswith(b"PK\\x03\\x04"):
+        return "zip_local_header_magic_only_unverified"
+    if data.startswith(b"\\x1f\\x8b\\x08"):
+        return "gzip_magic_only_unverified"
+    if data.startswith(b"7z\\xbc\\xaf\\x27\\x1c"):
+        return "7z_magic_only_unverified"
+    return "unclassified"
+
+
 def analyze_pairs(trace, samples, resources):
     """Compare reported pair bytes to pinned source and a synthetic key model.
 
@@ -172,6 +193,10 @@ def analyze_pairs(trace, samples, resources):
             "active_key_matches_static_selection_rule": selected_consistent,
             "branch_matches_static_candidate_rule": branch_consistent,
             "candidate_model_matches_reported_post": model_matches,
+            "candidate_output_header_hint": (
+                output_header_hint(post) if start_in_block == 0
+                else "not_at_reported_block_start"),
+            "output_format_verified": False,
             "paired_sample_consistent": consistent,
             "pre_sha256": digest(pre),
             "reported_post_sha256": digest(post),
