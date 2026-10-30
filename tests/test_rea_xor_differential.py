@@ -13,7 +13,7 @@ from tools.rea_transform_state import (
     candidate_key_byte, derive_state_word,
 )
 from tools.rea_xor_differential import (
-    DifferentialEvidenceError, analyze_pairs, main, parse_hex,
+    DifferentialEvidenceError, analyze_pairs, main, output_header_hint, parse_hex,
 )
 
 PRIMARY = [1, 2, 3, 4]
@@ -198,6 +198,38 @@ class XorDifferentialTests(unittest.TestCase):
             self.assertNotEqual(main(["--archive", str(folder / "wrong.zip"),
                                       "--trace", str(folder / "trace.json"),
                                       "--pairs", str(folder / "pairs.json")]), 0)
+
+
+    def test_output_header_magic_is_only_a_candidate(self):
+        self.assertEqual(output_header_hint(b"MZ"),
+                         "mz_prefix_only_unverified")
+        self.assertEqual(output_header_hint(b"PK\\x03\\x04" + b"\\x00" * 26),
+                         "zip_local_header_magic_only_unverified")
+        self.assertEqual(output_header_hint(b"\\x1f\\x8b\\x08" + b"x"),
+                         "gzip_magic_only_unverified")
+        self.assertEqual(output_header_hint(b"7z\\xbc\\xaf\\x27\\x1c"),
+                         "7z_magic_only_unverified")
+        self.assertEqual(output_header_hint(b"opaque"),
+                         "unclassified")
+        header = bytearray(128)
+        header[:2] = b"MZ"
+        header[0x3c:0x40] = (64).to_bytes(4, "little")
+        header[64:68] = b"PE\\x00\\x00"
+        header[68:70] = (0x14c).to_bytes(2, "little")
+        header[88:90] = (0x10b).to_bytes(2, "little")
+        self.assertEqual(output_header_hint(bytes(header)),
+                         "partial_pe_header_candidate_not_validated")
+        header[64:68] = b"FAIL"
+        self.assertEqual(output_header_hint(bytes(header)),
+                         "mz_prefix_only_unverified")
+
+    def test_report_never_confuses_magic_with_format_validation(self):
+        t, r, p = paired_fixture()
+        out = compare(t, r, p)
+        check = out["pair_checks"][0]
+        self.assertEqual(check["candidate_output_header_hint"], "unclassified")
+        self.assertFalse(check["output_format_verified"])
+        self.assertFalse(out["output_format_classified"])
 
     def test_parse_hex_input_is_bounded(self):
         with self.assertRaises(DifferentialEvidenceError):
