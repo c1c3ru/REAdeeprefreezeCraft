@@ -1,6 +1,6 @@
 {
   "schema": "rea-progress-v1",
-  "as_of": "2026-10-30",
+  "as_of": "2026-10-29",
   "project": "c1c3ru/REAdeeprefreezeCraft",
   "objective": "Reconstruir e validar 100% dos componentes e comportamentos identificáveis do Deep Freeze Standard 9.00.020.5760, com denominadores auditáveis para código, funções, CFG, interfaces, semântica e equivalência em Windows 7 SP1 x86/x64.",
   "scope_note": "Entregas concluídas são marcos do projeto, não percentuais de cobertura. O denominador global ainda não está fechado: ver docs/coverage/STATUS.md; somente uma dimensão integralmente comprovada poderá chegar a 100%.",
