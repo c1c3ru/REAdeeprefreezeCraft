@@ -71,3 +71,7 @@ A procedência da string/chave e de `GetLocalTime` não é provada pelo rótulo 
 ## Regressão e economia
 
 Testes unitários sintéticos Python 3.8 e 3.12 cobrem caminho habilitado/inibido, subintervalos de `ReadFile`, seleção de chave, divergências de flag/bytes, adulterações, sobreposição e falsos positivos. Manter `rea_progress --check`, `rea_coverage --check` e `rea_certification --check`. Nenhum runner CI precisa executar instalador, driver ou VM.
+
+## Triagem delimitada da estrutura de saída
+
+O relatório identifica apenas **candidatos de cabeçalho** no início do bloco de saída declarado: MZ, PE parcial com assinatura e campos mínimos, ZIP (local header), gzip e 7z. A classificação é explicitamente provisória, não extrai arquivos nem trata bytes de amostra como módulos comprovados. Para posições fora do início do bloco, informa que a triagem não se aplica. `output_format_verified=false` e `output_format_classified=false` permanecem invariáveis mesmo com uma assinatura candidata. Os testes verificam os prefixos falsos e uma estrutura PE sintética mínima.
