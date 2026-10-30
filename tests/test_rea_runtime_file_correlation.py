@@ -14,7 +14,7 @@ from unittest import mock
 from tests.test_rea_structural import fixture_pe
 from tools.rea_runtime_file_correlation import (
     RuntimeTraceError, correlate, digest, extract_reference,
-    interval_union_size, region, validate_trace,
+    interval_union_size, missing_body_ranges, region, validate_trace,
 )
 from tools.rea_overlay_inventory import ROOT_SHA
 
@@ -170,6 +170,26 @@ class RuntimeFileCorrelationTests(unittest.TestCase):
         t["events"][3]["buffer_sha256"] = "f" * 64
         out = self.correlation(t, r)
         self.assertEqual(out["matched_body_unique_bytes"], 0)
+
+    def test_missing_ranges_for_full_synthetic_coverage(self):
+        out = self.correlation()
+        self.assertEqual(out["missing_body_unique_bytes"], 0)
+        self.assertEqual(out["missing_body_ranges_overlay_relative"], [])
+
+    def test_missing_ranges_for_unverified_body(self):
+        t, r = fixture()
+        t["events"][2]["buffer_sha256"] = "f" * 64
+        out = self.correlation(t, r)
+        self.assertEqual(out["missing_body_unique_bytes"], 8)
+        self.assertEqual(out["missing_body_ranges_overlay_relative"], [[96, 104]])
+
+    def test_missing_ranges_merges_adjacent_and_overlapping(self):
+        self.assertEqual(
+            missing_body_ranges([(100, 103), (96, 99), (102, 104)], 96, 108),
+            [[99, 100], [104, 108]])
+        self.assertEqual(missing_body_ranges([], 96, 104), [[96, 104]])
+        with self.assertRaises(ValueError):
+            missing_body_ranges([(94, 99)], 96, 104)
 
     def test_open_orphan_read_rejected(self):
         t, r = fixture()
