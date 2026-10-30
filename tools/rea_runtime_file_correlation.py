@@ -183,6 +183,24 @@ def interval_union_size(intervals):
     return size
 
 
+
+def missing_body_ranges(intervals, body_start, body_end):
+    """Return uncovered half-open ranges relative to the overlay, no payload bytes."""
+    if not 0 <= body_start <= body_end:
+        raise ValueError("Invalid opaque body boundaries")
+    cursor = body_start
+    gaps = []
+    for lo, hi in sorted(intervals):
+        if not body_start <= lo < hi <= body_end:
+            raise ValueError("Verified range extends outside opaque body")
+        if lo > cursor:
+            gaps.append([cursor, lo])
+        cursor = max(cursor, hi)
+    if cursor < body_end:
+        gaps.append([cursor, body_end])
+    return gaps
+
+
 def correlate(trace, resources):
     """Only hash comparisons; does not authenticate user-supplied VM records."""
     reads = validate_trace(trace)
@@ -226,6 +244,7 @@ def correlate(trace, resources):
             "read_bytes_match_expected_sha256": bool(match),
         })
     covered = interval_union_size(matched_body_ranges)
+    gaps = missing_body_ranges(matched_body_ranges, 96, len(overlay) - 8)
     return {
         "schema": "rea-015-file-io-correlation-v1",
         "capture_id": trace["capture"]["capture_id"],
@@ -238,6 +257,8 @@ def correlate(trace, resources):
         "reads_matching_expected_bytes": matches,
         "read_event_checks": result,
         "matched_body_unique_bytes": covered,
+        "missing_body_unique_bytes": sum(hi - lo for lo, hi in gaps),
+        "missing_body_ranges_overlay_relative": gaps,
         "opaque_body_total_bytes": len(overlay)-104,
         "opened_file_hash_consistent_with_reference": file_match,
         "claimed_trace_authentication": "unverified",
