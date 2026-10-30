@@ -350,14 +350,25 @@
         "docs/coverage/rea015_runtime_capture_checkpoint.json",
         "tools/rea_parallel_batch.py",
         "tests/test_rea_parallel_batch.py",
-        "docs/acceleration/ENGINEERING_LOOP_PARALLEL_2026-10-29.md"
+        "docs/acceleration/ENGINEERING_LOOP_PARALLEL_2026-10-29.md",
+        "tools/rea_observation_planner.py",
+        "tests/test_rea_observation_planner.py",
+        "docs/coverage/REA015_OBSERVATION_PLAN_2026-10-30.md",
+        "tools/rea_xor_differential.py",
+        "tests/test_rea_xor_differential.py",
+        "docs/coverage/REA015_XOR_DIFFERENTIAL_2026-10-30.md",
+        "tools/rea_capture_evidence_intake.py",
+        "tests/test_rea_capture_evidence_intake.py",
+        "tools/rea_output_structure.py",
+        "tests/test_rea_output_structure.py",
+        "docs/coverage/REA015_RUNTIME_OUTPUT_EVIDENCE_2026-10-30.md"
       ],
       "acceptance": [
         "Inventariar todos os recursos executáveis e dependências com hashes e origem",
         "Separar binários confirmados de nomes/strings e fechar pendências de empacotamento"
       ],
       "issue": "https://github.com/c1c3ru/REAdeeprefreezeCraft/issues/17",
-      "next_action": "Rodar batch offline paralelo da amostra com cache e checkpoint local, corrigir falhas e priorizar captura real Win7 de CreateFileA/ReadFile e recuperação UPX; sem confundir análises estáticas com equivalência."
+      "next_action": "Obter capturas Win7 x86/x64 isoladas de CreateFileA/ReadFile e pares pré/pós-XOR, verificar integridade do bundle, classificar a saída observada e recuperar UPX/drivers sem confundir triagem e certificação."
     },
     {
       "id": "REA-016",

@@ -41,7 +41,7 @@
 
 Priorize P0; cada tarefa avança em um PR, com testes e evidências.
 
-- **REA-015 (P0):** Rodar batch offline paralelo da amostra com cache e checkpoint local, corrigir falhas e priorizar captura real Win7 de CreateFileA/ReadFile e recuperação UPX; sem confundir análises estáticas com equivalência.
+- **REA-015 (P0):** Obter capturas Win7 x86/x64 isoladas de CreateFileA/ReadFile e pares pré/pós-XOR, verificar integridade do bundle, classificar a saída observada e recuperar UPX/drivers sem confundir triagem e certificação.
 
 ## Bloqueios e dependências abertas
 
@@ -272,6 +272,17 @@ Evidências:
 - [tools/rea_parallel_batch.py](../tools/rea_parallel_batch.py)
 - [tests/test_rea_parallel_batch.py](../tests/test_rea_parallel_batch.py)
 - [docs/acceleration/ENGINEERING_LOOP_PARALLEL_2026-10-29.md](../docs/acceleration/ENGINEERING_LOOP_PARALLEL_2026-10-29.md)
+- [tools/rea_observation_planner.py](../tools/rea_observation_planner.py)
+- [tests/test_rea_observation_planner.py](../tests/test_rea_observation_planner.py)
+- [docs/coverage/REA015_OBSERVATION_PLAN_2026-10-30.md](../docs/coverage/REA015_OBSERVATION_PLAN_2026-10-30.md)
+- [tools/rea_xor_differential.py](../tools/rea_xor_differential.py)
+- [tests/test_rea_xor_differential.py](../tests/test_rea_xor_differential.py)
+- [docs/coverage/REA015_XOR_DIFFERENTIAL_2026-10-30.md](../docs/coverage/REA015_XOR_DIFFERENTIAL_2026-10-30.md)
+- [tools/rea_capture_evidence_intake.py](../tools/rea_capture_evidence_intake.py)
+- [tests/test_rea_capture_evidence_intake.py](../tests/test_rea_capture_evidence_intake.py)
+- [tools/rea_output_structure.py](../tools/rea_output_structure.py)
+- [tests/test_rea_output_structure.py](../tests/test_rea_output_structure.py)
+- [docs/coverage/REA015_RUNTIME_OUTPUT_EVIDENCE_2026-10-30.md](../docs/coverage/REA015_RUNTIME_OUTPUT_EVIDENCE_2026-10-30.md)
 
 ### REA-016 — Classificar todos os bytes executáveis e reconstruir funções/CFG
 
