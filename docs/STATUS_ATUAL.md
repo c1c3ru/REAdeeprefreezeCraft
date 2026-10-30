@@ -167,17 +167,6 @@ Evidências:
 - [docs/coverage/REA009_DRIVER_PROVENANCE.md](../docs/coverage/REA009_DRIVER_PROVENANCE.md)
 - [docs/coverage/rea009_checkpoint.json](../docs/coverage/rea009_checkpoint.json)
 - [docs/acceleration/ENGINEERING_LOOP_PARALLEL_2026-10-29.md](../docs/acceleration/ENGINEERING_LOOP_PARALLEL_2026-10-29.md)
-- [tools/rea_observation_planner.py](../tools/rea_observation_planner.py)
-- [tests/test_rea_observation_planner.py](../tests/test_rea_observation_planner.py)
-- [docs/coverage/REA015_OBSERVATION_PLAN_2026-10-30.md](../docs/coverage/REA015_OBSERVATION_PLAN_2026-10-30.md)
-- [tools/rea_xor_differential.py](../tools/rea_xor_differential.py)
-- [tests/test_rea_xor_differential.py](../tests/test_rea_xor_differential.py)
-- [docs/coverage/REA015_XOR_DIFFERENTIAL_2026-10-30.md](../docs/coverage/REA015_XOR_DIFFERENTIAL_2026-10-30.md)
-- [tools/rea_capture_evidence_intake.py](../tools/rea_capture_evidence_intake.py)
-- [tests/test_rea_capture_evidence_intake.py](../tests/test_rea_capture_evidence_intake.py)
-- [tools/rea_output_structure.py](../tools/rea_output_structure.py)
-- [tests/test_rea_output_structure.py](../tests/test_rea_output_structure.py)
-- [docs/coverage/REA015_RUNTIME_OUTPUT_EVIDENCE_2026-10-30.md](../docs/coverage/REA015_RUNTIME_OUTPUT_EVIDENCE_2026-10-30.md)
 
 ### REA-010 — Validar Windows 7 SP1 x86 em VM isolada
 
@@ -283,6 +272,17 @@ Evidências:
 - [tools/rea_parallel_batch.py](../tools/rea_parallel_batch.py)
 - [tests/test_rea_parallel_batch.py](../tests/test_rea_parallel_batch.py)
 - [docs/acceleration/ENGINEERING_LOOP_PARALLEL_2026-10-29.md](../docs/acceleration/ENGINEERING_LOOP_PARALLEL_2026-10-29.md)
+- [tools/rea_observation_planner.py](../tools/rea_observation_planner.py)
+- [tests/test_rea_observation_planner.py](../tests/test_rea_observation_planner.py)
+- [docs/coverage/REA015_OBSERVATION_PLAN_2026-10-30.md](../docs/coverage/REA015_OBSERVATION_PLAN_2026-10-30.md)
+- [tools/rea_xor_differential.py](../tools/rea_xor_differential.py)
+- [tests/test_rea_xor_differential.py](../tests/test_rea_xor_differential.py)
+- [docs/coverage/REA015_XOR_DIFFERENTIAL_2026-10-30.md](../docs/coverage/REA015_XOR_DIFFERENTIAL_2026-10-30.md)
+- [tools/rea_capture_evidence_intake.py](../tools/rea_capture_evidence_intake.py)
+- [tests/test_rea_capture_evidence_intake.py](../tests/test_rea_capture_evidence_intake.py)
+- [tools/rea_output_structure.py](../tools/rea_output_structure.py)
+- [tests/test_rea_output_structure.py](../tests/test_rea_output_structure.py)
+- [docs/coverage/REA015_RUNTIME_OUTPUT_EVIDENCE_2026-10-30.md](../docs/coverage/REA015_RUNTIME_OUTPUT_EVIDENCE_2026-10-30.md)
 
 ### REA-016 — Classificar todos os bytes executáveis e reconstruir funções/CFG
 
