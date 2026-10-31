@@ -45,6 +45,10 @@ Laboratório de **engenharia reversa auditável** para análise de componentes d
 - `tools/rea_path_coverage.py`: **REA-007** — enumeração limitada de desvios e saídas dos dois CFGs; separa retorno explícito, corte de laço e destino não resolvido.
 - [Relatório REA-007](docs/analyses/REA_007_BRANCH_EXITS.md) e [evidência JSON](docs/contracts/rea007_exit_paths.json).
 
+## REA Inspector: executável portátil de análise offline
+
+O utilitário `rea_diagnostic.py` reúne cinco verificadores somente de análise (`correlate`, `xor-check`, `inspect-output`, `intake`, `import-capture`) e o comando `selfcheck`. Ele pode ser empacotado como `REA-Inspector.exe` no Windows com PyInstaller, **sem instalar o produto original, serviços, drivers ou proteção de disco**. Não é uma implementação funcional do Deep Freeze. Instruções de compilação, compatibilidade Win7 e critérios de teste físico: [Guia de empacotamento Windows](docs/packaging/REA_DIAGNOSTIC_WINDOWS.md).
+
 ## Executar localmente
 
 Requisito para inventário/loop: **Python 3.8+**, sem dependências Python de terceiros. Para `rea_cfg.py`, `rea_function_cfg.py` e `rea_contract_trace.py` é necessário **GNU binutils (objdump)**. O analisador pode rodar em Linux, sem execução do arquivo Windows.
