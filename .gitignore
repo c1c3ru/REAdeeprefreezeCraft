@@ -19,3 +19,9 @@ cfg_local*.md
 cfg_function*.json
 
 contract_cycle6*.json
+
+# Portable diagnostic builds and private captures
+out/
+build/
+dist/
+*.spec
