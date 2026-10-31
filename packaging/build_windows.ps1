@@ -12,16 +12,16 @@ try {
     if (-not (Get-Command python -ErrorAction SilentlyContinue)) {
         throw "Python nao instalado neste Windows."
     }
-    $infoText = & python -c "import json,struct,sys;print(json.dumps({'version':list(sys.version_info[:2]),'bits':struct.calcsize('P')*8,'platform':sys.platform}))"
+    $infoText = & python -c "import struct,sys;print('%d %d %d %s' % (sys.version_info[0],sys.version_info[1],struct.calcsize('P')*8,sys.platform))"
     if ($LASTEXITCODE -ne 0) { throw "Falha ao consultar Python." }
-    $info = $infoText | ConvertFrom-Json
-    if ($info.platform -ne "win32") { throw "Build de executavel Windows exige Windows." }
+    $info = $infoText.Trim() -split ' '
+    if ($info[3] -ne "win32") { throw "Build de executavel Windows exige Windows." }
     if ($Target.StartsWith("win7")) {
-        if ($info.version[0] -ne 3 -or $info.version[1] -ne 8) {
+        if ([int]$info[0] -ne 3 -or [int]$info[1] -ne 8) {
             throw "Candidato a Win7 exige Python 3.8 em ambiente isolado."
         }
         $expectedBits = if ($Target -eq "win7-x86") { 32 } else { 64 }
-        if ($info.bits -ne $expectedBits) {
+        if ([int]$info[2] -ne $expectedBits) {
             throw "Python com arquitetura incorreta (esperado $expectedBits bits)."
         }
     }
